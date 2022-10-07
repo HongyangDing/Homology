@@ -1,0 +1,1707 @@
+\chapter{单纯同调论}
+同调论是代数拓扑学中的一个分支，像大多数几何学那样，代数拓扑学的主要目的之一是寻求在一定变换下的不变量，只不过在这一学科中这一拓扑不变量往往以代数的形式呈现出来，即，将拓扑范畴的内容转换为代数范畴的问题。通过一般拓扑学的学习，我们知道空间的紧致性以及连通性都是在同胚变换下保持的，除此之外，根据我们直观的经验，图形内部的相对关系应该也是不变的，即边界与内点的相对关系，将这一经验进行严格化而发展起来的学科就是同调论。这一章的主要目的是通过一些具体的例子建立对同调论的感觉，所研究的对象也局限于单纯复形。
+\section{一些概念}
+为了说话方便，我们需要建立一套术语集。
+首先是仿射无关的概念，这个概念虽然在线性代数里就已经引入了，不过因为我个人之前很少用到它，所以大概写一下以方便查阅。
+首先我们考虑仿射集以及仿射组合相关的概念。
+对于给定的$a,b\in\mathbb{R}^{n}$，我们定义经过它们的直线为
+\begin{equation}
+    L(a,b):=\left\{\lambda a+(1-\lambda)b|\lambda\in\mathbb{R}\right\}
+\end{equation}
+由此我们可以定义仿射集的概念
+\begin{definition}[仿射集]
+设$S$为$\mathbb{R}^{n}$的一个子集，我们称它是仿射的如果对于任意的$a,b\in S$，都有$L(a,b)\in S$
+\end{definition}
+\begin{definition}[仿射组合]
+$\mathbb{R}^{n}$中的n个向量$\textbf{v}_{i},i=1,2,\cdots,n$的一个仿射组合是一个线性组合
+\begin{equation}
+    \textbf{y}(\textbf{c})=\sum\limits_{i=1}\limits^{n}{c}_{i}\textbf{v}_{i}
+\end{equation}
+其中组合系数满足$\sum\limits_{i=1}\limits^{n}{c}_{i}=1$。\\
+\end{definition}
+由$\mathbf{v}_{i}$生成的全部仿射组合构成的点集$S(v)=\{\textbf{y}(\textbf{c})|\sum\limits_{i=1}\limits^{n}{c}_{i}=1,c_{i}\in \mathbb{R}\}$显然是一个仿射集，有时也称线形流形/仿射流形等。
+事实上我们有下列结论
+\begin{proposition}
+集合$S$是仿射的当且仅当$S$包含所有的由$S$中元素构成的仿射组合
+\end{proposition}
+\begin{proof}
+由仿射组合推仿射是显然的，对于另一个方向，若$S$为仿射集，我们对仿射组合中非零系数的个数$n$做归纳。$n=1,2$时显然,假设$n<k$时命题成立，对于$n=k$时，不妨设$c_{k}\neq 1$，注意到
+\begin{equation}
+    \sum\limits_{i=1}\limits^{k}{c}_{i}v_{i}=c_{k}v_{k}+(1-c_{k})\left(\sum\limits_{i=1}\limits^{k-1}\frac{c_{i}}{1-c_{k}}v_{i}\right)
+\end{equation}
+即得命题。
+\end{proof}
+
+对于向量空间中的点集$S$我们可以定义
+\begin{definition}
+包含集合$S$的最小的仿射集称为$S$的仿射包，记作aff($S$)
+\end{definition}
+很明显，仿射集的交集仍然是仿射的，所以我们也可以等价定义aff($S$)为包含$S$的所有仿射集的交。由于$S(v)$是仿射的，从而aff$(S) \subset S(v)$,容易证明它们相等，即
+\begin{proposition}
+aff$(S)=\left\{\sum\limits_{i=1}\limits^{k}\lambda_{i}x_{i}|\sum\limits_{i=1}\limits^{k}\lambda_{i}=1,x_{i}\in S,k\in \mathbb{Z}^{+}\right\}$
+\end{proposition}
+下面的命题给出了仿射集的另一种刻画
+\begin{proposition}
+\label{chap1_45}
+设$S$是一个非空子集，则下列陈述等价\\
+1.$S$是仿射集\\
+2.$S$具有形式$x+V$，其中$x\in S$且$V$是一个向量空间,且$V$是唯一的
+\end{proposition}
+\begin{proof}
+2推1是简单的，下面证另一个方向。\\
+设$S$是仿射集，若$0\in S$,则对于任意$x,y \in S,k\in\mathbb{R}$，我们有$kx=kx+(1-k)0\in S$，且$x+y=2(\frac{1}{2}x+\frac{1}{2}y)\in S$，从而$S$是一个向量空间，若$0\notin S$,取定$x_{0}\in S$，则$0\in S-x_{0}$,从而这是一个向量空间，于是我们有$S=x_{0}+V$\\
+倘若$S$有两种分解$S=x_{1}+V_{1}=x_{2}+V_{2}$，我们有$x_{1}-x_{2}+V_{1}=V_{2}$，由于$0\in V_{2}$。从而$x_{1}-x_{2}\in V_{1}$，我们有$V_{2}=V_{1}+x_{1}-x_{2}\subset V_{1}$,同理$V_{1}\subset V_{2}$，于是我们有$V_{1}=V_{2}$
+\end{proof}
+换言之，我们仿射集是线性子空间的平移。由$V$的唯一性，我们定义
+\begin{definition}
+设$S$是任意非空集，则我们定义aff$(S)$的维数为与之平行的线性子空间的维数
+\end{definition}
+有了上述准备，我们来定义仿射无关的概念
+\begin{definition}[仿射无关]
+我们称$x_{i}\in \mathbb{R}^{n}$是仿射无关的，如果可以从
+\begin{itemize}
+    \item $\sum \lambda_{i}x_{i}=0$
+    \item  $\sum \lambda_{i}=0$
+\end{itemize}
+推出$\lambda_{i}=0$ for all i\\
+如果$x_{i}$不是仿射无关的，就称它们是仿射相关的。
+\end{definition}
+\begin{proposition}
+$x_{0},\cdots,x_{m}\in\mathbb{R}^{n}$是仿射无关的当且仅当$x_{1}-x_{0},\cdots,x_{m}-x_{0}$是线性无关的
+\end{proposition}
+\begin{proof}
+设$x_{0},\cdots,x_{m}$是仿射无关的，我们令$\sum\lambda_{i}(x_{i}-x_{0})=0$,即得$-(\sum\lambda_{i})x_{0}+\sum\lambda_{i}x_{i}=0$，由仿射无关的定义知$\lambda_{i}=0$，即$x_{i}-x_{0}$线性无关。\\
+另一方向，设$x_{i}-x_{0}$线性无关，我们令$\sum\lambda_{i}x_{i}=0,\sum\lambda_{i}=0$,从而令$\sum\lambda_{i}x_{i}=-\sum\limits_{i\neq0}(\lambda_{i})x_{0}+\sum\limits_{i\neq0}\lambda_{i}x_{i}=\sum\limits_{i\neq0}\lambda_{i}(x_{i}-x_{0})=0$，由线性无关的假设可以知道$\lambda_{i}=0(i\neq0)$，又因为$\sum\lambda_{i}=0$，于是$\lambda_{0}=0$，从而命题成立。
+\end{proof}
+我们记$S={\rm aff}(\left\{x_{0},\cdots,x_{m}\right\})$,若$V$是平行于$S$的子空间，则由(\ref{chap1_45})我们知道$S-x_{0}=V$，从而span$\left\{x_{1}-x_{0},\cdots,x_{m}-x_{0}\right\}\subset V$;另一方面，令$x\in V$,我们有$x+x_{0}\in S$，即$x+x_{0}=\sum\lambda_{i}x_{i}$,$\sum\lambda_{i}=1$,于是我们有$x=\sum\lambda_{i}(x_{i}-x_{0})\in$span$\left\{x_{1}-x_{0},\cdots,x_{m}-x_{0}\right\}$。\\
+综上$V=$span$\left\{x_{1}-x_{0},\cdots,x_{m}-x_{0}\right\}$,于是我们有推论
+\begin{corollary}
+$x_{0},\cdots,x_{m}\in\mathbb{R}^{n}$是仿射无关的当且仅当它们的仿射包的维数为$m$
+\end{corollary}
+\begin{corollary}
+仿射无关集的任意非空子集也是仿射无关的
+\end{corollary}
+下面的定义是单纯同调论研究的起点
+\begin{definition}[m-单形]
+设$x_{0},\cdots,x_{m}$是$\mathbb{R}^{n}$中仿射无关的点，则集合\\
+$A^{m}=\left\{\sum\limits_{i=0}\limits^{m}\lambda_{i}x_{i}|\sum\limits_{i=0}\limits^{m}\lambda_{i}=1,\lambda_{i}\geq0,i=1,\cdots,m\right\}$\\称为是由点$x_{0},\cdots,x_{m}$张成的m维单形，也称m-单形，记做$(x_{0}x_{1}\cdots x_{m})$
+\end{definition}
+\begin{remark}
+这里定义的$A^{m}$是$x_{i}$生成的仿射包的一个子集，称为由$x_{i}$生成的凸包
+\end{remark}
+\begin{remark}
+$x_{i}$的仿射无关性保证了$A^{m}$中每个元素的线性组合方式是唯一的，从而我们可以将$(\lambda_{0},\cdots,\lambda_{m})$称为$y=\sum\lambda_{i}x_{i}$的坐标，这个坐标称为$y$相对于仿射无关组$x_{i}$的重心坐标，其名称来源于物理中的重心坐标公式。
+\end{remark}
+\begin{definition}
+$A^{m}$中重心坐标全为正数的点叫做单形的内点，内点的全体构成的子集称为开单形，记作$({A}^{m})^{\circ}$\\
+单形中不是内点的点称为边界点,边界点全体构成单形的边界，记为$\overline{A}^{m}$\\
+单形中各重心坐标相等的点称为单形的重心，记作$A^{m*}$
+\end{definition}
+\begin{remark}
+注意这里所提到的单形的内点和边界并不一定是在仿射子空间的拓扑的意义下的内点和边界，例如考虑平面上的一条线段$(a_{0}a_{1})$，它作为1-单形的内点是一条开线段，边界是$a_{0},a_{1}$，显然在$\mathbb{R}^{2}$下，它们既不是该线段的内点也不是其边界。
+\end{remark}
+根据我们之前的结果，仿射无关集的子集仍然为仿射无关的，从而一个单形的顶点的子集仍然构成一个单形的顶点，因此我们可以定义
+\begin{definition}
+对于$k$维单形$A^{k}=(a_{0}a_{1}\cdots a_{k})$,取其中任一子集$\left\{a_{i_{0}},a_{i_{1}},\cdots,a_{i_{s}}\right\}$，则其张成一个s-单形，记作$B^{s}=(a_{i_{0}}a_{i_{1}}\cdots a_{i_{s}})$,称之为单形$A^{k}$的一个s维面。特别地，任意单形$A^{k}$是它自己的面，$A^{k}$的其他面称为真面。
+\end{definition}
+\begin{example}
+显然，一个点是一个0-单形；一条线段是一个1-单形，两个端点是它的两个0维面；一个实心三角形是一个2-单形，三条边分别是它的两个1维面；一个实心四面体是一个3-单形，四个面分别是它的2维面。
+\end{example}
+单形是我们在这一章所有讨论的基础，但是仅仅有单形还不足以覆盖足够广泛的图形，因此我们还需要考虑如何将不同的单形进行组合，这就是复形的概念。
+\begin{definition}
+$\mathbb{R}^{n}$中有限个单形所构成的集合$K$被称为一个复形，如果下面的两个条件成立：
+\begin{itemize}
+    \item 1. 如果单形$A^{k}\in K$，则$A^{k}$的任何一个面也在$K$中；
+    \item 2. $K$中的任意两个单形或者不相交，或者它们的相交部分是一个唯一的公共面。
+\end{itemize}
+\end{definition}
+\begin{remark}
+    上面定义中的要求(2)也被称为任意两个单形是规则相处的
+\end{remark}
+\begin{definition}
+复形$K$的0维单形称为它的顶点。\\
+复形$K$中最高维单形的维数叫做$K$的维数，记作$dimK$
+\end{definition}
+
+由复形的定义，单形$A^{k}$的所有面构成的集合是一个复形，此外，复形还有其他更广泛的形式。
+\begin{example}
+在图(\ref{fig:111})中，每个小图均由两个2-单形构成，小图(a)是复形，图中两个三角形是规则相处的，而图(b)(c)中的三角形均不是规则相处的，从而不是复形。
+\end{example}
+
+\hspace*{\fill}\\
+\begin{figure}[htbp]
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}
+\coordinate (A) at (-1,0.5);
+\coordinate (B) at (2,0);
+\coordinate (C) at (1,3);
+\coordinate (D) at (4,1.5);
+\coordinate (E) at ($(B)!.5!0:(A)$);
+\draw [black](A)--(B)--(C)--cycle;
+\draw [black](D)--(B)--(C)--cycle;
+\end{tikzpicture}
+\caption*{(a)}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}
+\coordinate (A1) at (-1,0.5);
+\coordinate (B1) at (2,0);
+\coordinate (C1) at (1,3);
+\coordinate (D1) at (4,1.5);
+\coordinate (E1) at ($(B1)!.5!0:(C1)$);
+\coordinate (D) at ($(C1)-(B1)$);
+\coordinate (H2) at ([shift={($0.2*($(C1)-(B1)$)$)}] B1);
+\coordinate (H3) at ([shift={($0.2*($(C1)-(B1)$)$)}] E1);
+\draw [black](A1)--(B1)--(C1)--cycle;
+\draw [black](H3)--(H2)--(D1)--cycle;
+\end{tikzpicture}
+\caption*{(b)}
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}
+\coordinate (O) at(0,0);
+\coordinate (A2) at (-1,0.5);
+\coordinate (B2) at (2,0);
+\coordinate (C2) at (1,3);
+\coordinate (D2) at (4,1.5);
+\coordinate (E2) at ([shift={(0.3,0.5)}]$(B2)!.5!40:(C2)$);
+\coordinate (F2) at ([shift={(0.3,0.5)}]$(B2)!1!40:(D2)$);
+\coordinate (G2) at ([shift={(0.3,0.5)}]$(B2)!0!40:(C2)$);
+\draw [black](A2)--(B2)--(C2)--cycle;
+\draw [black](E2)--(F2)--(G2)--cycle;
+\end{tikzpicture}
+\caption*{(c)}
+\end{minipage}
+\caption{}
+\label{fig:111}
+\end{figure}
+
+\begin{example}
+对于图(\ref{fig:333})中的图形，它的一个复形结构是
+\begin{equation*}
+    \begin{split}
+      K=&\left\{\right.(p_{0}p_{1}p_{2}),(p_{0}p_{1}),(p_{0}p_{2}),(p_{1}p_{2}),(p_{2}p_{3}),(p_{2}p_{4}),(p_{3}p_{4}),(p_{4}p_{5}),\\
+      &(p_{0}),(p_{1}),(p_{2}),(p_{3}),(p_{4}),(p_{5})\left.\right\}\\
+    \end{split}
+\end{equation*}
+
+\end{example}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{image/3.png}
+    \caption{}
+    \label{fig:333}
+\end{figure}
+注意复形不一定是连通的，对于图(\ref{fig:222})，我们可以考虑下列由单形构成的集合$$K=\left\{(abc),(ab),(ac),(bc),(de),(a),(b),(c),(d),(e)\right\}$$这显然是一个复形。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{image/2.png}
+    \caption{}
+    \label{fig:222}
+\end{figure}
+
+有了复形$K$以后，如果我们忽略掉赋予给它复形结构而只将其看作是一个点集，我们就得到了多面体的概念
+\begin{definition}
+给定复形$K$，则欧氏空间中的点集$\bigcup\limits_{A\in K}A$称为由$K$确定的多面体，记作$|K|$,此时我们称集合$K$为多面体$|K|$的一个三角剖分(triangulation)，也称为单纯剖分,简称剖分
+\end{definition}
+从剖分的角度看，复形实际上赋予了一个多面体组合结构。一个多面体可以有不同构的三角剖分。
+类似单形的面，我们可以定义子复形的概念
+\begin{definition}
+由复形$K$中的一部分单形构成的集合$L$，如果也是一个复形，则称$L$为$K$的子复形。显然$K$中所有维数小于$l$的全体单形构成$K$的一个子复形，称为$K$的$l$维骨架，记作$K^{l}$。
+\end{definition}
+
+我们至今为止讨论的构造几何图形的砖块都是平直的，然而我们只关心拓扑不变量，因此在同胚的意义下将复形的概念推广到弯曲的图形是必要的，这就是
+\begin{definition}
+空间$K$叫做是可剖分的，如果存在复形$K$和同胚映射$f$
+\begin{equation*}
+    f:|K|\longrightarrow X
+\end{equation*}
+这里我们称同胚映射$f$和复形$K$的二元组$(f,K)$为空间$X$的曲单纯剖分，为方便，常常不明确指出$f$
+\end{definition}
+当然，一个可剖分空间可以有多种曲单纯剖分，我们的目的就是确定出空间的不依赖于剖分的拓扑不变量。
+为方便，我们给出下列定义
+\begin{definition}
+设$(f,K)$为可剖分空间$K$的一个曲单纯剖分，那么对$K$中的每一个单形$A^{k}$,我们可以得到$X$中的一个子集$f(A^{k})$,我们称这种子集为空间$X$的一个曲单形
+\end{definition}
+可剖分空间$X$是所有曲单形的并，至于这些曲单形是哪个单形在什么映射下的像往往不是关键的，因此我们有时也会仅仅指出可剖分空间的一组曲单形，而不指明$(f,K)$。
+\begin{proposition}
+可剖分空间是紧致的、可度量化的空间
+\end{proposition}
+\begin{proof}
+只要对多面体$|K|$证明即可，首先证明多面体是紧致的。由于单形是有界闭集，而多面体是单形的有限并，从而也是有界闭的，在欧氏空间中这等价于紧致。
+同样由于$|K|$是欧氏空间的子空间，从而它是可度量化的。
+\end{proof}
+\begin{remark}
+    这一定理的逆是不成立的，由复形的构造可知，$|K|$连通等价于道路连通，因此这样的空间是不会与拓扑学家的正弦曲线同胚的。
+\end{remark}
+通过这一命题我们知道，并不是所有的空间都是可剖分的，好在，有很多重要的空间是可剖分的。
+
+最后一个概念是承载单形的概念，首先需要证明如下命题
+\begin{proposition}
+如果点$x\in |K|$,则$K$中含有$x$的最低维单形只有一个
+\end{proposition}
+\begin{proof}
+若K中包含点$x$的最低维单形不止一个，不妨设为$A,B$，则我们有$x\in A\bigcap B$，从而$A\bigcap B=C$是一个单形的公共面，由于$K$是复形，于是$C$也是包含$x$的一个单形，由于$A,B$为包含$x$的最低维单形，所以$C$不是它们的真面，从而有$C=A=B$,这就得到了唯一性。
+\end{proof}
+\begin{definition}[承载单形]
+对于复形$K$，设$x\in K$，则包含$x$的最低维单形称为$x$在$K$中的承载单形，记作$\langle x\rangle_{K}$，在不引起歧义的情况下，也记为$\langle x\rangle$
+\end{definition}
+\begin{proposition}
+\label{chap1_208}
+设$A$为单形，则$x\in A^{\circ}$当且仅当$A=\langle x\rangle$
+\end{proposition}
+\begin{proof}
+必要性：设$x\in A^{\circ}$，则由单形内点的定义，$x$的重心坐标全为正数，因为$\langle x\rangle$是$A$的面，若其为真面，则与$x$为内点矛盾，从而为$\langle x\rangle=A$。\\
+充分性：若$x$不是$A$的内点，则$x$必属于$A$的边界，从而与$A$是包含$x$的维数最小单形矛盾
+\end{proof}
+\begin{proposition}\label{pro261}
+多面体$|K|$的点$x$属于单形$A^{k}$的充要条件是$x$的承载单形为$A^{k}$的面
+\end{proposition}
+\begin{proof}
+由定义这是显然的
+\end{proof}
+如果$A,B$是复形$K$的两个开单形(在单形的定义中，限制系数$\lambda_{i}>0$,即$A=A^{\circ}$)，若它们相交不空，则我们必然有$x\in A^{\circ}\bigcap B^{\circ}$,根据命题(\ref{chap1_208}),我们有$\langle x\rangle=A=B$，这是因为承载单形是唯一的。这样我们得到了下列命题
+\begin{proposition}
+复形的任意两个不同的开单形交于空集
+\end{proposition}
+事实上我们有更强的结论
+\begin{proposition}\label{pro272}
+$\mathbb{R}^{n}$中有限个单形所构成的集合$K$被称为一个复形，如果下面的两个条件成立：
+\begin{itemize}
+    \item 1. 如果单形$A^{k}\in K$，则$A^{k}$的任何一个面也在$K$中；
+    \item 2'. $K$的任意两个不同的开单形交于空集。
+\end{itemize}
+\end{proposition}
+我们刚才已经证明了复形定义中的(1),(2)可以推出这里的(1),(2'),现在进行反向的证明。注意到我们只需要由命题的条件出发去证明(2)
+\begin{proof}
+只要证：如果单形$A$和$B$的交集$C$非空，则$C$必为它们的公共面。\\
+任取$x\in C$，由于$\langle x\rangle$同时包含在$A,B$中，从而存在$A$的面$A'$和$B$的面$B'$满足$x\in A'^{\circ}$且$x\in B'^{\circ}$,即$x\in A'^{\circ}\bigcap B'^{\circ}$,由(2')，我们知道$A'=B'\subset B$,从而$A$有顶点属于$B$，记这类顶点的全体为$\left\{a_{i_{0}},\cdots,a_{i_{l}}\right\}$,从而$x\in (a_{i_{0}}\cdots a_{i_{l}})$,由$x$的任意性，我们可以得到$C\subset (a_{i_{0}}\cdots a_{i_{l}})$。\\
+对于另一个方向，由于$(a_{i_{0}}\cdots a_{i_{l}})$同时是$A$和$B$的面，我们有$(a_{i_{0}}\cdots a_{i_{l}}) \subset A\bigcap B=C$,综上，我们有$A\bigcap B=(a_{i_{0}}\cdots a_{i_{l}})$，这就证明了(2)。
+\end{proof}
+\section{同调群}
+这一节我们通过在上一节中引入的概念来引入同调群。
+正如我们在最开始就提到的，同调论关心的是几何图形的边界的不变性质，为了这样的目的，首先我们要将边界这个概念严格代数化。先来看几个例子。
+对于一维单形，也就是线段，我们可以知道它的边界是它的两个端点，如图(\ref{fig:293})所示。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\coordinate (A) at (-1,0);
+\coordinate (B) at (1,0);
+\coordinate (A1) at ([shift={(6,0)}] A);
+\coordinate (B1) at ([shift={(6,0)}] B);
+\coordinate (C) at (2.2,0);
+\coordinate (D) at (3.8,0);
+\coordinate (M) at ($(C)!0.5!0:(D)$);
+\node[above] at (M) {$\partial_{1}$};
+\filldraw[black] (A1) circle (2pt)node[below]{$a_{0}$};
+\filldraw[black] (B1) circle (2pt)node[below]{$a_{1}$};
+\filldraw[black] (A) circle (2pt)node[below]{$a_{0}$};
+\filldraw[black] (B) circle (2pt)node[below]{$a_{1}$};
+\begin{scope}
+  \path [draw=black,line width=1.5pt,postaction={on each segment={mid arrow=red}}] (A)node[below]{$a_{0}$}--(B)node[below]{$a_{1}$};
+  \end{scope}
+\draw[->] (C)--(D);
+\end{tikzpicture}
+    \caption{}
+    \label{fig:293}
+\end{figure}
+上面是我们所熟知的情况，然而，如果我们考虑两个规则相处的线段构成的折线(图(\ref{fig:332})),我们留意到中间的边界点并不出现，为了能够刻画这一性质，我们给单形赋予方向，从向量(可看作有向1-单形)类比，对于一个m-单形$(a_{0}\cdots a_{m})$,我们可以从它的顶点的排列出发，给予其一个取向，从而有下面的定义
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\coordinate (A) at (-2,1);
+\coordinate (O) at (0,0);
+\coordinate (B) at (2.8,0);
+\coordinate (A1) at ([shift={(8.5,0)}] A);
+\coordinate (B1) at ([shift={(6.5,0)}] B);
+\coordinate (C) at (4.0,0);
+\coordinate (D) at (5.6,0);
+\coordinate (M) at ($(C)!0.5!0:(D)$);
+\node[above] at (M) {$\partial_{1}$};
+\filldraw[black] (A) circle (2pt)node[below]{$a_{0}$};
+\filldraw[black] (O) circle (2pt)node[below]{$a_{1}$};
+\filldraw[black] (B) circle (2pt)node[below]{$a_{2}$};
+\filldraw[black] (A1) circle (2pt)node[below]{$a_{0}$};
+\filldraw[black] (B1) circle (2pt)node[below]{$a_{2}$};
+\begin{scope}
+  \path [draw=black,line width=1.5pt,postaction={on each segment={mid arrow=red}}] (A)node[below]{$a_{0}$}--(O)node[below]{$a_{1}$}--(B)node[below]{$a_{2}$};
+  \end{scope}
+\draw[->] (C)--(D);
+\end{tikzpicture}
+    \caption{}
+    \label{fig:332}
+\end{figure}
+\begin{definition}[有向单形]
+对于一个m-单形$(a_{0}\cdots a_{m})$，其顶点的全部排列按照奇偶性可以分成两组，我们称属于同一组的顶点排列所表示的单形具有相同的取向，而属于不同组的顶点排列所表示的单形具有相反的取向。给定了取向的m-单形被称为有向m-单形，用$\sigma^{m}$表示；与之取向相反的有向m-单形用$-\sigma^{m}$表示。\\通常我们选取与$(a_{0}a_{1}\cdots a_{m})$相同取向的单形的取向为正，记作$+(a_{0}\cdots a_{m})$或者$+\sigma^{m}$，正号可以省略;与之取向相反的有向单形的取向为负，记作$-(a_{0}\cdots a_{m})$或者$-\sigma^{m}$特别地，对于0维单形$a_{0}$，我们也规定它有两种取向，分别记为$\pm(a_{0})$。
+\end{definition}
+\begin{remark}
+    由定义可知，取向是具有相对意义的。
+\end{remark}
+\begin{remark}
+    同一种取向的单形的顶点排列差一个偶置换，相反取向的单形的顶点排列相差一个奇置换,因此尽管在上述定义中出现的有向单形的顶点表示均是按下标递增方式写出的，但这并不妨碍我们理解$(a_{1}a_{0}a_{2})=-(a_{0}a_{1}a_{2})$等表达式。
+\end{remark}
+有时我们也会通过箭头的方式标注一个有向单形的取向，例如在图(\ref{fig:293})中，我们用从$a_{0}$指向$a_{1}$的箭头来表示我们选取$(a_{0}a_{1})$取向为正，于是$(a_{1}a_{0})$取向为负，且$(a_{0}a_{1})=-(a_{1}a_{0})$
+利用有向单形，我们可以给复形一个更细致的结构
+\begin{definition}
+设$K$为$n$维复形，它的全部单形构成的集合记为
+\begin{equation*}
+    \left\{A^{k}_{i}|i=1,\cdots,\phi_{k};k=0,1,\cdots,n\right\}
+\end{equation*}
+我们对其中每个单形取定一个取向，记作$\sigma^{k}_{i}$。对$k\in\left\{0,1,\cdots,n\right\}$,将所有$k$维有向单形做成一个集合
+\begin{equation*}
+    K(k)=\left\{\sigma^{k}_{i}|i=1,\cdots,\phi_{k}\right\}
+\end{equation*}
+我们称这个集合为$K$的一个$k$维基本组。我们将所有基本组的并记作$S(K)=\bigcup\limits_{k}K(k)$
+\end{definition}
+利用这一定义我们可以定义链群的概念，很快我们会看到，链群的某个子群的商群即为同调群。
+\begin{definition}
+对$K(k)$中任一元素$\sigma^{k}_{i}$,我们规定它在加法下的逆元素为$-\sigma^{k}_{i}$,则由$K(k)$自由生成了一个加法Abel群，我们称它为复形$K$的$k$维整数链群，记作$C_{k}(K)$
+\end{definition}
+\begin{remark}
+    根据定义，链群中的元素$x^{k}$是下列形式和
+    \begin{equation*}
+        x^{k}=\sum\limits_{i=1}^{\phi_{k}}\alpha_{i}\sigma_{i}^{k},\;\alpha_{i}\in \mathbb{Z},\;i=1,\cdots,\phi_{k}
+    \end{equation*}
+    这个概念类似于你可以把三把椅子和两张桌子加在一起，把它们的和当作一个新的对象，当$\alpha_{i}<0$时，我们可以将其理解成$(-\alpha_{i})(-\sigma_{i})$,即理解成相反取向的单形的和。今后我们将自由地使用$\alpha_{i}\sigma^{k}_{i}$和$(-\alpha_{i})(-\sigma_{i})$这两种表达。
+\end{remark}
+\begin{remark}
+    如果我们取$\alpha_{m}=1,\alpha_{j}=0(j\neq m)$,由此形成的链群中的元素为$1\cdot\sigma^{k}_{m}$，如果我们将$1\cdot\sigma^{k}_{m}$与$\sigma^{k}_{m}$等同起来，则我们可以认为$k$维基本组构成了$C_{k}(K)$的一组基。因此，线性代数告诉我们我们可以有多种等效的基的选择（即不同的基生成的链群同构），为了方便，如不特殊说明，在提到链群的基时，我们总是指它的$k$维基本组构成的基。
+\end{remark}
+\begin{definition}
+当$\alpha_{i}\neq 0$时，我们定义链$\alpha_{i}\sigma_{i}^{k}$的承载复形为复形$A^{k}_{i}$,一般地，链$x^{k}=\sum\limits_{i}\alpha_{i}\sigma_{i}^{k}$的承载复形是它的所有非0项的承载复形的并。我们定义链$x^{k}$的承载体为它的承载复形所决定的多面体。
+\end{definition}
+因为同调论关心的是几何图形的边界，因此我们需要讲边界这个概念代数化。因为链群是一个自由群，我们所考虑的“边缘”运算应该是某种群的同态，从而只需要在一个基本组上定义边缘同态的作用。为表示最一般的情况，我们用$\epsilon(a_{0}\cdots a_{m}),\;\epsilon=\pm1$来表示顶点为$\left\{a_{0},\cdots,a_{m}\right\}$的正向或者反向单形，从而我们有
+\begin{definition}
+对于$k\geq1,\;k\in\mathbb{Z}$,在链群$C_{k}$的基本组与$C_{k-1}$之间，我们定义边缘运算$\partial_{k}$为
+\begin{equation*}
+\begin{aligned}
+    \partial_{k}:\quad K(k)&\longrightarrow C_{k-1}(K)\\
+    \partial_{k}(\epsilon(a_{0}a_{1}\cdots a_{k}))=&\sum\limits_{i=0}^{k}\epsilon(-1)^{i}(a_{0}a_{1}\cdots\hat{a}_{i}\cdots a_{k})
+    \end{aligned}
+\end{equation*}
+其中$\hat{a_{i}}$表示该顶点不出现，即
+\begin{equation*}
+    (a_{0}\cdots\hat{a}_{i}\cdots a_{k})=(a_{0}\cdots{a}_{i-1}a_{i+1}\cdots a_{k})
+\end{equation*}
+特别地，我们规定0维单形的边缘为0。\\
+将这一运算线性扩充后，我们得到链群$C_{k}(K)$到$C_{k-1}(K)$的同态，仍记为$\partial_{k}$。
+\end{definition}
+\begin{remark}
+在这一定义下，我们可能需要验证$\partial_{k}((-\alpha)(-\sigma))=\partial_{k}(\alpha\sigma)$，不过这是显然的
+\end{remark}
+下面来看几个例子
+首先我们仍考察上文中出现的线段的例子。在图(\ref{fig:293})中，$\partial_{1}(a_{0}a_{1})=(-1)^{0}(a_{1})+(-1)^{1}(a_{0})=a_{1}-a_{0}$,此外对于更高维的单形，我们有\\
+$\partial_{2}(a_{0}a_{1}a_{2})=(a_{1}a_{2})-(a_{0}a_{2})+(a_{0}a_{1})$\\
+$\partial_{3}(a_{0}a_{1}a_{2}a_{3})=(a_{1}a_{2}a_{3})-(a_{0}a_{2}a_{3})+(a_{0}a_{1}a_{3})-(a_{0}a_{1}a_{2})$\\
+可见这确实是我们直观上的边缘概念的代数化。
+
+由于$\partial_{k}$是两个向量空间之间的线性变换，所以我们可以引入关联矩阵的概念
+\begin{definition}
+我们将边缘同态在$C_{k}(K)$的一个基本组下的作用记为
+\begin{equation*}
+    \partial_{k}(\sigma^{k}_{i})=\sum\limits_{j=0}^{\phi_{k}}\alpha^{k}_{ij}\sigma^{k-1}_{j},
+\end{equation*}
+其中$\alpha^{k}_{ij}$叫做有向单形$\sigma^{k}_{i}$和$\sigma^{k-1}_{j}$之间的关联数，矩阵$(\alpha^{k}_{ij})_{1\leq i\leq\phi_{k};1\leq j\leq\phi_{k-1}},\;k=1,2,\cdots,dimK$,被称为$K$的第$k$个关联矩阵,有时也记作$(\partial_{k})$
+\end{definition}
+直观来看，一个图形的边缘本身应该是没有边的，我们可以将这一直观感受具体为下列命题
+\begin{proposition}
+设$\partial_{k+1}$和$\partial_{k}$都是边缘同态，则$\partial_{k+1}\partial_{k}=0,\;k\geq 0$
+\end{proposition}
+\begin{proof}
+由边缘同态的定义，只需要对$C_{k+1}(K)$的基本组中的元素进行验证,此外，因为我们定义$\partial_{0}$是零同态，所以只需要验证$k\geq 1$的情况。任取$\sigma^{k+1}_{i}=\epsilon(a_{0}\cdots a_{k}a_{k+1})$,直接计算,在下面的计算中，我们约定如果求和号下标大于上标则这一项为0，容易验证这一约定是合理的。
+\begin{equation*}
+\begin{aligned}
+    \partial_{k}\partial_{k+1}\sigma^{k+1}_{i}&=\epsilon\sum\limits_{i=0}^{k+1}(-1)^{i}\partial_{k}((a_{0}\cdots \hat{a}_{i}\cdots a_{k+1}))\\
+    &=\epsilon\sum\limits_{i=0}^{k+1}(-1)^{i}\left(\sum\limits_{j=1}^{i-1}(-1)^{j}(a_{0}\cdots\hat{a}_{j}\cdots \hat{a}_{i}\cdots a_{k+1})+\sum\limits_{j=i+1}^{k}(-1)^{j-1}(a_{0}\cdots\hat{a}_{i}\cdots \hat{a}_{j}\cdots a_{k+1})\right)\\
+    &=\epsilon\sum\limits_{i=1}^{k}(-1)^{i}\left(\sum\limits_{j=0}^{i-1}(-1)^{j}(a_{0}\cdots\hat{a}_{j}\cdots \hat{a}_{i}\cdots a_{k+1})+\sum\limits_{j=i+1}^{k+1}(-1)^{j-1}(a_{0}\cdots\hat{a}_{i}\cdots \hat{a}_{j}\cdots a_{k+1})\right)+\\&\quad\epsilon\sum\limits_{j=1}^{k+1}(-1)^{0}(-1)^{j-1}(a_{1}\cdots \hat{a}_{j}\cdots a_{k+1})+\epsilon\sum\limits_{j=0}^{k}(-1)^{k+1}(-1)^{j}(a_{0}\cdots \hat{a}_{j}\cdots a_{k})\\
+    &=\epsilon\sum\limits_{i=1}^{k}(-1)^{i}\left(\sum\limits_{j=1}^{i-1}(-1)^{j}(a_{0}\cdots\hat{a}_{j}\cdots \hat{a}_{i}\cdots a_{k+1})+\sum\limits_{j=i+1}^{k}(-1)^{j-1}(a_{0}\cdots\hat{a}_{i}\cdots \hat{a}_{j}\cdots a_{k+1})\right)+
+    \\&\quad\textcolor{red}{\epsilon\sum\limits_{j=1}^{k}(-1)^{0}(-1)^{j-1}(a_{1}\cdots \hat{a}_{j}\cdots a_{k+1})}+\textcolor{gray}{\epsilon(-1)^{k}(a_{1}\cdots a_{k})}+
+    \\&\quad\textcolor{blue}{\epsilon\sum\limits_{j=1}^{k}(-1)^{k+1}(-1)^{j}(a_{0}\cdots \hat{a}_{j}\cdots a_{k})}+\textcolor{gray}{\epsilon(-1)^{k+1}(a_{1}\cdots a_{k})}+
+    \\&\quad\textcolor{red}{\epsilon\sum\limits_{i=1}^{k}(-1)^{i}(-1)^{0}(a_{1}\cdots \hat{a}_{i}\cdots a_{k+1})}+\textcolor{blue}{\epsilon\sum\limits_{i=1}^{k}(-1)^{i}(-1)^{k+1-1}(a_{0}\cdots \hat{a}_{i}\cdots a_{k})}\\
+    &=\epsilon\sum\limits_{i=1}^{k}(-1)^{i}\left(\sum\limits_{j=1}^{i-1}(-1)^{j}(a_{0}\cdots\hat{a}_{j}\cdots \hat{a}_{i}\cdots a_{k+1})+\sum\limits_{j=i+1}^{k}(-1)^{j-1}(a_{0}\cdots\hat{a}_{i}\cdots \hat{a}_{j}\cdots a_{k+1})\right)
+\end{aligned}
+\end{equation*}
+由此可见在上面的第二行中出现的$k+2$项的和式中，所有含有$\hat{a}_{0}$或者$\hat{a}_{k+1}$的项可以相互抵消，因此如果$k$为偶数，则命题成立，当$k$为奇数时，记$\tilde{k}=\frac{k+1}{2}$,最后的和式化为
+\begin{equation*}
+     \partial_{k}\partial_{k+1}\sigma^{k+1}_{i}=\epsilon(-1)^{\tilde{k}}\left(\sum\limits_{j=\tilde{k}}^{\tilde{k}-1}(-1)^{j}(a_{0}\cdots\hat{a}_{j}\cdots \hat{a}_{\tilde{k}}\cdots a_{k+1})+\sum\limits_{j=\tilde{k}+1}^{k}(-1)^{\tilde{k}}(a_{0}\cdots\hat{a}_{\tilde{k}}\cdots \hat{a}_{j}\cdots a_{k+1})\right)=0
+\end{equation*}
+综上我们就证明了命题。
+\end{proof}
+\begin{corollary}
+对于关联矩阵$(\partial_{k})$和$(\partial_{k+1})$($k\geq0$)，我们有$(\partial_{k})(\partial_{k+1})=0$
+\end{corollary}
+现在我们已经实现了将边缘这一直观概念代数化的任务，同时也有了描述几何图形的链的概念，因此现在我们可以重新回到刻画拓扑不变量的主线任务上去。如果一个图形是另一个图形的边，即它是$\Ima(\partial_{k+1})$中的元素，因为我们从直观期望边缘关系在同胚下是不变的，所以这类元素是显然的拓扑不变量，我们对他们没有太多兴趣；另一方面，刚才的定理告诉我们边缘的边缘是零，从而一个$k$链$\sigma^{k}_{i}$是边缘的必要条件是$\sigma^{k}_{i}\in \Ker(\partial_{k})$,尽管我们有$\Ima(\partial_{k+1})\subset \Ker(\partial_{k})$,但是我们没有理由认为$\Ima(\partial_{k+1})$和$\Ker(\partial_{k})$之间存在相等的关系，考虑$\Ker(\partial_{k})$对$\Ima(\partial_{k+1})$的商群，即得到同调群的概念。从我们之前的讨论可以知道，同调群刻画的是满足边缘的必要条件而又不是边缘的几何图形在相差一个边缘的意义下的等价类。
+
+我们将之前的讨论总结起来，得到下面更加抽象的代数的定义。
+\begin{definition}
+n维复形$K$的单纯链复形(或称为有向链复形、链复形)，记为$C_{*}(K)$,是指如下序列：
+\begin{equation*}
+    \cdots\rightarrow0\rightarrow C_{n}(K)\xrightarrow{\partial_{n}}C_{n-1}(K)\xrightarrow{\partial_{n-1}}\cdots \xrightarrow{\partial_{2}}C_{1}(K)\xrightarrow{\partial_{1}}C_{0}(K)\xrightarrow{\partial_{0}}0
+\end{equation*}
+ 其中我们要求同态之间满足$\partial_{k}\partial_{k+1}=0(k\geq 0)$
+\end{definition}
+\begin{definition}
+我们定义复形$K$的链群的两个子群如下，分别称之为复形$K$的$k$维闭链群和$k$维边缘链群
+\begin{equation*}
+    \begin{aligned}
+         Z_{k}(K)&=\Ker(\partial_{k})=\left\{z^{k}|z_{k}\in C_{k}(K),\partial_{k}(z^{k})=0\right\}\\
+         B_{k}(K)&=\Ima(\partial_{k+1})=\left\{b^{k}|b_{k}\in C_{k}(K),\exists x^{k+1}\in C_{k+1}(K)\;s.t.\;\partial_{k+1}(x^{k+1})=b^{k}\right\}\\
+    \end{aligned}
+\end{equation*}
+我们称$z^{k}\in Z_{k}(K)$为$k$维闭链，$b^{k}\in B_{k}(K)$为$k$维边缘链
+\end{definition}
+\begin{remark}
+根据我们之前的讨论，$B_{k}(K)\subset Z_{k}(K)$,且由于它们都是自由群$C_{k}(K)$的子群，从而它们都是自由群
+\end{remark}
+\begin{definition}
+商群$H_{k}(K)=Z_{k}(K)/B_{k}(K)=\Ker(\partial_{k})/\Ima(\partial_{k+1})$称为复形$K$的$k$维同调群。\\
+同调群$H_{k}(K)$中的元为$Z_{k}(K)$模$B_{k}(K)$的等价类$[z^{k}]$,在上下文没有歧义时也可以写为类$z^{k}$,称之为$K$的$k$维同调类,同一同调类中的元$z_{1}^{k},z_{2}^{k}$称为是同调的，记作$z_{1}^{k}\sim z^{k}_{2}$,特别地，我们称同调于$0$的元素为零调的。
+\end{definition}
+显然，$B_{k}(K)$中的元素都是零调的。
+
+根据商群的定义，我们有如下命题成立
+\begin{proposition}
+设$k$维闭链$x^{k}_{i}$为同调类$[x^{k}_{i}]$的代表元素，$\alpha_{i}\in \mathbb{Z}$,则等式$\sum\limits_{i}\alpha_{i}[x_{i}^{k}]=0$成立的充分必要条件是$\sum\limits_{i}\alpha_{i}x_{i}^{k}\sim0$
+\end{proposition}
+利用定义，我们已经可以知道一些非常平凡的同调群的结构了
+\begin{proposition}
+设$K$是一个$n$维复形，我们有$H_{0}(K)=C_{0}(K)/B_{0}(K)$,$H_{n}(K)=Z_{n}(K)$,当$k>n$时，$H_{k}(K)=0$
+\end{proposition}
+\begin{proof}
+由定义，$\Ker(\partial_{0})=C_{0}(K)$,从而第一个论断成立。由于没有$n+1$维链，$C_{n+1}(K)=0$,从而$B_{n}(K)=0$,从而第二个论断成立，类似地，第三个论断成立。
+\end{proof}
+\begin{proposition}
+边缘同态$\partial_{k}$诱导出同构$C_{k}(K)/Z_{k}(K)\cong B_{k-1}(K)$
+\end{proposition}
+\begin{proof}
+由于$B_{k-1}(K)=\Ima(\partial_{k})$,从而由第一同构定理立得
+\end{proof}
+
+下面我们来计算几个不那么平凡的同调群。
+\begin{figure}[htbp]
+    \centering
+\begin{tikzpicture}
+\coordinate (A) at (-1.5,-0.9);
+\coordinate (B) at (1.5,-1.1);
+\coordinate (C) at (0,1.5);
+\coordinate (O) at (0,0);
+\begin{scope}
+  \path [draw=black,fill=green!30,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (A)node[below]{$a_{0}$}--(B)node[below]{$a_{1}$}--(C)node[above]{$a_{2}$}--cycle;
+  \end{scope}
+  \begin{scope}
+  \path [draw=black,->,line width=1.5pt]
+  arc(75:300:0.3);
+  \end{scope}
+\end{tikzpicture}
+    \caption{}
+    \label{fig:499}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}
+\coordinate (A) at (-2,-1);
+\coordinate (B) at (2,-1);
+\coordinate (C) at (2,1);
+\coordinate (D) at (-2,1);
+\node[below]  at (A){A};
+\node[below]  at (B){B};
+\node[above]  at (D){D};
+\node[above]  at (C){C};
+\draw [black,line width=2pt](A)--(B);
+\draw [black,line width=2pt](C)--(D);
+\begin{scope}
+  \path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (A)--(D);
+  \end{scope}
+   \path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (B)--(C);
+\end{tikzpicture}
+\caption*{(a)}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}
+\coordinate (A) at (-2,-1);
+\coordinate (B) at (2,-1);
+\coordinate (C) at (2,1);
+\coordinate (D) at (-2,1);
+\node[below]  at (A){A};
+\node[below]  at (B){B};
+\node[above]  at (D){D};
+\node[above]  at (C){C};
+\draw [black,line width=2pt](A)--(B);
+\draw [black,line width=2pt](C)--(D);
+\draw [black,line width=2pt](A)--(C);
+\begin{scope}
+  \path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (A)--(D);
+  \end{scope}
+   \path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (B)--(C);
+\end{tikzpicture}
+\caption*{(b)}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+\centering
+\begin{tikzpicture}
+\coordinate (A) at (-2,-1);
+\coordinate (B) at (2,-1);
+\coordinate (C) at (2,1);
+\coordinate (D) at (-2,1);
+\coordinate (M) at ($(A)!0.5!0:(B)$);
+\coordinate (N) at ($(C)!0.5!0:(D)$);
+\node[below]  at (A){A};
+\node[below]  at (B){B};
+\node[above]  at (D){D};
+\node[above]  at (C){C};
+\node[above]  at (N){N};
+\node[below]  at (M){M};
+\draw [black,line width=2pt](A)--(B);
+\draw [black,line width=2pt](A)--(N)--(M)--(C);
+\draw [black,line width=2pt](C)--(D);
+\begin{scope}
+  \path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (A)--(D);
+  \end{scope}
+   \path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}]
+  (B)--(C);
+\end{tikzpicture}
+\caption*{(c)}
+\end{minipage}
+\caption{}
+\label{fig:564}
+\end{figure}
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+\begin{scope}
+\coordinate (A) at (-1,-1.5);
+\coordinate (B) at (1,-1.5);
+\coordinate (C) at (1,1.5);
+\coordinate (D) at (-1,1.5);
+\coordinate (E) at ($1/3*($(A)+(C)+(D)$)$);
+\coordinate (F) at ($1/3*($(B)+(C)+(A)$)$);
+\node[below]  at (A){$a_{1}$};
+\node[below]  at (B){$a_{2}$};
+\node[above]  at (C){$a_{5}$};
+\node[above]  at (D){$a_{4}$};
+\path [draw=black,line width=2pt,->]($(E)+(0.1,0.3)$) arc(75:300:0.25);
+\path [draw=black,line width=2pt,->](F) arc(75:300:0.25);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(-1,1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,-1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,1.5);
+\end{scope}
+\begin{scope}[shift={(2,0)}]
+\coordinate (A) at (-1,-1.5);
+\coordinate (B) at (1,-1.5);
+\coordinate (C) at (1,1.5);
+\coordinate (D) at (-1,1.5);
+\coordinate (E) at ($1/3*($(A)+(C)+(D)$)$);
+\coordinate (F) at ($1/3*($(B)+(C)+(A)$)$);
+\node[below]  at (B){$a_{3}$};
+\node[above]  at (C){$a_{6}$};
+\path [draw=black,line width=2pt,->]($(E)+(0.1,0.3)$) arc(75:300:0.25);
+\path [draw=black,line width=2pt,->](F) arc(75:300:0.25);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(-1,1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,-1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,1.5);
+\end{scope}
+\begin{scope}[shift={(4,0)}]
+\coordinate (A) at (-1,-1.5);
+\coordinate (B) at (1,-1.5);
+\coordinate (C) at (1,1.5);
+\coordinate (D) at (-1,1.5);
+\coordinate (E) at ($1/3*($(A)+(C)+(D)$)$);
+\coordinate (F) at ($1/3*($(B)+(C)+(A)$)$);
+\node[below]  at (B){$a_{1}$};
+\node[above]  at (C){$a_{4}$};
+\path [draw=black,line width=2pt,->]($(E)+(0.1,0.3)$) arc(75:300:0.25);
+\path [draw=black,line width=2pt,->](F) arc(75:300:0.25);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(-1,1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,-1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,1.5);
+\end{scope}
+\end{tikzpicture}
+    \caption{}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+\begin{scope}
+\coordinate (A) at (-1,-1.5);
+\coordinate (B) at (1,-1.5);
+\coordinate (C) at (1,1.5);
+\coordinate (D) at (-1,1.5);
+\coordinate (E) at ($1/3*($(A)+(C)+(D)$)$);
+\coordinate (F) at ($1/3*($(B)+(C)+(A)$)$);
+\node[below]  at (A){$a_{1}$};
+\node[below]  at (B){$a_{2}$};
+\node[above]  at (C){$a_{5}$};
+\node[above]  at (D){$a_{4}$};
+\path [draw=black,line width=2pt,->]($(E)+(0.1,0.3)$) arc(75:300:0.25);
+\path [draw=black,line width=2pt,->](F) arc(75:300:0.25);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(-1,1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,-1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,1.5);
+\end{scope}
+\begin{scope}[shift={(2,0)}]
+\coordinate (A) at (-1,-1.5);
+\coordinate (B) at (1,-1.5);
+\coordinate (C) at (1,1.5);
+\coordinate (D) at (-1,1.5);
+\coordinate (E) at ($1/3*($(A)+(C)+(D)$)$);
+\coordinate (F) at ($1/3*($(B)+(C)+(A)$)$);
+\node[below]  at (B){$a_{3}$};
+\node[above]  at (C){$a_{6}$};
+\path [draw=black,line width=2pt,->]($(E)+(0.1,0.3)$) arc(75:300:0.25);
+\path [draw=black,line width=2pt,->](F) arc(75:300:0.25);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(-1,1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,-1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,1.5);
+\end{scope}
+\begin{scope}[shift={(4,0)}]
+\coordinate (A) at (-1,-1.5);
+\coordinate (B) at (1,-1.5);
+\coordinate (C) at (1,1.5);
+\coordinate (D) at (-1,1.5);
+\coordinate (E) at ($1/3*($(A)+(C)+(D)$)$);
+\coordinate (F) at ($1/3*($(B)+(C)+(A)$)$);
+\node[below]  at (B){$a_{4}$};
+\node[above]  at (C){$a_{1}$};
+\path [draw=black,line width=2pt,->]($(E)+(0.1,0.3)$) arc(75:300:0.25);
+\path [draw=black,line width=2pt,->](F) arc(75:300:0.25);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(-1,1.5)--(1,1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,-1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](1,1.5)--(1,-1.5);
+\path [draw=black,line width=2pt,postaction={on each segment={mid arrow=red}}](-1,-1.5)--(1,1.5);
+\end{scope}
+\end{tikzpicture}
+    \caption{}
+    \label{fig:my_label}
+\end{figure}
+\section{零维同调群$H_{0}(K)$的计算}
+有了上面几个例子的铺垫，我们可以来谈论稍微广泛一点的情况，根据我们目前所拥有的工具，零维同调群可以得到比较彻底的讨论。我们先来讨论一个简单的情况，倘若复形$K$的任意两个顶点$a,b$可以由多个首尾相接的一维复形连接起来，由于一维复形的两个顶点是同调的，从而我们有$a\sim b$，于是$K$的任意两个顶点均同调，$H_{0}(K)=\mathbb{Z}$。下面我们引入一系列新的概念来将这一观察重新表述。
+\begin{definition}
+我们称复形$K$的两个顶点$a,b$为可连接的，如果存在$K$的有限个顶点$a_{0},a_{1},\cdots,a_{k}$,其中$a_{0}=a,\;a_{k}=b$,使得$a_{i},a_{i+1}(i=0,1,\cdots,k-1)$时$K$的一个1-单形。特别地，我们规定一个顶点总是与它自己是可连接的。
+\end{definition}
+形象的说，如果$a,b$是可连接的，则我们可以用集合$K$中的折线将它们连接起来。
+
+\begin{proposition}
+在复形$K$中，顶点之间的可连接性是一个等价关系。在该等价关系下，属于同一个类的顶点在$K$中所张成的多个单形的集合构成$K$的一个子复形，被称为$K$的一个组合分支。
+\end{proposition}
+\begin{proof}
+第一个论断是显然的。为证明第二个论断，我们利用复形的等价定义(\ref{pro272})。由组合分支的定义，$(1)$是成立的，因为$K$是一个复形，而组合分支中的元素仍然是$K$中的元素，从而$(2')$成立。
+\end{proof}
+\begin{definition}
+复形$K$称为是连通的，如果它只有一个组合分支。
+\end{definition}
+从而我们在本节最开始讨论的其实是连通复形的情况，从而我们有如下命题
+\begin{proposition}\label{pro711}
+如果复形$K$连通，那么$H_{0}(K)=\mathbb{Z}$
+\end{proposition}
+我们可以将上述情况推广到更一般的情况
+\begin{proposition}\label{pro715}
+如果复形$K$有$q$个组合分支$K_{1},\cdots,K_{q}$，那么$H_{k}(K)=H_{k}(K_{1})\oplus\cdots\oplus H_{k}(K_{q})$
+\end{proposition}
+\begin{corollary}
+若复形$K$有$q$个组合分支，则$H_{0}(K)=\bigoplus\limits_{l=1}^{q}\mathbb{Z}$
+\end{corollary}
+下面我们来看命题(\ref{pro715})的证明。
+\begin{proof}
+由于组合分支构成了$K$的一个划分，所以我们有下列关系
+\begin{equation*}
+\begin{aligned}
+         &K=\bigcup\limits_{i=1}^{q}K_{i}\\
+         &K_{i}\bigcap K_{j}=\varnothing,1\leq i\neq j \leq q
+\end{aligned}
+\end{equation*}
+由自由生成Abel群的性质，我们有
+\begin{equation*}
+    C_{k}(K)=\bigoplus\limits_{l=1}^{q}C_{k}(K_{l})
+\end{equation*}
+而且对于$C_{k}(K_{l})$上的边缘算子$\partial_{l}$我们有
+\begin{equation*}
+    \partial_{l}=\partial\left.\right|_{C_{k}(K_{l})}
+\end{equation*}
+任取$z_{k}\in Z_{k}(K)$,从而由上式我们有$z_{k}=\sum\limits_{l=1}^{q}z_{k}^{l},\;z^{l}_{k}\in C_{k}(K_{l})$,而且由直和可知上述分解是唯一的，利用边缘算子的线性，我们有$\sum\limits_{l=1}^{q}\partial z_{k}^{l}=\partial_{l} z_{k}^{l}=0$
+，从而$\partial z_{k}^{l}\in C_{k-1}(K_{l})$,利用$H_{k-1}(K)$的直和分解，我们有
+\begin{equation*}
+    \partial z_{k}^{l}=0
+\end{equation*}
+从而$Z_{k}\subset \bigoplus\limits_{l=1}^{q}Z_{k}(K_{l}) $
+而反过来的方向是显然的，所以我们有
+\begin{equation*}
+Z_{k}(K)= \bigoplus\limits_{l=1}^{q}Z_{k}(K_{l})
+\end{equation*}
+类似地，我们有
+\begin{equation*}
+B_{k}(K)= \bigoplus\limits_{l=1}^{q}B_{k}(K_{l})
+\end{equation*}
+我们构造同态
+\begin{equation*}
+    \begin{aligned}
+             \phi&:Z_{k}(K)\longrightarrow \bigoplus\limits_{l=1}^{q}H_{k}(K_{l})\\
+             \phi&(z_{k})=\phi(\sum\limits_{l}z_{k}^{l})=\sum\limits_{l}[z_{k}^{l}]
+    \end{aligned}
+\end{equation*}
+其中$z_{k}^{l}\in Z_{k}(K_{l}),\;[z^{i}_{k}]\in H_{k}(K_{l})$。显然这是一个满射，且$\Ker(\phi)=\bigoplus\limits_{l=1}^{q}B_{k}(K_{l})=B_{k}(K)$,从而由第一同构定理我们有
+\begin{equation*}
+    Z_{k}(K)/B_{k}(K)\cong \bigoplus\limits_{l=1}^{q}H_{k}(K_{l})
+\end{equation*}
+这样我们就证明了这一命题。
+\end{proof}
+在实际应用中，复形的连通分支的判断并不直观，下面我们将讨论复形$K$连通的充要条件。
+正如我们所提到过的，我们在这里所谈论的连通的概念指的是任意两个顶点可以用一系列折线连接起来，我们事实上可以证明下列更强的命题
+\begin{proposition}\label{pro767}
+如果复形$K$是连通的，那么$|K|$道路连通。
+\end{proposition}
+\begin{proof}
+对于$|K|$中任意两点$x,y$，不妨设$A$和$B$分别是包含$x$和$y$的$K$的单形，任取$A,B$的顶点分别是$a,b$，那么$x,a$和$y,b$分别构成了单形$A,B$中的一个线段，分别记作$[x,a],[b,y]$(如果存在重合的情况，则线段退化为一个点)，由于$K$连通，则$a,b$可由一段折线连接起来，记作$[a,b]$，从而$[x,a],[a,b],[b,y]$构成了一条从$x$到$y$的道路。由于$x,y$的任意性，我们证明了这个命题。
+\end{proof}
+这个命题的逆命题也是成立的，即
+\begin{proposition}\label{pro774}
+如果多面体$|K|$是道路连通的，则$K$连通
+\end{proposition}
+为了证明这一命题，我们需要做一些直观上的解释和准备。由于连通要求的是一条特殊的道路，因此我们当然不可能直接期望道路连通性给出的道路就是我们所期望的折线，所以我们要做的是将这一条初始直线转换成我们所期望的折线。由复形的性质，如果两个顶点同属一个单形，则他们之间是可以通过1-单形连接的。我们考虑以某个顶点$a$为承载单形的顶点的集合$St_{K}(a)$，由于复形中的任意点都有承载单形，所以所有这样的集合实际构成了复形的某种覆盖，每个这样集合内的点都可以与顶点$a$建立线性连线，倘若我们能用这样的集合覆盖整条道路，注意到如果这样的集合存在公共部分$\eta$，则由承载单形的唯一性，包含$\eta$的两个集合$St_{K}(a),St_{K}(b)$必定满足$a,b$同属$\eta$的承载单形，从而可用1-单形连接，重复这样的步骤，我们就达到了我们的目的。下面来处理细节
+\begin{definition}
+设$K$为复形，$a$为$K$的顶点，我们定义$St_{K}(a)=\left\{x|x\in K,a\in\langle x\rangle\right\}$
+\end{definition}
+\begin{proposition}
+$x\in St_{K}(a)$等价于$x\in|K|\backslash\bigcup\limits_{a\notin A}A$，其中$A$为$K$中单形
+\end{proposition}
+\begin{proof}
+充分性：设$x\in St_{K}(a)$。假如$x\in|K|\backslash\bigcup\limits_{a\notin A}A$不成立，则$x\in\bigcup\limits_{a\notin A}A$，于是存在单形$\tilde{A}$满足$x\in \tilde{A}$且不包含$a$，又因为$\langle x\rangle\subset \tilde{A}$,这与$\langle x\rangle$有一个顶点为$a$矛盾\\
+必要性：设$x\in|K|\backslash\bigcup\limits_{a\notin A}A$。若$a$不是$\langle x\rangle$的顶点，则$x\in\langle x\rangle\subset \bigcup\limits_{a\notin A}A$,即$x\notin|K|\backslash\bigcup\limits_{a\notin A}A$,矛盾。
+\end{proof}
+\begin{corollary}\label{cor_1_788}
+$St_{K}(a)$是$|K|$中的开集，从而它是$a$在$|K|$中的邻域，且$\bigcup\limits_{a\in K^{0}}St_{K}(a)$构成$|K|$的一个开覆盖。
+\end{corollary}
+\begin{proof}
+显然每个单形是多面体$|K|$中的闭集,由于$\bigcup\limits_{a\notin A}A$是有限并，从而还是闭集，从而由上一命题，$St_{K}(a)=|K|\backslash\bigcup\limits_{a\notin A}A$知道$St_{K}(a)$是$|K|$中的开集。由我们之前的讨论知道，所有$St_{K}(a)$构成一个覆盖，从而是开覆盖
+\end{proof}
+\begin{corollary}
+对于连接$a,b$的道路$\omega:I\rightarrow|K|$，存在足够大的正整数$N$使得$\omega(\frac{1}{N})\in St_{K}(a)$
+\end{corollary}
+\begin{proof}
+由$St_{K}(a)$为开集且$\omega$连续立得。
+\end{proof}
+现在我们终于可以来证明命题(\ref{pro774})
+\begin{proof}
+设$a,b\in K^{0}$是复形$K$的顶点，$\omega$是连接它们的道路。我们考虑所有$St_{K}(a)$构成的开覆盖，并记$St^{-1}(a)=\omega^{-1}(St_{K}(a))$，从而由连续性，$St^{-1}(a)$是$I$的一个开覆盖，由$I$是紧致的，其lebesgue数$\delta>0$，我们取$N$足够大使得$\frac{2}{N}<\delta$,从而我们有$\omega((\frac{k-1}{N},\frac{k+1}{N}))\subset St(a_{k})$,其中$a_{k}\in K^{0}$。我们考虑一个新的函数$f:I\rightarrow |K|$，定义$f(\frac{k}{N})=a_{k}$，注意到$a_{k},a_{k+1}$都是$\omega(\frac{k}{N},\frac{k+1}{N})$中的点的承载单形的顶点，从而他们之间可以用$K$中的1-单形连接，这样我们得到了一系列顶点$a_{0}=a,a_{1},\cdots,a_{N}=b$，其中相邻的两个顶点可以由折线连接，我们将$f$扩展成分段线性函数$\tilde{f}$，则得到了$a,b$之间的一个连接，从而复形$K$是可连接的。
+\end{proof}
+\begin{corollary}
+下列三个命题等价:\\
+(1)复形$K$有$q$个组合分支\\
+(2)多面体$|K|$有$q$个道路连通分支\\
+(3)$H_{0}(K)=\bigoplus\limits_{l=1}^{q}\mathbb{Z}$
+\end{corollary}
+\begin{proof}
+只有(3)推(1)或(2)是不那么显然的。根据我们刚证明的结论，(1)(2)等价，我们只需要证(3)推(1)。由于连通复形的0维同调群是$\mathbb{Z}$，如果我们设$K$有$s$个连通分支，则由命题(\ref{pro715})，$H_{0}(K)=\bigoplus\limits_{l=1}^{s}\mathbb{Z}$,但是由(3)我们知道$H_{0}(K)=\bigoplus\limits_{l=1}^{q}\mathbb{Z}$，根据自由群的性质，生成元个数(rank)不同的自由群必然不同构，从而我们有$s=q$，命题得证。
+\end{proof}
+\section{复形$K$的一般同调群计算}
+我们在之前给出的同调群的计算例子中，并没有给出可以处理更普遍的同调群的通法，这一节就来考虑这个问题。根据同调群的定义，我们只要知道$\Ker\partial_{k}$与$\Ima\partial_{k+1}$，就可以确定k维同调群。注意到边缘同态$\partial_{k}$是一个线性变换,它的作用完全由它在所有基本组上的作用决定，换言之，如果我们只要讨论$(\partial_{k})$，就可以完全讨论清楚一个复形的所有同调群。注意到$(\partial_{k})$是一个整数矩阵，根据高等代数中的结论，任意整数矩阵$M$具有形如下列的Smith标准型(所有没写出的元素都是0)
+\begin{equation*}
+  \left(\begin{array}{ccccc}
+     d_{1}& & & & \\
+     & \ddots& & &  \\
+      & &d_{k} & &  \\
+       & & & &  \\
+     \end{array} \right) 
+\end{equation*}
+其中$k=\text{rank}M$,$d_{i}$为正整数，且有$d_{i}|d_{i+1},i=1,\cdots,k-1$。我们称$d_{1},\cdots,d_{k}$为$M$的不变因子，它们完全由矩阵$M$自身决定。
+\begin{proof}
+我们定义的初等变换由以下几个操作组成。
+\begin{itemize}
+    \item 第$i$行加到第$j$行上$i\neq j$\\
+    \item 改变第$i$行的符号\\
+    \item 第$i$列加到第$j$列上$i\neq j$\\
+     \item 改变第$i$列的符号\\
+\end{itemize}
+得到对角形式的证明以后补。不变因子由矩阵自身决定其实是Smith标准型的唯一性。为证明这一点，我们定义矩阵$M$所有$s$阶子式($s\leq dimM=k $)的行列式的最大公因式为$M$的$s$阶行列式因子,记作$D_{s}$。由于$\text{rankM=k}$，从而$M$必然有非零的$s$阶子式，所以$D_{s}$非零。对于化成对角型的整数矩阵而言，由于$d_{i}|d_{i+1}$，我们有$D_{k}=d_{1}\cdots d_{k}$，于是不变因子$d_{s}\frac{D_{s}}{D_{s-1}},s=1,\cdots,k$，其中我们定义$D_{0}=1$。于是，只要我们证明矩阵的秩和行列式因子在初等变换下不改变即可得到Smith标准型的唯一性。\\
+秩不变是显然的。对于改变某一行的符号，显然所有$k$阶子式构成的集合在相差一个符号的意义下是不变的，记变换后的行列式因子是$\widetilde{D}_{s}$,则$D_{s}|\widetilde{D}_{s}$。对于一行加到另一行上，我们可以将含有这一和式的行展开，得到两个式子之和，其中每个都是原来矩阵的$k$阶子式，从而仍然有$D_{s}|\widetilde{D}_{s}$。对于列同样讨论，这样我们就得到了在初等变换下有$D_{s}|\widetilde{D}_{s}$。由于初等变换的可逆性，我们有$\widetilde{D}_{s}|\widetilde{\widetilde{D}}_{s}=D_{s}$。综上我们有$D_{s}=\widetilde{D}_{s}$，这样就证明了Smith标准型的唯一性。
+\end{proof}
+\begin{proposition}
+适当选取$C_{k}(K)$和$C_{k-1}(K)$的基，边缘同态$\partial_{k}:C_{k}(K)\rightarrow C_{k-1}(K)$所对应的矩阵具有下列形式
+\begin{equation*}
+   \left(\begin{array}{ccccc}
+     \tau^{k}_{1}& & & & \\
+     & \ddots& & &  \\
+      & &\tau^{k}_{m_{k}} & &  \\
+       & & & &  \\
+     \end{array} \right) 
+\end{equation*}
+其中$m_{k}$是$(\partial_{k})$的秩，$\tau^{k}_{1},\cdots,\tau^{k}_{m_{k}}$是不变因子，只由$\partial_{k}$决定，与基的选取无关
+\end{proposition}
+因此，如果我们把$(\partial_{k})$化成它的Smith标准型，则可以直观看出它的零空间和像空间，这相当于选定了另一组基。然而，通过$(\partial_{k})$我们可以确定的是$\Ker(\partial_{k})$和$\Ima(\partial_{k})$，不过为了计算同调群$H_{k}$我们需要的是$\Ker(\partial_{k})$和$\Ima(\partial_{k+1})$。通过$C_{k+1},C_{k}$的基的选取，我们可以确定$\Ima(\partial_{k+1})$，通过$C_{k},C_{k-1}$的基的选取，我们可以确定$\Ker(\partial_{k+1})$，一个自然的问题是，这两种情况下，$C_{k}(K)$中选取的基之间存在什么关系，一个更加大胆的想法是，这两种情况下得到的基是不是相同，即我们可以在一组$C_{k}(K)$基的选取下，同时对角化$(\partial_{k}),(\partial_{k+1})$。事实上这是完全可以做到的，我们现在就来做这件事情。\\
+显然，对于一般情况我们是不可能期望这个同时对角化是可能的，但是注意到边缘同态满足$\partial_{k+1}\partial_{k}=0$，这可能会给我们带来希望。首先我们考虑将$(\partial_{k+1})$Smith对角化的一组$C_{k+1}(K)$和$C_{k}(K)$的基为$\left\{{c_{1}^{k+1},\cdots,c_{m_{k+1}}^{k+1},z_{1}^{k+1},\cdots,z_{\phi_{k}-m_{k+1}}}\right\}$和$\left\{{c_{1}^{k},\cdots,c_{m_{k+1}}^{k},z_{1}^{k},\cdots,z_{\phi_{k}-m_{k+1}}}\right\}$，我们记$\partial_{k+1}$在这组基下的矩阵为$M_{k+1}$,它是一个$\phi_{k}\times \phi_{k+1}$矩阵，满足
+$M_{k+1}c_{l}^{k+1}=\tau^{k+1}_{l}c_{l}^{k},\;M_{k+1}z_{l}^{k+1}=0$，即$M_{k+1}$有形式
+\begin{equation*}
+	M_{k+1}=\begin{array}{c@{\hspace{-5pt}}l}	
+	\left(\begin{array}{ccc|ccc}	
+	\tau^{k+1}_{1}& & & & &\\	
+	&\ddots & & & \\	
+	& &\tau^{k+1}_{m_{k+1}}& \multicolumn{3}{c}{\raisebox{2ex}[0pt]{\Huge0}}\\\hline	
+	& & & & & \\	
+	& & & & & \\	
+	\multicolumn{3}{c|}{\raisebox{2ex}[0pt]{\Huge0}}
+	& 	\multicolumn{3}{c}{\raisebox{2ex}[0pt]{\Huge0}}	
+	\end{array}\right)
+	\end{array}=\left(\begin{array}{cc}
+	    A^{k+1} & O \\
+	    O & O 
+	\end{array}\right)
+	\end{equation*}
+仍然取$C_{k}(K)$的基为$\left\{{c_{1}^{k},\cdots,c_{m_{k+1}}^{k},z_{1}^{k},\cdots,z_{\phi_{k}-m_{k+1}}}\right\}$，我们取$C_{k-1}$的一组基为$\tilde{c}_{1}^{k-1},\cdots,\tilde{c}_{\phi_{k-1}}^{k-1}$,并记在这组基下$\partial_{k}$的矩阵为$M_{k-1}$,我们将它写成$m_{k+1}\times(\phi_{k}-m_{k+1})$的列分块矩阵
+\begin{equation*}
+    \left(\begin{array}{c}
+         \tilde{A}  \\
+          \tilde{B}
+    \end{array}\right)
+\end{equation*}
+，利用$M_{k+1}M_{k}=0$可知$\tilde{A}=0$,我们对$\tilde{B}$进行初等变换将其化成Smith标准型，注意此时我们只需要调整$C_{k}(K)$中的基的一个子集$\left\{{z_{1}^{k},\cdots,z_{\phi_{k}-m_{k+1}}}\right\}$,由于$M_{k+1}$中与$z^{k}$相关的列都是0，所以在将$\tilde{B}$对角化的过程中，可以保持$M_{k+1}$的形式不变，注意此时$\left\{{z_{1}^{k},\cdots,z_{\phi_{k}-m_{k+1}}}\right\}$是会发生改变的，我们记此时$C_{k}(K)$的新的基为$\left\{{c_{1}^{k},\cdots,c_{m_{k+1}}^{k},\overline{z}_{1}^{k},\cdots,\overline{z}_{\phi_{k}-m_{k+1}}}\right\}$。\\
+我们将$\tilde{c}_{1}^{k-1},\cdots,\tilde{c}_{\phi_{k-1}}^{k-1}$中，属于$M_{k+1}$的像集的记作$c_{1}^{k-1},\cdots,c_{m_{k}}^{k-1}$，其余的记作$z_{1}^{k-1},\cdots,z_{\phi_{k-1}-m_{k}}^{k-1}$,则$M_{k}$有形式
+\begin{equation*}
+	M_{k}=\begin{array}{c@{\hspace{-5pt}}l}	
+	\left(\begin{array}{ccc|ccc}
+		& & & & & \\	
+	& & & & & \\	
+	\multicolumn{3}{c|}{\raisebox{2ex}[0pt]{\Huge0}}
+	& 	\multicolumn{3}{c}{\raisebox{2ex}[0pt]{\Huge0}}	\\\hline
+	\tau^{k}_{1}& & & & &\\	
+	&\ddots & & & \\	
+	& &\tau^{k}_{m_{k}}& \multicolumn{3}{c}{\raisebox{2ex}[0pt]{\Huge0}}
+	\end{array}\right)
+	\end{array}=\left(\begin{array}{cc}
+	    O & O \\
+	    A^{k} & O 
+	\end{array}\right)
+	\end{equation*}
+这样我们就实现了我们一开始的目标。由我们的推导过程，我们发现可以将$C_{k}(K)$中的一组基按下列方式分成五类：首先是$\Ima\partial_{k+1}$的像的基，$A_{k}$该基所对应的不变因子为1；$B_{k}$该基所对应的不变因子不为1，剩下三类不在$\Ima\partial_{k+1}$中，分别是$U_{k}\in\Ker\partial_{k}$;$V_{k}$,该基所对应的不变因子为1;$W_{k}$,该基所对应的不变因子不为1。换言之，我们有$A_{k}=\partial_{k+1}V_{k+1},\;B_{k}=\partial_{k+1}W_{k+1}$，是我们不怎么关心的真正的边缘。$U_{k}$是我们所关心的同调群中的生成元，$V_{k},W_{k}$不是闭链中的元素。\\
+\begin{proposition}
+设$K$为$n$维复形，则$A_{n},B_{n}$为空集。对于任意复形，都有$V_{0},W_{0},B_{0},W_{1}$为空集。
+\end{proposition}
+\begin{proof}
+由于$\partial_{n+1}$为0映射，所以它的像中不包含任何基向量，从而$A_{n},\;B_{n}$为空集。同理，由于$\partial_{0}$为0，从而它的任何元素的像都是0，所以$V_{0},W_{0}$是空集。由边缘算子的性质，在基本组作为基的情况下，$(\partial_{1})^{\top}$每一行都只由一个1和一个$-1$组成，而且不存在完全相同的两行。对于任意一个非零$k$子式，不妨设其中每一行都包含$1,-1$，因为只含有一个数字的行我们可以按这一行展开，得到一个$k-1$子式，然后可以重复讨论，如果有一行只有一个数字，可以继续展开，直到所有的行都有两个数字或我们可以直接得到整个行列式的值为$\pm1$。我们从第一列开始，不妨设第一列所有的非零数字都是1，然后利用初等变换，可以利用其中某一行将其他第一列的数字消掉。注意到这样得到的新的行仍然是由一个1和一个$-1$组成。利用归纳法，我们可以得到这样的矩阵的每一个行列式因子都是$\pm1$，从而所有的不变因子都是1。
+\end{proof}
+\begin{definition}
+我们定义$(\partial_{k+1})$的秩为$\alpha_{k}$
+\end{definition}
+由定义可知，$(\partial_{k+1})$的秩即为$A_{k},B_{k}$中的元素数目，记为$\alpha_{k}=|A_{k}|+|B_{k}|$,因此$\alpha_{n}=0,\alpha_{0}=|A_{0}|$，特别地，我们约定$\alpha_{-1}=0$。另外由$A_{k}=\partial_{k+1}V_{k+1}$,$B_{k}=\partial_{k+1}W_{k+1}$可知$|A_{k}|=|V_{k+1}|,\;|B_{k}|=|W_{k+1}|$。
+\begin{definition}
+对于$n$维复形，$k=0,1,\cdots,n$，我们可以定义 $\beta_{k}=\phi_{k}-\alpha_{k}-\alpha_{k-1}$称为复形$K$的第$k$个Betti数，大于1的不变因子$\tau^{k}_{1},\cdots,\tau^{k}_{|B_{k}|}$称为复形$K$的$k$维挠系数。
+\end{definition}
+\begin{proposition}\label{pro902}
+对于$n$维复形$K$，$H_{k}=\left(\bigoplus\limits_{l=1}^{\beta_{k}}\mathbb{Z}\right)\bigoplus\left(\bigoplus\limits_{l=1}^{|B_{k}|}\mathbb{Z}/\tau_{l}^{k}\right)$,其中$\beta_{k}$是我们刚刚定义的Betti数，$\tau_{l}^{k}$是$k$维挠系数。
+\end{proposition}
+
+\begin{proof}
+由上面的讨论可以知道，$Z_{k}(K)$的一组生成元是$A_{k},B_{k},U_{k}$,而$B_{k}(K)$的一组生成元是$A_{k},\tau^{k}_{l}b_{l}$,其中$b_{l}\in B_{k}$。这样$H_{k}=\left(\bigoplus\limits_{l=1}^{|U_{k}|}\mathbb{Z}\right)\bigoplus\left(\bigoplus\limits_{l=1}^{|B_{k}|}\mathbb{Z}/\tau_{l}^{k}\right)$,但是由于$|U_{k}|=\phi_{k}-|A_{k}|-|B_{k}|-|V_{k}|-|W_{k}|=\phi_{k}-|A_{k}|-|B_{k}|-|A_{k-1}|-|B_{k-1}|=\phi_{k}-\alpha_{k}-\alpha_{k-1}=\beta_{k}$，当$k=0$时，由于$B_{0},V_{0},W_{0}$都是空集，所以$|U_{0}|=\phi_{0}-A_{0}=\phi-\alpha_{0}-\alpha_{-1}$，与我们约定$A_{-1}=0$是一致的。综上，我们就得到了命题。
+\end{proof}
+\begin{remark}
+Betti数$\beta_{k}=\phi_{k}-\alpha_{k}-\alpha_{k-1}$，其中$\alpha_{k}$是$(\partial_{k})$的秩，这说明Betti数$\beta_{k}$和两个边缘算子$\partial_{k},\partial_{k-1}$都有关,而挠系数仅仅是矩阵$(\partial_{k+1})$的不变因子，所以挠系数由$\partial_{k+1}$完全决定，而与$\partial_{k}$无关。
+\end{remark}
+\begin{definition}
+$n$维复形$K$的Euler示性数定义为$\chi(K)=\sum\limits_{l=0}^{n}(-1)^{l}\phi_{l}$,其中$\phi_{l}$是$K$的$k$维单形数。
+\end{definition}
+\begin{proposition}
+$n$维复形$K$的Euler示性数和Betti数之间有关系$\chi(K)=\chi(K)=\sum\limits_{l=0}^{n}(-1)^{l}\beta_{l}$
+\end{proposition}
+\begin{proof}
+利用$\beta_{l}=\phi_{l}-\alpha_{l}-\alpha_{l-1}$直接计算,
+\begin{equation*}
+    \begin{aligned}
+      \sum\limits_{l=0}^{n}(-1)^{l}\beta_{l}&=\sum\limits_{l=0}^{n}(-1)^{l}(\phi_{l}-\alpha_{l}-\alpha_{l-1})\\
+      &=\sum\limits_{l=0}^{n}(-1)^{l}\phi_{l}-\alpha_{-1}+(-1)^{n}\alpha_{n}\\
+      &=\sum\limits_{l=0}^{n}(-1)^{l}\phi_{l}
+    \end{aligned}
+\end{equation*}
+\end{proof}
+\begin{remark}
+将来我们会证明，同调群是拓扑不变的，从而Betti数是拓扑不变的，即Euler示性数是拓扑不变量。对于一个多面体$|K|$，我们可以有不同的划分，从而单形的数目$\phi_{k}$是变化的，但是Euler示性数的拓扑不变性告诉我们，他们的简单加减的组合是不变的。
+\end{remark}
+我们下面利用这种方法来计算一下球面的同调群。我们选取球面的四面体三角剖分，如下图所示
+\begin{figure}[htpb]
+    \centering
+\begin{tikzpicture}
+\coordinate (A0) at (-0.2,2);
+\coordinate (A1) at (-2,-0.1);
+\coordinate (A2) at (0.2,-1);
+\coordinate (A3) at (1.2,0.2);
+\node[above] at (A0){$p_{0}$};
+\node[left] at (A1){$p_{1}$};
+\node[below] at (A2){$p_{2}$};
+\node[right] at (A3){$p_{3}$};
+\draw (A0)--(A1)--(A2)--(A3)--cycle;
+\draw (A0)--(A2);
+\draw[dashed] (A1)--(A3);
+  \end{tikzpicture}
+    \caption{}
+    \label{fig:my_label}
+\end{figure}
+我们可以写出它的各维基本组为
+\begin{equation*}
+    \begin{aligned}
+    K(0)&=\left\{p_{0},p_{1},p_{2},p_{3}\right\}\\
+     K(1)&=\left\{(p_{0}p_{1}),(p_{0}p_{2}),(p_{0}p_{3}),(p_{1}p_{2}),(p_{1}p_{3}),(p_{2}p_{3})\right\}\\
+     K(3)&=\left\{(p_{1}p_{2}p_{3}),(p_{0}p_{2}p_{3}),(p_{0}p_{1}p_{3}),(p_{0}p_{1}p_{2})\right\}\\
+    \end{aligned}
+\end{equation*}
+于是我们可以写出基本组下的边缘变换的矩阵
+\begin{equation*}
+    \begin{aligned}
+    M_{0}&=\left(\begin{array}{cccc}
+     0 & 0  &0 &0 \\
+    \end{array}\right)\\
+    M_{1}&=\left(\begin{array}{cccccc}
+        -1 &-1&-1&0&0&0  \\
+        1 &0&0&-1&-1&0\\
+        0 &1&0&1&0&-1\\
+        0 &0&1&0&1&1\\
+    \end{array}\right)\\
+    M_{2}&=\left(\begin{array}{cccc}
+        0 & 0&1&1 \\
+        0 & 1&0&-1 \\
+        0 & -1&-1&0 \\
+        1 & 0&0&1 \\
+        -1 & 0&1&0 \\
+        1 & 1&0&0 \\
+    \end{array}\right)
+    \end{aligned}
+\end{equation*}
+利用mma我们可以得到它们的Smith标准型
+\begin{equation*}
+    \begin{aligned}
+    D_{0}&=\left(\begin{array}{cccc}
+     0 & 0  &0 &0 \\
+    \end{array}\right)\\
+    D_{1}&=\left(\begin{array}{cccccc}
+        1 &0&0&0&0&0  \\
+        0 &1&0&0&0&0\\
+        0 &0&1&0&0&0\\
+        0 &0&0&0&0&0\\
+    \end{array}\right)\\
+    D_{2}&=\left(\begin{array}{cccc}
+        1 & 0&0&0 \\
+        0 & 1&0&0 \\
+        0 & 0&1&0 \\
+        0 & 0&0&0 \\
+        0 & 0&0&0 \\
+        0 & 0&0&0 \\
+    \end{array}\right)
+    \end{aligned}
+\end{equation*}
+在这个例子中，我们有$\phi_{0}=4,\phi_{1}=6,\phi_{2}=4$,$\;\alpha_{0}=\text{rank}(\partial_{1})=3,\alpha_{1}=\text{rank}(\partial_{2})=3,\alpha_{2}=0$,从而$\beta_{0}=1,\beta_{1}=0,\beta_{2}=1$,于是根据命题(\ref{pro902}),我们知道球面非平凡的同调群为$H_{0}(S^{2})=\mathbb{Z},\;H_{2}(S^{2})=\mathbb{Z}$
+\section{上同调群}
+我们在前面较为详尽的讨论了一些简单几何体的同调群，在那里，我们的基本方法是利用边缘同态，考察更高一维的复形在低一维的边界是怎样的，我们同样十分好奇，低一维的边界是以怎样的方式参与了高维几何体的构成，这就是这一节要讨论的上同调的概念。我们在讨论同调群是定义了关联矩阵$(\partial_{k})$，在选定一组基后，对于$C_{k}$中的链$\beta_{k}$，可以将其表示成列向量形式，且$(\partial_{k})\beta_{k}$给出了它的边缘。在$C_{k-1}$中选定一组基后，它的链都可以表成列矢量$\gamma_{k-1}$，我们注意到$(\partial_{k})^{\top}\gamma_{k-1}$是$C_{k}$中的链，而且，我们设单位向量$e_{i}$对应的$C_{k-1}$中的基为$\sigma^{k-1}$，则$(\partial_{k})^{\top}e_{i}$中的非零坐标对应了所有的边界含有$\sigma^{k-1}$的$C_{k}$中的基。\\
+根据上面的讨论，我们定义
+\begin{definition}[上边缘同态]
+对于复形$K$的相邻的链群，我们可以定义上边缘同态为$(\delta^{k-1})=(\partial_{k})^{\top}$\\
+\begin{equation*}
+\begin{aligned}
+    &\delta^{k-1}:C_{k-1}(K)\rightarrow C_{k}(K)\\
+    &\delta^{k-1}(\sigma^{k-1}_{j})=\sum\limits_{i=1}^{\phi_{k}}\alpha_{ij}^{k}\sigma^{k}_{i}
+\end{aligned}
+\end{equation*}
+其中$\alpha_{ij}^{k}$是我们之前定义的关联数。
+\end{definition}
+按我们的定义,$(\delta^{k})$右乘作用于行矢量上。
+\begin{proposition}
+对于上边缘同态我们有$\delta^{k}\delta^{k-1}=0$,或者对于矩阵$(\delta^{k})$而言，我们有$(\delta^{k-1})(\delta^{k})=0$
+\end{proposition}
+\begin{proof}
+利用定义，我们有$(\delta^{k-1})=(\partial_{k})^{\top}$,从而我们有$(\delta^{k-1})(\delta^{k})=(\partial_{k})^{\top}(\partial^{k+1})^{\top}=((\partial_{k+1})(\partial_{k}))^{\top}=0$,从而我们有$\delta^{k}\delta^{k-1}=0$
+\end{proof}
+\begin{corollary}
+$\Ima\delta^{k-1}\subset \Ker\delta^{k}$
+\end{corollary}
+\begin{definition}
+我们定义复形$K$的$k$维上闭链群$Z^{k}(K)$和上边缘链群$B^{k}(K)$分别为$\Ker\delta^{k}$和$\Ima\delta^{k-1}$，它们的商群$H^{k}(K)=Z^{k}(K)/B^{k}(K)=\Ker\delta^{k}/\Ima\delta^{k-1}$，成为复形$K$的$k$维上同调群。
+\end{definition}
+由于上同调群也是由边界关系导出的，和同调群一样，我们也期望它们是拓扑不变的，事实上也的确如此，在第二章我们会证明这一点。现在我们来从另一个角度来理解上同调群。同态$\partial_{k}$和$\delta_{k-1}$的表示矩阵互为转置，这让我们想到了线性空间的对偶空间相关的命题，事实上，对于群而言，我们确实存在类似的命题，这是因为向量空间和Abel群都具有模的结构。
+\begin{definition}
+我们定义所有形如$f:G\rightarrow \mathbb{Z}$的同态构成的集合为$\text{Hom}(G,\mathbb{Z})$，其中$G$为Abel群。这个集合在普通的映射加法下构成一个Abel群，称之为从群$G$到$\mathbb{Z}$的同态群，记为$\text{Hom}(G,\mathbb{Z})$
+\end{definition}
+\begin{proposition}\label{pro1035}
+设$F,G$为群，$\phi:F\rightarrow G$为群同态，则$\phi$诱导了从$\text{Hom}(G,\mathbb{Z})$到$\text{Hom}(F,\mathbb{Z})$的同态$\phi^{*}$:
+\begin{equation*}
+    \begin{aligned}
+        \phi^{*}:\text{Hom}(G,\mathbb{Z})&\rightarrow\text{Hom}(F,\mathbb{Z})\\
+        \phi^{*}(g)&=g\circ \phi
+    \end{aligned}
+\end{equation*}
+我们称$\phi^{*}$为$\phi$诱导的对偶同态，有时也将它记作$Hom(\phi)$。
+\end{proposition}
+\begin{proof}
+先验证$\phi^{*}(g)$为$F$到$\mathbb{Z}$的同态，随后验证$\phi^{*}$为从$\text{Hom}(G,\mathbb{Z})$到$\text{Hom}(F,\mathbb{Z})$的同态。即对任意$a,b\in F$，我们有$\phi^{*}(g)(a+b)=\phi^{*}(g)(a)+\phi^{*}(g)(b)$;以及对任意$g,g'\in\text{Hom}(G,\mathbb{Z})$，任意$a\in F$，有$\phi^{*}(g+g')(a)=(\phi^{*}(g)+\phi^{*}(g'))(a)$,细节略
+\end{proof}
+\begin{corollary}\label{pro1049}
+对偶同态满足$Hom(g\circ f)=Hom(f)\circ Hom(g),Hom(1)=1$
+\end{corollary}
+\begin{proof}
+对于任意$\phi\in Hom(G,\mathbb{Z})$,我们有$Hom(g\circ f)\phi=\phi\circ g\circ f=(Hom(f)\circ Hom(g))\phi$,$Hom(1)(\phi)=\phi\circ 1=\phi$
+\end{proof}
+对于自由群$F$而言，我们可以仿照线性空间，定义它的对偶基，从而可以证明如此得到的同态群$\text{Hom}(F,\mathbb{Z})\cong F$。链群$C_{k}(K)$是以基本组$\left\{\sigma^{k}_{i}\right\}$为基的自由群，我们记与其同构的同态群为$C^{k}(K)$，其中的基$\left\{\tau^{k}_{i}\right\}$,满足$\tau^{k}_{i}(\sigma^{k}_{j})=\delta^{ij}$。
+\begin{definition}
+对于复形$K$而言，我们称$C^{k}(K)$为$K$的$k$维上链群，它的元称为$k$维上链.如果记上链群中的一组基为$\left\{\tau^{k}_{i}\right\}$，则任意上链具有形式$\sum\limits_{i=1}^{\phi_{k}}\alpha_{i}\tau^{k}_{i}$
+\end{definition}
+根据命题(\ref{pro1035}),边缘同态诱导了同态群之间的同态$\partial_{k}^{*}$:
+\begin{equation*}
+\begin{aligned}
+    \partial_{k}^{*}:C^{k-1}(K)&\rightarrow C^{k}(K)\\
+    \partial_{k}^{*}(\tau^{k-1}_{i})&=\tau^{k-1}_{i}\circ \partial_{k}
+    \end{aligned}
+\end{equation*}
+事实上，考虑$\partial_{k}^{*}(\tau^{k-1}_{i})$在$C_{k}(K)$上的作用，我们有
+\begin{equation*}
+    \begin{aligned}
+    \partial_{k}^{*}(\tau^{k-1}_{i})(\sigma^{k}_{j})&=\tau^{k-1}_{i}(\partial_{k}\sigma^{k}_{j})\\
+    &=\tau^{k-1}_{i}(\sum\limits_{l=1}^{\phi_{k-1}}\alpha^{k}_{jl}\sigma_{l}^{k-1})\\
+    &=\alpha^{k}_{ji}\\
+    &=\sum\limits_{\beta=1}^{\phi_{k}}(\alpha^{k}_{\beta i}\tau^{k}_{\beta})\sigma^{k}_{j}
+    \end{aligned}
+\end{equation*}
+将上式进行线性扩充，我们就得到了想要的同态。由于$\left\{\sigma^{k}_{j}\right\}$是一组基，这表明
+\begin{equation*}
+    \partial_{k}^{*}(\tau^{k-1}_{i})=\sum\limits_{\beta=1}^{\phi_{k}}(\alpha^{k}_{\beta i}\tau^{k}_{\beta})
+\end{equation*}
+注意到这一变换行为与我们之前定义的$\delta^{k-1}$相同，
+由于$C^{k}(K)\cong C_{k}(K)$，所以我们可以将$\sigma^{k}_{i}$和$\delta^{k}_{i}$等同起来，这样我们就可以在相差一个同构的意义下认为$\delta^{k-1}=\partial_{k}^{*}$，这样，我们可以说上边缘同态就是边缘同态的对偶，以后对于上同调，我们都采用这样对偶的说法。\\
+有了对偶的概念，我们可以引入上链群和链群之间的配对
+\begin{definition}
+我们称下列映射$\kappa$为Kronecker指数，
+\begin{equation*}
+    \begin{aligned}
+    &\kappa:C^{k}(K)\times C_{l}(K)\rightarrow \mathbb{Z}\\
+    &\kappa(\phi,c)=\left\{\begin{array}{cc}
+         0,\quad k\neq l  \\
+         \phi(c),\quad k=l 
+    \end{array}\right.
+    \end{aligned}
+\end{equation*}
+有时也将$\kappa(\phi,c)$记作$\langle\phi,c \rangle$
+\end{definition}
+根据上链群的定义我们马上有
+\begin{proposition}
+(1)Kronecker指数是双线性的\\
+(2)$\langle\partial^{*}_{k+1}\phi_{k},c_{k+1}\rangle=\langle\phi_{k},\partial_{k+1}c_{k+1}\rangle$
+\end{proposition}
+\begin{corollary}
+(1)$\langle\partial_{k+1}^{*}\phi_{k},z_{k+1}\rangle$=0,对任意$\phi_{k}\in C^{k}(K),\;z_{k+1}\in Z_{k+1}(K)$成立\\
+(2)$\langle\phi_{k},\partial_{k+1}c_{k+1}\rangle$=0,对任意$\phi_{k}\in Z^{k}(K),\;c_{k+1}\in C_{k+1}(K)$成立
+\end{corollary}
+\begin{corollary}\label{coro1098}
+(1)上链$\phi\in Z^{k}(K)$的充要条件是$\langle\phi,\partial c \rangle=0$对于任意$c\in C_{k+1}(K)$成立，即$\phi$是$k$维上闭链的充要条件为$\phi$是$k$维边缘链的零化子\\
+(2)上链$\psi\in B^{k}(K)$,则$\langle\psi,z\rangle=0$对于任意$z\in Z_{k}(K)$成立，即若$\psi$是$k$维上边缘链，则$\psi$是$k$维闭链的零化子
+\end{corollary}
+\begin{proof}
+先证(1):设$\phi_{k}\in Z^{k}(K)$，则$\partial_{k+1}^{*}\phi_{k}=0$，即$0=\langle \partial_{k+1}^{*}\phi_{k},c_{k+1}\rangle=\langle \phi_{k},\partial_{k+1}c_{k+1}\rangle$,这样我们就证明了一个方向。对于另一个方向，我们设$\langle \phi_{k},\partial_{k+1}c_{k+1}\rangle=0$对任意$c$成立，则我们有$\langle \partial_{k+1}^{*}\phi_{k},c_{k+1}\rangle=0$恒成立，这表明$\partial_{k+1}^{*}\phi_{k}=0$,即$\phi_{k}\in Z^{k}(K)$\\
+对于(2),我们可以设$\psi_{k}=\partial^{*}_{k-1}c_{k-1}$,则$\langle\psi_{k},z_{k}\rangle=\langle c_{k-1},\partial_{k}z_{k}\rangle=0$
+\end{proof}
+\begin{corollary}
+$\kappa$诱导了$H^{k}(K)\times H_{l}(K)$到$\mathbb{Z}$的同态$\tilde{\kappa}$为$\tilde{\kappa}([\phi],[{Z}])=\langle\phi,z\rangle$
+\end{corollary}
+\begin{proof}
+只要证明上述同态是良定义的。考虑到$[\phi]$中的元素属于上闭链且相差一个上边缘链，$[z]$中的元素属于闭链且相差一个边缘链，那么根据推论$(\ref{coro1098})$，我们自然有同态是良定义的。
+\end{proof}
+利用$\tilde{\kappa}$我们可以定义Kronecker映射导出的下列同态：
+\begin{equation*}
+    \begin{aligned}
+    \alpha:H^{k}(K)&\rightarrow \text{Hom}(H_{k}(X),\mathbb{Z})\\
+    [\phi]&\rightarrow\alpha([\phi])
+    \end{aligned}
+\end{equation*}
+其中$\alpha([\phi])\in \text{Hom}(H_{k}(K),\mathbb{Z})$满足$\alpha([\phi])([z])=\tilde{\kappa}([\phi],[z]),\;z\in Z_{k}(K)$
+
+与同调群一样，对于上同调群我们也有一个计算的问题，注意到我们有$(\delta^{k})=(\partial_{k+1})^{\top}$,在我们选用的ABUVW基下，可以清楚看到转置不会改变不变因子的数目，也不会改变秩，从而经过一定的基重排后我们可以以与同调群相同的讨论方式来讨论上同调群的一般求法,所以我们有
+\begin{proposition}\label{pro1122}
+对于$n$维复形$K$，$H^{k}=\left(\bigoplus\limits_{l=1}^{\beta_{k}}\mathbb{Z}\right)\bigoplus\left(\bigoplus\limits_{l=1}^{|B_{k-1}|}\mathbb{Z}/\tau_{l}^{k-1}\right)$,其中$\beta_{k}$是我们之前定义的Betti数，$\tau_{l}^{k-1}$是$k-1$维挠系数。
+\end{proposition}
+\begin{proof}
+由于我们仅仅进行了矩阵的转置，因此在$(\delta^{k})$中，仍然存在不变因子为1和不变因子大于一的基，我们设$\delta^{k}D_{k}=X_{k+1},\delta^{k}E_{k}=Y_{k+1}$,其中$D_{k},E_{k}$分别是不变因子为1和不变因子大于1的基的集合。此外我们设$S_{k}$为不在$\Ima\delta_{k-1}$但在$\Ker\delta^{k}$中的基。这样，$\Ker\delta^{k}$的生成元个数是$|{S}_{k}|+|{X}_{k}|+|{Y}_{k}|$，$\Ima\delta^{k-1}$的生成元是$\tilde{X}_{k},\tau^{k-1}_{i} y_{i}$,我们注意到转置后秩是不变的，所以仍然有$|S_{k}|=\phi-\text{rank}(\delta^{k})-\text{rank}(\delta^{k-1})=\phi_{k}-\alpha_{k}-\alpha_{k-1}=\beta_{k}$,所以$H^{k}(K)$的自由部分仍然有$\beta_{k}$个，而循环群部分由$\tau^{k-1}_{i}$给出，这是由于在边缘同态中，我们是用像的编码来标识不变因子，而在上边缘同态中，我们仍然沿用这一记号，相当于我们用了定义域来编号，两者相差1。此外，当$k=0,1$时，根据同调群中的结论我们可以知道此时$\delta^{-1},\delta^{0}$的像中的基所对应的不变因子都是1，所以$H^{0}(K),H^{1}(K)$都是自由群，此时如果我们认为上标小于下标意味着这一项不存在，则命题仍然成立。
+\end{proof}
+\begin{corollary}
+复形$K$的同调群和上同调群之间存在如下关系：\\
+(1)$H_{k}(K)$和$H^{k}(K)$有相同的自由群部分；\\
+(2)$H_{k}(K)$和$H^{k+1}(K)$有相同的有限子群部分
+\end{corollary}
+\begin{proof}
+由命题(\ref{pro902})和命题(\ref{pro1122})立得
+\end{proof}
+由上述推论，我们可以知道同调群与上同调群之间存在着密切的关系，事实上，如果我们知道了其中的一个，就可以确定出另一个，然而，在不同的场合使用这两种语言的方便程度是不同的，所以这两种概念都是有各自的意义的。
+\section{复形的运算}
+之前我们介绍了由单形得到复形的操作，这一节中我们将讨论如何由一个复形得到新的复形，即复形的运算。
+\begin{definition}
+一个抽象复形指的是一个由非空有限集合$A$的非空幂集的子集构成的集合$\mathcal{K}$，如果$\mathcal{K}$满足以下条件：
+\begin{itemize}
+    \item A中的所有元素均为抽象复形中的元素
+    \item 如果A的一个子集S属于抽象复形，那么S的所有非空子集均属于抽象复形
+\end{itemize}
+我们称$A$中的元素为抽象复形的顶点，称$\mathcal{K}$中元素为抽象单形，我们定义抽象单形的维数为它所含有的顶点的数目-1，定义$\mathcal{K}$的维数为它所含有的最高维抽象单形的维数。
+\end{definition}
+\begin{definition}
+如果我们将一个复形的顶点作为抽象单形的顶点集，各单形顶点的并集作为抽象单形，则每一个复形都确定了一个抽象复形，我们称这样的复形为抽象单形的一个几何实现
+\end{definition}
+事实上，抽象复形的内涵要比复形更为广泛。我们设$\mathcal{U}=\left\{U_{\alpha}\right\}$是拓扑空间$X$的一个有限开覆盖，我们可以按如下规则决定一个抽象复形$\mathcal{K}_{\mathcal{U}}$:首先我们将$\mathcal{U}$作为顶点集，并且规定顶点集$U_{\alpha_{0}},\cdots,U_{\alpha_{\alpha_{l}}}$决定一个抽象单形当且仅当$U_{\alpha_{0}}\bigcap\cdots\bigcap U_{\alpha_{\alpha_{l}}}\neq \varnothing$。我们称这个抽象复形为开覆盖$\mathcal{U}$的脉络。
+刚才我们从复形$K$可以得到抽象复形$\mathcal{K}$，事实上，这一命题的反方向也是不难的，即我们有
+\begin{proposition}
+设$c_{0},c_{1},\cdots,c_{k}$为抽象复形$\mathcal{K}$的顶点，那么在$\mathbb{R}^{k+1}$中，存在它的几何实现$K$
+\end{proposition}
+\begin{proof}
+我们令$\mathbb{R}^{k+1}$中的第$i$个标准基向量$e_{i}$对应$c_{i}$，由于$e_{0},\cdots,e_{k}$是仿射无关的，所以他们决定一个单形$A^{k}$，之后我们令$A^{k}$的面$B^{l}=(e_{i_{0}}e_{i_{1}}\cdots e_{i_{l}})$对应抽象单形$\left\{e_{i_{0}},e_{i_{1}},\cdots, e_{i_{l}}\right\}$,那么根据抽象复形的定义，我们这样得到的复形$K={B^{l}}$是复形，而且它是复形$A^{k}$的子复形。从构造的过程中我们知道，$K$是$\mathcal{K}$的一个几何实现
+\end{proof}
+尽管上述定理给出了一个几何实现任意抽象复形的方案，但是由于顶点数往往很大从而不够使用，事实上我们还有下列显著的改进
+\begin{proposition}
+$n$维抽象复形$\mathcal{K}$一定可以在$\mathbb{R}^{2n+1}$中实现，即$\mathbb{R}^{2n+1}$有复形$K$使得它是抽象复形$\mathcal{K}$的几何实现
+\end{proposition}
+\begin{proof}
+我们设$c_{0},\cdots,c_{k}$是$\mathcal{K}$的顶点，顶点的数目可能很大。我们定义以下$k+1$个点：$P^{l}=(l+1,(l+1)^{2},\cdots,(l+1)^{2n+1})$，其中$l=0,1,\cdots,k$。首先我们在下面证明，这些点中任意$2n+2$个都是仿射无关的，若不然，则根据仿射相关的定义，存在不全为0的$\lambda_{1},\cdots,\lambda_{2n+2}$满足下列方程组
+\begin{equation*}
+    \begin{aligned}
+    &\sum\limits_{l=1}^{2n+2}\lambda_{l}=0\\
+    &\sum\limits_{i=l}^{2n+2}\lambda_{l}(l+1)^{1}=0\\
+    &\cdots \cdots\\
+    &\sum\limits_{i=l}^{2n+2}\lambda_{l}(l+1)^{2n+1}=0\\
+    \end{aligned}
+\end{equation*}
+注意第一个方程由仿射无关的定义中要求组合系数之和为0给出。由范德蒙行列式的结论可知这不可能，因此$P^{l}$中任意$2n+2$个都是仿射无关的。\\
+现在我们让$P^{s}$对应$c^{s}$，$A^{r}=(P^{s_{0}}\cdots P^{s_{r}})$对应抽象单形$\left\{c_{s_{0}},\cdots,c_{s_{r}}\right\}$，由于抽象复形的维数是n,所以我们有$r\leq n$，于是$A^{r}$的顶点数为$r+1\leq n+1<2n+2$，所以$P^{s_{0}},\cdots ,P^{s_{r}}$仿射无关,$A^{r}$是单形，所以此时我们所确定的集合$K=\left\{A^{s}\right\}$符合复形的定义(1)，现在我们要验证他们也满足条件(2)，即任意两个单形$A^{r},B^{s}$，或者相交非空，或者交于他们的唯一一个公共面。\footnote{对于上一个命题，这一点是明显的，因为顶点不同的单形只能交于它们的公共顶点构成的单形，而这是他们的公共边。}我们设$A^{r},B^{s}$中互异的顶点个数为$u$，则$u\leq s+1+r+1\leq n+1+n+1=2n+2$，从而他们是仿射无关的，所有互异的点决定一个单形。借助于下面的引理，我们知道单形的任意两个面要么相交非空，要么交于他们的唯一的公共面，所以我们就证明了命题。
+\end{proof}
+\begin{lemma}
+一个单形的两个面要么相交为空集，要么相交于唯一的公共面
+\end{lemma}
+\begin{proof}
+我们设$A^{k},B^{l}$是$C^{s}$的两个面，则$A^{k}$由重心坐标$\lambda_{i_{0}}=\cdots=\lambda_{i_{s-k}}=0$确定的集合A给出，$B^{l}$由重心坐标$\mu_{j_{0}}=\cdots=\mu_{j_{s-l}}=0$确定的集合B给出，如果他们相交不空，则他们的交集仍由若干个重心坐标为0的方程给出，而这样的集合仍然是一个面，这样我们就得到了引理
+\end{proof}
+有例子表明上述结果不能再改进，例如四维复形$A^{4}$的一维骨架不能在$\mathbb{R}^{2}$中实现。
+
+在这一节中借助抽象复形的语言，我们将介绍四种复形的运算，分别是锥形、柱形、重心重分和单纯积。首先来看锥形，
+\begin{definition}[锥形]
+设$\mathcal{K}$为抽象复形，我们考虑比$\mathcal{K}$多一个顶点的抽象单形构成的集合$\hat{\mathcal{K}}$，我们记多出来的顶点为$c$。$\hat{\mathcal{K}}$中的抽象单形由以下三个部分组成:
+\begin{itemize}
+    \item 顶点$c$
+    \item $\mathcal{K}$中的所有抽象单形
+    \item 所有形如$c\mathcal{A}^{i}=(ca_{0}\cdots a_{i})$的抽象复形，其中$\mathcal{A}^{i}\in \mathcal{K}$且$\mathcal{A}^{i}=(a_{0}\cdots a_{i})$
+    \end{itemize}
+我们称$\hat{\mathcal{K}}$是以$c$为顶，以$\mathcal{K}$为底的锥形，也记作$c\mathcal{K}$
+\end{definition}
+容易验证，抽象复形的锥形还是一个抽象复形。
+\begin{definition}[柱形]
+对于给定的$n$维抽象复形$\mathcal{K}$，我们给$\mathcal{K}$中的顶点以下标，并将下标的序作为顶点的序,即$c_{0}<c_{1}<\cdots<c_{n}$,现在对于$\mathcal{K}$中的每个$s$维抽象单形$(c_{i_{0}}c_{i_{1}}\cdots c_{i_{s}})$，其中下标递增，我们定义二元对$a_{i}=(c_{i},0),\;b_{i}=(c_{i},1)$,则我们可以定义一个$(s+1)$维抽象单形为$(a_{i_{0}}\cdots a_{i_{l}}b_{i_{l}}\cdots b_{i_{s}})$,这些抽象单形连同他们所有的面和顶点构成了一个新的抽象复形，我们称之为柱形，记为$\mathcal{K}\times I$,根据构造，其顶点集为$\left\{a_{0},\cdots,a_{n},b_{0},\cdots,b_{n}\right\}$
+\end{definition}
+\begin{definition}[重心重分]
+对于$n$维抽象复形$\mathcal{K}=\left\{A^{k}_{i}|i=1,2,\cdots,\phi_{k};k=0,1,\cdots,n\right\}$，我们将其中的单形当作顶点，
+可以定义它的一个真面序列为$\left\{A_{i_{0}},A_{i_{1}},\cdots,A_{i_{s}}\right\}$,其中$1\leq s\leq n$且序列中后一个抽象单形是前一个抽象单形的真子集，即$A_{i_{l+1}}\mathop{\subset}\limits_{\neq}A_{i_{l}}$。我们定义顶点集决定一个抽象单形当且仅当他们构成一个真面序列，这样得到的由所有真面序列作为抽象单形构成的集合$\text{Sd}\mathcal{K}$称为抽象复形$\mathcal{K}$的重心重分。
+\end{definition}
+根据构造，抽象复形的重心重分还是抽象复形。
+\begin{proposition}
+若$K$为$\mathcal{K}$的几何实现，那么当$K$的单形序列$A_{0},A_{1},\cdots,A_{k}$使得$A_{i}$为$A_{i-1}$的真面时$(i=1,2,\cdots,k)$，各单形的重心$A^{*})_{0},A^{*}_{1},\cdots,A^{*}_{k}$仿射无关，从而张成一个单形。所有这样的重心张成的单形构成一个复形，记为$\text{Sd}K$，称为复形$K$的重心重分。$\text{Sd}K$是$\text{Sd}\mathcal{K}$的一个几何实现。
+\end{proposition}
+\begin{proof}
+首先我们证明$\text{Sd}K$是复形。之后由于我们可以将$A^{*}_{k}$和它所在的单形$A_{k}$对应起来，所以$\text{Sd}K$是$\text{Sd}\mathcal{K}$的一个几何实现是明显的。\\
+首先我们证明第一部分，即当单形序列$A_{0},A_{1},\cdots,A_{k}$使得$A_{i}$为$A_{i-1}$的真面时$(i=1,2,\cdots,k)$，各单形的重心$A^{*}_{0},A^{*}_{1},\cdots,A^{*}_{k}$仿射无关。由于仿射无关组的子集仍然是仿射无关的，所以我们只需要对$A_{0}$的维数为$k$，即$A_{i}$比$A_{i-1}$的维数少1的情况进行证明。\\
+通过适当改变顶点的标号，我们可以设$A_{0}=(a_{0}a_{1}\cdots a_{k})$，$A_{i}=(a_{i}\cdots a_{k})$，于是各重心可以表为$A^{*}_{i}=\frac{1}{k+1-i}\left(a_{i}+\cdots+a_{k}\right)$。现在我们设有$\lambda_{0},\cdots,\lambda_{k}$满足
+\begin{equation*}
+    \begin{aligned}
+    \lambda_{0}+\lambda_{1}+\cdots+\lambda_{k}&=0\\
+    \lambda_{0}A^{*}_{0}+\lambda_{1}A^{*}_{1}+\cdots+\lambda_{k}A^{*}_{k}&=0\\
+    \end{aligned}
+\end{equation*}
+带入各个重心的表达式，并按照各顶点合并同类项，我们有
+\begin{equation}\label{eq1216}
+    \frac{\lambda_{0}}{k+1}a_{0}+\left(\frac{\lambda_{0}}{k+1}+\frac{\lambda_{1}}{k}\right)a_{1}+\cdots+\left(\frac{\lambda_{0}}{k+1}+\frac{\lambda_{1}}{k}+\cdots+\frac{\lambda_{k}}{1}\right)a_{k}=0
+\end{equation}
+注意到上式各点系数之和就是$\lambda_{0}+\cdots+\lambda_{k}=0$,则由$a_{i}$仿射无关可知我们有
+\begin{equation*}
+    \begin{aligned}
+     \frac{\lambda_{0}}{k+1}&=0\\
+     \frac{\lambda_{0}}{k+1}+\frac{\lambda_{1}}{k}&=0\\
+     \cdots \cdots\\
+     \frac{\lambda_{0}}{k+1}+\frac{\lambda_{1}}{k}+\cdots+\frac{\lambda_{k}}{1}&=0
+    \end{aligned}
+\end{equation*}
+解这个方程我们有$\lambda_{0}=\cdots=\lambda_{k}=0$,这样我们就证明了$A^{*}_{0},A^{*}_{1},\cdots,A^{*}_{k}$仿射无关，从而$(A^{*}_{0}A^{*}_{1}\cdots A^{*}_{k})$是单形。\\
+下面我们在证明$\text{Sd}K$是复形，我们按照$K$的维数归纳证明。\\
+当$\text{dim}K=0$时，$\text{Sd}K=K$，从而命题成立。\\
+假设当$\text{dim}K<k$时命题成立，现在考虑$k$维复形$L$，由构造我们知道$\text{Sd}L$满足复形的第一个条件，现在我们只要证明$\text{Sd}L$的任意两个不同的开单形交于空集。我们设两个单形$(A^{*}_{0}A^{*}_{1}\cdots A^{*}_{k})^{\circ}$，$(B^{*}_{0}B^{*}_{1}\cdots B^{*}_{l})^{\circ}$有公共点$x$，由于它为内点，所以我们得知$x$在两个单形中，重心坐标的各分量都为正数，则根据式(\ref{eq1216})可知，它在$A_{0},B_{0}$中的重心坐标也为正，于是$A_{0},B_{0}$都是$x$在$L$中的承载单形，由承载单形的唯一性可知$A_{0}=B_{0}$。从而如果$\text{dim}A_{0}=\text{dim}B_{0}<k$，则$(A^{*}_{0}A^{*}_{1}\cdots A^{*}_{k})$，$(B^{*}_{0}B^{*}_{1}\cdots B^{*}_{l})$都是$\text{Sd}A_{0}$的重心重分中的单形，从而由归纳假设知命题成立。\\
+如果$\text{dim}A_{0}=\text{dim}B_{0}=k$，我们设$x$在$(A^{*}_{0}A^{*}_{1}\cdots A^{*}_{k})$中的重心坐标为$(\mu_{0},\cdots,\mu_{k})$;在$(B^{*}_{0}B^{*}_{1}\cdots B^{*}_{l})$中的重心坐标为$(\nu_{0},\cdots,\nu_{l})$由于$x$是内点，所以所有的坐标分量都满足$0<\mu_{i},\nu_{j}<1$。仍由(\ref{eq1216})可知，$x$在$A_{0}=B_{0}$的顶点构成的单形中的重心坐标均为正数，且由于$A_{0}$和$B_{0}$是同一个单形，同一个点$x$的重心坐标在恰当的轮换下应该相同，特别地，其中绝对值最小的坐标相同，即$\frac{\mu_{0}}{k+1}=\frac{\nu_{0}}{k+1}$，这样我们知道$x$在两套重心坐标中相同的点$A^{*}_{0}$和$B^{*}_{0}$的坐标分量相同。我们将这个点从重心坐标系中减去，即可运用归纳假设得到命题，具体而言，我们考虑
+\begin{equation*}
+\begin{aligned}
+    y_{1}&=\frac{1}{1-\mu_{0}}(x-\mu_{0}A^{*}_{0})=\frac{1}{1-\mu_{0}}(\mu_{1}A^{*}_{1}+\cdots+\mu_{k}A^{*}_{k})\\
+    y_{2}&=\frac{1}{1-\nu_{0}}(x-\nu_{0}B^{*}_{0})=\frac{1}{1-\nu_{0}}(\nu_{1}B^{*}_{1}+\cdots+\nu_{l}B^{*}_{l})\\
+\end{aligned}
+\end{equation*}
+由于$0<\mu_{i},\nu_{j}<1$，所以$y_{1},y_{2}$的各分量也均大于0，从而$y_{1}\in(A^{*}_{1}\cdots A^{*}_{k})^{\circ}$,$y_{2}\in(B^{*}_{1}\cdots B^{*}_{l})^{\circ}$，而显然$y_{1},y_{2}$是同一个点，所以$y_{1}\in(A^{*}_{1}\cdots A^{*}_{k})^{\circ}$和$y_{2}\in(B^{*}_{1}\cdots B^{*}_{l})^{\circ}$是内点相交非空的$k-1$维单形，于是根据归纳假设，$(A^{*}_{1}\cdots A^{*}_{k})=(B^{*}_{1}\cdots B^{*}_{l})$,再加上$A_{0}^{*}=B_{0}^{*}$，我们有$(A^{*}_{0}A^{*}_{1}\cdots A^{*}_{k})=(B^{*}_{0}B^{*}_{1}\cdots B^{*}_{l})$,这样我们就证明了命题，即$\text{Sd}K$是复形。
+\end{proof}
+\begin{proposition}\label{pro1241}
+$|K|=|\text{Sd}K|$
+\end{proposition}
+\begin{proof}
+由于$|\text{Sd}K|$的顶点均在$|K|$中，则它们构成的多面体也在$|K|$中，所以$|\text{Sd}K|\subset |K|$；对于另一个方向，设$x\in|K|$且它的承载单形为$A_{0}=(a_{0}a_{1}\cdots a_{k})$,考虑$x$的重心坐标$(\lambda_{0},\lambda_{1},\cdots,\lambda_{k})$，我们可以适当改变$A_{0}$的顶点标号，使得各重心坐标满足$0<\lambda_{0}\leq \lambda_{1}\leq\cdots\leq\lambda_{k}$,这样下列方程组就会存在一组非负解$(\lambda_{0}',\lambda_{1}',\cdots,\lambda_{k}')$
+\begin{equation*}
+    \begin{aligned}
+     \frac{\lambda_{0}'}{k+1}&=\lambda_{0}\\
+     \frac{\lambda_{0}'}{k+1}+\frac{\lambda_{1}'}{k}&=\lambda_{1}\\
+     \cdots \cdots\\
+     \frac{\lambda_{0}'}{k+1}+\frac{\lambda_{1}'}{k}+\cdots+\frac{\lambda_{k}'}{1}&=\lambda_{k}
+    \end{aligned}
+\end{equation*}
+而且这组解仍然满足$\sum\lambda_{i}'=\sum\lambda_{i}=1$，
+所以我们有
+\begin{equation*}
+    x=\sum\limits_{i=0}^{k}\lambda_{i}a_{i}=\sum\limits_{i=0}^{k}\left(\frac{\lambda_{0}'}{k+1}+\cdots+\frac{\lambda_{i}'}{k+1-i}\right)a_{i}=\sum\limits_{i=0}^{k}\lambda_{i}'A^{*}_{i}
+\end{equation*}
+这里$A_{i}=(a_{i}a_{i+1}\cdots a_{k})$,于是我们有$x\in (A_{0}^{*}A^{*}_{1}\cdots A^{*}_{k})\subset |\text{Sd}K|$,这样我们就证明了$|K|\subset|\text{Sd}K|$。这样我们就证明了命题
+\end{proof}
+如果$L$是$K$的子复形，那么$L$的顶点都是$K$的顶点，$\text{Sd}L$中的单形也是$\text{Sd}K$中的单形，所以我们有下列命题
+\begin{proposition}
+若$L$是$K$的子复形，则$\text{Sd}L$是$\text{Sd}K$的子复形
+\end{proposition}
+根据命题(\ref{pro1241})，我们知道重心重分只是多面体$|K|$的另一个单纯剖分而已，但是重心重分的优势在于我们可以控制其中出现的单形的大小，下面我们来把这个想法精确化。
+\begin{definition}
+单形$A^{k}$的直径$\text{diam}A^{k}$定义为$\text{sup}\left\{\rho(x,y)|x,y\in A^{k}\right\}$,其中$\rho$是欧式度量
+\end{definition}
+\begin{proposition}
+$\text{diam}A^{k}$等于$A^{k}$中一维单形的长度的最大值
+\end{proposition}
+\begin{proof}
+我们设$\left\{x_{0},\cdots,x_{k}\right\}$是$A^{k}$的顶点，则对于$x,y\in A^{k}$,我们有
+首先注意到事实，三角形顶点$A$与其对边$BC$上的点的连线的长度小于等于$\text{max}(|AB|,|AC|)$。对于单形$A^{k}$中任意两点$x,y$，首先固定$x$，由单形的定义，$y$位于某两个顶点$a_{i},a_{j}$的连线上，在$x,a_{i}a_{j}$构成的三角形中，利用上述事实，我们知道$y$只能在某一顶点处取最大值，所以长度最大的连线只能是其中一个点为顶点的线段，对于这一类线段，若其另一端点不是顶点，则通过同样的方式我们知道其最大值只能在顶点处取得，综上，最大长度的线段只能是1维单形，而1维单形的数目是有限的，这样我们就得到了命题
+\end{proof}
+\begin{proposition}\label{pro_1_1282}
+设$K$是$n$维复形，它的单形的直径的直径都不超过$\eta$，则$\text{Sd}K$的单形的直径不超过$\frac{n}{n+1}\eta$
+\end{proposition}
+\begin{proof}
+由上一个命题，只需要对$\text{Sd}K$中的所有一维单形进行验证即可。任取$\text{Sd}K$中的一个一维单形$(A^{*}_{0}A^{*}_{1})$，其中$A_{1}$是$A_{0}$的真面，我们将$A^{*}_{1}$在$A_{0}$的顶点张成的重心坐标系中表达为$A_{1}^{*}=\sum\limits_{i=0}^{k}\lambda_{i}a_{i}$，于是
+\begin{equation*}
+    \begin{aligned}
+    &\rho(A^{*}_{0},A^{*}_{1})=\rho(A^{*}_{0},\sum\limits_{i}\lambda_{i}a_{i})\leq \sum\limits_{i} \lambda_{i}\rho(A^{*}_{0},a_{i})=\sum\limits_{i}\lambda_{i}\rho(\frac{1}{k+1}\sum\limits_{j} a_{j},a_{i})\leq\\& \sum\limits_{i,j}\frac{\lambda_{i}}{k+1}\rho(a_{j},a_{i})\leq \sum\limits_{i,j}\frac{\lambda_{i}}{k+1}\eta\leq\frac{k}{k+1}\eta\leq\frac{n}{n+1}\eta
+    \end{aligned}
+\end{equation*}
+其中利用了$\rho(x,y)$的凸性质以及$\rho(a_{i},a_{i})=0$，从而对$j$的求和中只出现了$k$项非零项。
+\end{proof}
+\begin{proposition}\label{pro1288}
+设$A^{k}$为$k$维单形，我们赋予他复形的结构，则$\text{Sd}A^{k}=A^{k*}\text{Sd}\overline{A}^{k}$，其中$\overline{A}^{k}$表示$A^{k}$的边界
+\end{proposition}
+\begin{proof}
+$\text{Sd}A^{k}$的单形由两部分组成，含有$A^{k}$的真面序列和不含$A^{k}$的真面序列，对于后一种情况，它们是$\overline{A}^{k}$中的子集，而对于前一种情况，其中含有$A^{k*}$，其余顶点则在$\overline{A}^{k}$中，从而对两种情况我们都有$\text{Sd}A^{k}\subset A^{k*}\text{Sd}\overline{A}^{k}$。而另一个方向是明显的，因为$\overline{A}^{k}$中的真面序列也是$A^{k}$中的真面序列。综上我们得到了命题。
+\end{proof}
+下面来介绍另一种复形的运算
+\begin{definition}
+对单形$A^{k}=(a_{0}a_{1}\cdots a_{k})$和$B^{l}=(b_{0}b_{1}\cdots b_{l})$，我们定义他们的单纯积为$A^{k}\Delta B^{l}$是一个$(k+1)\times (l+1)-1$维单形，它的顶点是二元组$c_{ij}=(a_{i},b_{j})$，$0\leq i\leq k,0\leq j\leq l$。对于复形$K$,$L$，则复形$K,L$的单纯积$K\Delta L$由所有的单纯积$U^{r}\Delta V^{s}$以及他们的所有面构成，这里$U^{r}$和$V^{s}$分别是$K,L$的所有单形
+\end{definition}
+单纯积的构造与普通单形的构造是相同的，只是在顶点构成上有所不同,因此我们可以将之前关于单形的结论移植过来。对于$K\Delta L$中的任意两个单纯积$U_{1}\Delta V_{1},U_{2}\Delta V_{2}$，记其中互异顶点构成的集合为$S$,$S$张成的单形为$W$，记$W_{1},W_{2}$分别是$S$中第一分量和第二分量张成的$A^{k},B^{l}$中的单形，则$W=W_{1}\Delta W_{2}$,我们可以将$U_{1}\Delta V_{1},U_{2}\Delta V_{2}$看作$W$的面，则由于单形的面是规则相处的，我们知道$K\Delta L$中的单形要么交于空集，要么交于唯一的公共面。这样我们就得到了下列命题
+\begin{proposition}
+复形的单纯积是复形
+\end{proposition}
+下面我们来计算锥形的同调群。首先来明确记号，在以$a$为顶，以$K$为底的锥形$aK$的链群$C_{k}(aK)$中，有一部分基本组的元为$(aa_{i_{1}}a_{i_{2}}\cdots a_{i_{k}})$，其中为$(a_{i_{1}}a_{i_{2}}\cdots a_{i_{k}})$为$C_{k-1}(K)$的基本组中的元，如果我们将它记作$\sigma$，那么我们将$(aa_{i_{1}}a_{i_{2}}\cdots a_{i_{k}})$记作$a\sigma$,一般地，对于$c=\sum\alpha_{i}\sigma_{i}\in C_{k-1}(K)$，我们用$ac$表示$\sum\alpha_{i}a\sigma_{i}\in C_{k}(aK)$。
+我们定义映射
+\begin{equation*}
+    \begin{aligned}
+    a:C_{k-1}(aK)&\rightarrow C_{k}(aK)\\
+    \sigma&\rightarrow a\sigma
+    \end{aligned}
+\end{equation*}
+当$\sigma$中有顶点为$a$时，我们规定$a(\sigma)=0$。
+\begin{proposition}
+对于以$a$为顶，以$K$为底的锥形$aK$而言，
+\begin{equation*}\label{pro1313}
+    H_{k}(aK)=\left\{\begin{array}{cc}
+         0,\quad k\neq 0  \\
+         \mathbb{Z},\quad k=0 
+    \end{array}\right.
+\end{equation*}
+\end{proposition}
+\begin{proof}
+由于锥形是道路连通的，所以连通，由命题(\ref{pro711})我们知道$H_{0}(aK)=\mathbb{Z}$;\\
+当$k>0$时，我们先陈述以下事实
+\begin{equation*}
+    \begin{aligned}
+    \partial(a\sigma)=\left\{\begin{array}{cc}
+         \sigma-a(\partial \sigma),\quad \text{dim}\;\sigma>0  \\
+         \sigma-\epsilon(\sigma)a, \quad \text{dim}\;\sigma=0 
+    \end{array}\right.
+    \end{aligned}
+\end{equation*}
+其中的差别是因为1不是任何单形的像，所以不能将$a=a\cdot 1$写成$a$乘边界的形式。$\epsilon$是增广同态，满足$\epsilon(+x^{0})=1$，这是由于$\sigma$是$C_{0}(K)$中的元素，是一个链，其一般形式为$\sigma=\sum \alpha_{i}x^{0}_{i}$，于是$\partial(a\sigma)=\sigma-a\partial(\sum\alpha_{i}x^{0}_{i})=\sigma-a\sum\alpha_{i}\epsilon(x^{0}_{i})=a\epsilon(\sigma)$.
+当$k>0$时，任取$z^{k}\in Z_{k}(aK)$，我们有$\partial(az^{k})=z^{k}-z(\partial z^{k})=z^{k}-0$,所以$z^{k}$同调于0，这样我们知道$H_{k}(aK)=0\;(k>0)$
+\end{proof}
+\begin{corollary}
+锥形的上同调群
+\begin{equation*}
+H_{k}(aK)=\left\{\begin{array}{cc}
+         0,\quad k\neq 0  \\
+         \mathbb{Z},\quad k=0 
+    \end{array}\right.
+\end{equation*}
+\end{corollary}
+由上面的讨论可以知道锥形和单点复形具有相同的同调群，具有此类性质的复形是一类特殊的复形，值得一个专门的名字
+\begin{definition}
+我们称复形$K$是点状的，如果它和单点复形$pt$具有相同的同调群，即
+\begin{equation*}
+H_{i}(K)=\left\{\begin{array}{cc}
+     0,\quad i\neq 0  \\
+     \mathbb{Z},\quad i=0 
+\end{array}\right.
+\end{equation*}
+\end{definition}
+由同调群的定义可以知道，当$H_{k}(K)=0$时，有$\Ima\partial_{k+1}=\Ker \partial_{k}$,因此，我们有下列命题
+\begin{proposition}
+对复形$K$，当$k\geq 1$时，$H_{k}(K)=0$的充分必要条件是在序列
+\begin{equation*}\label{eq1356}
+    C_{k+1}(K)\xrightarrow{\partial_{k+1}}C_{k}(K)\xrightarrow{\partial_{k}}C_{k-1}(K)
+\end{equation*}
+中，有$\Ima\partial_{k+1}=\Ker \partial_{k}$
+\end{proposition}
+后面会看到，这一关系经常被用到，所以我们给它们一个名称
+\begin{definition}
+在群和群同态构成的序列
+\begin{equation*}
+    G_{1}\xrightarrow{\alpha_{1}}G_{2}\xrightarrow{\alpha_{2}}G_{3}
+\end{equation*}
+中，如果有$\Ima\alpha_{1}=\Ker\alpha_{2}$，便称该序列在$G_{2}$处正合。\\
+在群和群同态构成的长序列
+\begin{equation*}
+    \cdots \rightarrow G_{k+1}\xrightarrow{\alpha_{k+1}}G_{k}\xrightarrow{\alpha_{k}}G_{k-1}\rightarrow\cdots
+\end{equation*}
+中，如果在每个$G_{k}$处它都正合，则称该长序列为正合序列\\
+正合序列
+\begin{equation*}
+    0 \rightarrow G_{1}\xrightarrow{\alpha_{1}}G_{2}\xrightarrow{\alpha_{2}}G_{3}\rightarrow 0
+\end{equation*}
+称为短正合序列。这个短正合序列称为是分裂的，如果存在$\beta_{1}:G_{2}\rightarrow G_{1}$使得$\beta_{1}\alpha_{1}=1_{G_{1}}$
+\end{definition}
+对于短正合序列我们有下列分裂引理
+\begin{lemma}[分裂引理]
+\label{fenlie}
+对于短正合序列
+\begin{equation*}
+    0 \rightarrow G_{1}\xrightarrow{\alpha_{1}}G_{2}\xrightarrow{\alpha_{2}}G_{3}\rightarrow 0
+\end{equation*}
+我们考虑映射$\beta_{1}:G_{2}\rightarrow G_{1}$,$\;\beta_{2}:G_{3}\rightarrow G_{2}$(可能不存在)，则下列陈述等价
+\begin{itemize}
+    \item （左分裂）存在$\beta_{1}:G_{2}\rightarrow G_{1}$使得$\beta_{1}\alpha_{1}=1_{G_{1}}$
+    \item （右分裂）存在$\beta_{2}:G_{3}\rightarrow G_{2}$使得$\alpha_{2}\beta_{2}=1_{G_{3}}$
+    \item $G_{2}\cong G_{1}\oplus G_{3}$，$\alpha_{1}$是$G_{1}$到$G_{2}$的嵌入，$\alpha_{2}$是$G_{2}$到$G_{3}$的投影
+\end{itemize}
+\end{lemma}
+\begin{proof}
+当$(3)$成立时，短正合序列变为
+\begin{equation*}
+    0 \rightarrow G_{1}\xrightarrow{\alpha_{1}}G_{1}\oplus G_{3}\xrightarrow{\alpha_{2}}G_{3}\rightarrow 0
+\end{equation*}
+我们取$\beta_{1}$为$G_{1}\oplus G_{3}$到$G_{1}$的投影，取$\beta_{2}$为$G_{3}$到$G_{1}\oplus G_{3}$到$G_{1}$的嵌入，则容易验证$(1),\;(2)$都是成立的。因此剩下的事情只要证明$(1)\Rightarrow(3)$和$(2)\Rightarrow (3)$,下面逐一来做这两件事情。
+\begin{enumerate}
+    \item $(1)\Rightarrow (3)$ \\
+    设$g_{2}\in G_{2}$，利用我们可以使用的映射，可以将它写成$g_{2}=\alpha_{1}\circ\beta_{1}(g_{2})+(g_{2}-\alpha_{1}\circ\beta_{1}(g_{2}))$,由于$\beta_{1}((g_{2}-\alpha_{1}\circ\beta_{1}(g_{2}))=\beta_{1}(g_{2})-\beta_{1}\circ\alpha_{1}(\beta_{1}(g_{2}))=\beta_{1}(g_{2})-1_{G_{1}}(\beta_{1}(g_{2}))=0$,所以$G_{2}=\Ima\alpha_{1}+\Ker\beta_{1}$,设$u\in\Ima\alpha_{1}\bigcap\Ker\beta_{1}$,那么存在$g_{1}\in G_{1}$使得$u=\alpha_{1}(g_{1})$而且$\beta_{1}(u)=0$，从这两个式子中我们得到$\beta_{1}\circ\alpha_{1}(g_{1})=g_{1}=0$,从而$u=\alpha_{1}(0)=0$,所以我们得到了直和$G_{2}=\Ima\alpha_{1}\oplus\Ker\beta_{1}$,从短正合序列的性质我们知道$\alpha_{1}$是单射，所以$\Ima\alpha_{1}\cong G_{1}$。对任意$g_{3}\in G_{3}$,因为$\alpha_{2}$是满射，所以存在$g_{2}'\in G_{2}$使得$g_{3}=\alpha_{2}(g_{2}')$,我们按刚才的办法将它分解，得到$g_{2}'=g_{2}'\left|_{\Ker\beta_{1}}\right.+g_{2}'\left|_{\Ima\alpha_{1}}\right.$,利用在$G_{2}$处的正合性，$\alpha_{2}(g_{2}'\left|_{\Ima\alpha_{1}}\right.)=0$,从而$\alpha_{2}(g_{2}')=\alpha_{2}(g_{2}'\left|_{\Ker\beta_{1}}\right.)=g_{3}$,这表明$\alpha_{2}$限制在$\Ker\beta_{1}$上是一个到$G_{3}$的满射。我们现在再来证明它是单的。设$u_{1},u_{2}\in \Ker\beta_{1}$满足$\alpha_{2}(u_{1})=\alpha_{2}(u_{2})$,那么我们有$\alpha_{2}(u_{1}-u_{2})=0\in\Ker\alpha_{2}=\Ima\alpha_{1}$,于是存在$s\in G_{1}$满足$\alpha_{1}(s)=u_{1}-u_{2}$,两边作用$\beta_{1}$得到$\beta_{1}\alpha_{1}(s)=i_{G_{1}}(s)=s=0$,这表明$u_{1}=u_{2}$，这样我们就证明了$\Ker\beta_{1}\cong G_{3}$，于是我们有$G_{2}=\Ima \alpha_{1}\oplus \Ker\beta_{1}=G_{1}\oplus G_{3}$,结合构造过程，显然$\alpha_{1}$是嵌入映射，$\alpha_{2}$是投影映射。
+    \item $(2)\Rightarrow (3)$ \\
+    这跟$(1)\Rightarrow (3)$是很类似的。设$g_{2}\in G_{2}$,并将其分解成$g_{2}=\beta_{2}\alpha_{2}(g_{2})+(g_{2}-\beta_{2}\alpha_{2}(g_{2}))$,利用$\alpha_{2}\beta_{2}=1_{G_{3}}$可得$G_{2}=\Ima\beta_{2}+\Ker\alpha_{2}$，完全类似地，我们可以得到这其实是直和，即$G_{2}=\Ima\beta_{2}\oplus\Ker\alpha_{2}$,下面的任务是分别证明这两个直和项与$G_{1},\;G_{3}$同构。根据$G_{2}$处的正合性，$\Ima\alpha_{1}=\Ker\alpha_{2}$，根据$G_{1}$处的正合性，$\alpha_{1}$是单射，所以我们有$G_{1}\cong \Ker\alpha_{2}$;设$g_{3}\in G_{3}$，则利用$\alpha_{2}$是满射，知道存在$g_{2}'\in G_{2}$使得$\alpha_{2}(g_{2}')=g_{3}$,将$g_{2}'$按直和项分解，可知$\alpha_{2}$限制在$\Ima\beta_{2}$上是到$G_{3}$的满射，只要证明$\alpha_{2}\left|_{\Ima\beta_{2}}\right.$是单的。设$u_{1},\;u_{2}\in\Ima\beta_{2}$使得$\alpha_{2}(u_{1})=\alpha_{2}(u_{2})$，不妨设$u_{1}=\beta_{2}(\omega_{1}),\;u_{2}=\beta_{2}(\omega_{2})$,带入上式有$0=\alpha_{2}\beta_{2}(\omega_{1}-\omega_{2})=\omega_{1}-\omega_{2}$，其中我们再次利用了$\alpha_{2}\beta_{2}=i_{G_{2}}$,从而$u_{1}=u_{2}=\beta_{2}(\omega_{1})=\beta_{2}(\omega_{2})$,这样我们就证明了$\alpha_{2}\left|_{\Ker\beta_{2}}\right.$,从而$\Ima\beta_{2}\cong G_{3}$ $G_{2}=\Ima\beta_{2}\oplus\Ker\alpha_{2}=G_{1}\oplus G_{3}$,且$\alpha_{1}$是嵌入映射，$\alpha_{2}$是投影映射。
+\end{enumerate}
+这样我们就完全证明了命题。
+\end{proof}
+\begin{proposition}\label{pro1395}
+复形$K$是点状的当且仅当长序列
+\begin{equation*}
+    \cdots \rightarrow C_{k+1}(K)\xrightarrow{\partial_{k+1}}C_{k}(K)\xrightarrow{\partial_{k}}C_{k-1}(K)\rightarrow\cdots\rightarrow C_{1}(K)\xrightarrow{\partial_{1}}C_{0}(K)\xrightarrow{\epsilon}\mathbb{Z}\rightarrow 0
+\end{equation*}
+是正合序列。其中$\epsilon:C_{0}(K)\rightarrow\mathbb{Z}$满足$\epsilon(+a)=1$，称之为增广同态。
+\end{proposition}
+\begin{proof}
+由命题(\ref{eq1356})可知，在$k\neq0$时，我们知道长序列在$C_{k}(K)$处是正合的，当$k=0$时，我们下面证明$\Ima \partial_{1}=\Ker \epsilon$。由定义，$\epsilon$是满射，于是根据群的第一同构定理，我们有$C_{0}(K)/\Ker \epsilon\cong \mathbb{Z}$,从而$C_{0}(K)\cong \mathbb{Z}\bigoplus \Ker\epsilon$，这样我们得到$\Ker \epsilon\cong C_{0}(K)/\mathbb{Z}$。\\
+另一方面，利用$K$为点状复形，我们有$H_{0}(K)=C_{0}(K)/\Ima \partial_{1}=\mathbb{Z}$,类似地我们有$\Ima\partial_{1}=C_{0}(K)/\mathbb{Z}$，这样我们得到$\Ker\epsilon=\Ima\partial_{1}$，这样我们就得到了长序列是正合序列。\\
+充分性。根据正合性和命题(\ref{eq1356})可知在$k\neq0$时，$H_{k}(K)=0$，而当$k=0$时，由于$\Ima\partial_{1}=\Ker\epsilon$，于是我们有$H_{0}(K)=C_{0}(K)/\Ima\partial_{1}=C_{0}(K)/\Ker\epsilon\cong\Ima\epsilon=\mathbb{Z}$
+\end{proof}
+上述证明中，其中出现的长序列对于判断点状复形有重要作用，因此我们也给它一个名字
+\begin{definition}
+长序列\begin{equation*}
+    \cdots \rightarrow C_{k+1}(K)\xrightarrow{\partial_{k+1}}C_{k}(K)\xrightarrow{\partial_{k}}C_{k-1}(K)\rightarrow\cdots\rightarrow C_{1}(K)\xrightarrow{\partial_{1}}C_{0}(K)\xrightarrow{\epsilon}\mathbb{Z}\rightarrow 0
+\end{equation*}
+称为复形$K$的增广链复形，记作$\tilde{C}_{*}(K)$,为记号上的统一，我们将$\mathbb{Z}$记作$C_{-1}(K)$。由增广链复形决定的同调群称之为复形$K$的约化同调群，记作$\tilde{H}_{k}(K)$，其满足
+\begin{equation*}
+    \tilde{H}_{k}=\left\{\begin{array}{cc}
+         \Ker\partial_{k}/\Ima\partial_{k+1},\quad k\leq1  \\
+         \Ker\epsilon/\Ima\partial_{1},\quad k=0
+    \end{array}\right.
+\end{equation*}
+\end{definition}
+利用这一定义我们可以将命题(\ref{pro1395})写成
+\begin{proposition}
+复形$K$是点状的当且仅当它的约化同调群$\tilde{H}_{k}(K)=0$对任意$k\geq 0$成立
+\end{proposition}
+在复形的同调群和约化同调群之间，存在着下列关系
+\begin{proposition}\label{chap1_pro_1431}
+\begin{equation*}
+\begin{aligned}
+H_{k}(K)&=\tilde{H}_{k}(K),\quad k\geq 1\\
+H_{0}(K)&=\tilde{H}_{0}(K)\oplus \mathbb{Z}
+\end{aligned}
+\end{equation*}
+\end{proposition}
+\begin{proof}
+只要证$k=0$的情况，根据之前的证明，我们知道$C_{0}(K)=\Ker\epsilon\oplus\mathbb{Z}$，由此我们将$C_{0}(K)$中元素表示为$(a,n)$，再加之$\tilde{H}_{0}(K)=\Ker\epsilon/\Ima\partial_{1}$,由此可构造映射$f:C_{0}(K)\rightarrow \tilde{H}_{0}(K)\oplus\mathbb{Z}$，满足$f(a,n)=([a],z)$，其中$[a]$是$a$在$\tilde{H}_{0}(K)$中的等价类，这是一个满射。显然$\Ker f=(\Ima\partial_{1},0)\cong\Ima\partial_{1}$,于是利用第一同构定理我们有$H_{0}(K)=C_{0}(K)/\Ima\partial_{1}=C_{0}(K)/\Ker f\cong\tilde{H}_{0}(K)\oplus \mathbb{Z}$,这就证明了命题。
+\end{proof}
+至此我们对锥形的同调群的讨论告一段落，对于其他运算的同调群，我们会在后面的学习中逐一了解。
+\section{单纯映射、链映射、链同伦}
+这一节我们来讨论重心重分的同调群$H_{k}(\text{Sd}K)$的计算。尽管我们还没有证明，同调群是一个拓扑不变量，因此可以预期$H_{k}(\text{Sd}K)=H_{k}(K)$，在这一节中，我们不打算使用这一超前的结论，而是直接去证明它，像处理锥形的同调群那样，在重心重分的同调群的证明过程中，我们将较为自然的引入一些常用的概念。
+
+我们希望在同调群$H_{k}(\text{Sd}K)$和$H_{k}(K)$之间建立同态，我们先来考虑更为一般的情况，即在$H_{k}(K)$和$H_{k}(L)$之间建立同态,由定义，$H_{k}(K)=Z_{k}(K)/B_{k}(K)$，$H_{k}(L)=Z_{k}(L)/B_{k}(L)$,所以我们只要在闭链群中建立一个将$B_{K}$映入$B_{k}(L)$的同态就可以了，然而闭链群的计算要求我们知道$\Ker\partial_{k}$，这并不容易计算，相比之下，链群$C_{k}(K)$中由于有基本组的存在，所以我们可以只需要在基本组之间建立同态即可得到$C_{k}(K)$上的同态，为了能够保持边界关系，即$Z_{k}(K)\subset Z_{k}(L)$,$B_{k}(K)\subset B_{k}(L)$,我们需要对这些同态施加一些限制，这就是下面的定义的出发点
+\begin{definition}
+我们考虑从$C_{k}(K)$映入$C_{k}(L)$的一系列同态$f_{k}:C_{k}(K)\rightarrow C_{k}(L),(k\geq 0)$，如果它们满足关系
+\begin{equation*}
+   \partial_{k}^{L}f_{k}=f_{k-1}\partial_{k}^{K},(k\geq 1) 
+\end{equation*}
+即我们有交换图
+{\center
+\begin{tikzcd}
+C_{k}(K) \arrow[rr, "f_{k}"] \arrow[dd, "\partial_{k}^{K}"] &  & C_{k}(L) \arrow[dd, "\partial_{k}^{L}"] \\
+                                                            &  &                                         \\
+C_{k-1}(K) \arrow[rr, "f_{k-1}"]                            &  & C_{k-1}(L)                             
+\end{tikzcd}\\}
+则我们称这一组同态$f=\left\{f_{k}\right\}$是$C_{k}(K)$和$C_{k}(L)$之间的链映射，其中$\partial_{k}^{K},\partial_{k}^{L}$分别是$K$和$L$之间的边缘同态，此外如果链映射还满足$\epsilon^{K}=\epsilon^{L}f_{0}$，则我们称链映射$f$是保持增广的
+\end{definition}
+\begin{example}
+我们考虑两个一维单形$A^{1}=(a_{0}a_{1})$,$B^{1}=(b_{0}b_{1})$，记$K=\text{Sd}A^{1},\;L=B^{1}$，我们定义从$K$到$L$的链群同态$f:C_{k}(K)\rightarrow C_{k}(L)$为
+\begin{equation*}
+\begin{aligned}
+f_{0}&:C_{0}(K)\rightarrow  C_{0}(L)\\
+&\left\{\begin{array}{cc}
+    f_{0}(a_{0})&=0\\
+       f_{0}(a_{1})&=0\\
+        f_{0}(A^{1*})&=b_{0}-b_{1}\\
+\end{array}\right.
+\end{aligned}
+\end{equation*}
+\begin{equation*}
+\begin{aligned}
+f_{1}&:C_{1}(K)\rightarrow  C_{1}(L)\\
+&\left\{\begin{array}{cc}
+   f_{1}(+(a_{0}A^{1*}))&=+(b_{1}b_{0})\\
+     f_{1}(+(A^{1*}a_{1}))&=+(b_{0}b_{1})\\
+\end{array}\right.
+\end{aligned}
+\end{equation*}
+其余$f_{k}=0,(k\neq 0,1)$。直接验证可以知道这样定义的$f$是一个链映射，不过它不是增广的，这是因为$\epsilon^{L}f_{0}(a_{0})=0\neq\epsilon^{K}(a_{0})=1$
+\end{example}
+\begin{proposition}
+设$\left\{f_{k}:C_{k}(K)\rightarrow C_{k}(L)\right\}$和$\left\{g_{k}:C_{k}(L)\rightarrow C_{k}(M)\right\}$为(保持增广的)链映射，那么$\left\{g_{k}\circ f_{k}:C_{k}(K)\rightarrow C_{k}(M)\right\}$也是(保持增广的)链映射
+\end{proposition}
+\begin{proof}
+利用$\left\{f_{k}\right\}$和$\left\{g_{k}\right\}$都是链映射，我们有$\partial^{M}_{k}(g_{k}\circ f_{k})=g_{k-1}\partial^{L}_{k}f_{k}=(g_{k-1}\circ f_{k-1})\partial^{K}_{k}$，所以
+\begin{equation*}
+    \left\{g_{k}\circ f_{k}:C_{k}(K)\rightarrow C_{k}(M)\right\}
+\end{equation*}
+也是链映射,对于保持增广的性质，可以同理证得
+\end{proof}
+\begin{proposition}\label{pro1489}
+设$\left\{f_{k}:C_{k}(K)\rightarrow C_{k}(L)\right\}$为(保持增广的)链映射,那么它们导出(约化)同调群之间的同态
+\begin{equation*}
+\begin{aligned}
+     f_{k_{*}}:& H_{k}(K)\rightarrow H_{k}(L)\\
+    \left(\right.f_{k_{*}}:& \tilde{H}_{k}(K)\rightarrow \tilde{H}_{k}(L)\left.\right)  \\
+\end{aligned}
+\end{equation*}
+特别地，由恒同映射组成的链映射$\left\{1_{k}:C_{k}(K)\rightarrow C_{k}(K)\right\}$导出同调群之间的同构
+\begin{equation*}
+    1_{k_{*}}:H_{k}(K)\rightarrow H_{k}(K)
+\end{equation*}
+\end{proposition}
+\begin{proof}
+我们只需要证明命题的前半段（特别地之前的部分）。当$k\geq 1$时，由于$\partial_{k}^{L}f_{k}=f_{k-1}\partial_{k}^{K}$,于是我们有$f(Z_{k}(K))\subset Z_{k}(L)$,$f(B_{k}(K))\subset B_{k}(L)$,当$k=0$时，若不考虑保持增广的条件，注意到$\partial_{0}$是零映射可知$f(Z_{0}(K))\subset Z_{0}(L)$，又$\partial_{1}^{L}f_{1}=f_{0}\partial_{1}^{K}$,则$f(B_{0}(K))\subset B_{0}(L)$；若考虑增广条件，设$a\in Z_{0}(K)$，即$\epsilon^{K}(a)=0$,根据保持增广条件，$\epsilon^{L}(f_{0}(a))=\epsilon^{K}(a)=0$，从而$f(Z_{0}(K))\subset Z_{0}(L)$成立。综上我们始终有$f(Z_{k}(K))\subset Z_{k}(L)$,$f(B_{k}(K))\subset B_{k}(L)$。
+现在我们定义映射$f_{k}:H_{k}(K)\rightarrow H_{k}(L)$,满足$f_{k}([z_{k}])=[f_{k}(z_{k})]$,对于$z_{1},z_{2}\in Z_{k}$，由于$f_{k}(Z_{k}(K))\subset Z_{k}(L)$，从而$[f_{k}(z_{k})]$有定义，此外我们有$f_{k}(z_{1})-f_{k}(z_{2})=[f_{k}(z_{1})]-[f_{k}(z_{2})]=[f_{k}(z_{1})-f_{k}(z_{2})]=[f_{k}(z_{1}-z_{2})]$,由于$z_{1}-z_{2}\in B_{k}(K)$，从而$f_{k}(z_{1}-z_{2})\in B_{k}(L)$，于是$f_{k}(z_{1})=f_{k}(z_{2})$，从而$f_{k}$是良好定义的，我们取$f_{k*}=f_{k}$就得到了命题
+\end{proof}
+根据上述命题，为了找到$H_{k}(K)$到$H_{k}(\text{Sd}K)$的同态，只要建立起从$C_{k}(K)$到$C_{k}(\text{Sd}K)$的链映射，又因为链群由基本组生成，所以我们只要对基本组中的元素建立它在链映射下的取值。
+
+首先来看几个例子，对于0维单形而言，其重心重分仍为其自身；对于1维单形而言，其重心重分为两个子线段；对于2维单形而言，其重心重分将其分为六个小三角形，再结合重心重分的性质命题(\ref{pro1288})，我们可以归纳地定义下列链映射$Sd_{k}:C_{k}(K)\rightarrow C_{k}(\text{Sd}K)$,满足$Sd_{0}(x_{0})=x_{0}$，假设$Sd_{k-1}$对于$C_{k-1}(K)$已经定义好，对于$k$维链群，我们先对基本组$\sigma_{k}$做如下定义$Sd_{k}(\sigma_{k})=\sigma^{k*}Sd_{k-1}(\partial\sigma^{k})=\sigma^{k*}\text{Sd}(\partial\sigma^{k})$，其中$\sigma^{k*}$是基本组中单形的重心，之后将其线性扩充到$C_{k}(K)$上即得到了$Sd_{k}$。在上面定义中出现的$\text{Sd}$就是之前出现的重心重分，根据$\text{Sd}\sigma^{k}=\sigma^{k*}\text{Sd}\overline{\sigma}^{k}$,$\overline{\sigma}^{k}$是$\partial\sigma^{k}$的承载复形，从而$Sd_{k-1}(\partial\sigma^{k})$是$\text{Sd}\overline{\sigma}^{k}$中的一个链，于是我们有$Sd_{k}(\sigma_{k})=\sigma^{k*}\text{Sd}(\partial\sigma^{k})\in C_{k}(\sigma^{k*}\text{Sd}(\overline{\sigma}^{k}))=C_{k}(\text{Sd}\sigma^{k})\subset C_{k}(\text{Sd}(K))$，所以上述映射是良好定义的。接下来要验证的是$Sd_{k}$是链映射，下面我们用归纳法来证明$\partial Sd_{k}x^{k}=Sd_{k-1}\partial x^{k}$，$k=0$时，两边都是零，是成立的。假设$n<k-1$时成立，下面我们只要对$C_{k}(K)$中的基本组验证成立即可。$\partial Sd_{k}\sigma^{k}=\partial(\sigma^{k*}Sd_{k-1}\partial\sigma^{k})=Sd_{k-1}\partial\sigma^{k}-\sigma^{k*}\partial(Sd_{k-1}\partial\sigma^{k})$,当$k\geq 2$时，第二项$\sigma^{k*}\partial(Sd_{k-1}\partial\sigma^{k})=\sigma^{k*}(\partial Sd_{k-1})\partial\sigma^{k}=\sigma^{k*}(Sd_{k-2}\partial)\partial\sigma^{k}=0$;当$k=1$时，直接计算$\sigma^{1*}\partial(Sd_{0}\partial\sigma^{1})=\sigma^{1*}\partial\partial\sigma_{1}=0$，其中我们利用了$Sd_{0}x^{0}=x^{0}$,这样我们就证明了$\partial Sd_{k}x^{k}=Sd_{k-1}\partial x^{k}$,根据归纳原理，我们证明了$Sd_{k}$是链映射，事实上，由于我们约定$Sd_{0}x^{0}=x^{0}$，$Sd_{k}$是保持增广的。我们将这一结论写成一个命题
+\begin{proposition}\label{chap1_pro_1526}
+重心重分映射$Sd_{k}$是保持增广的链映射
+\end{proposition}
+\begin{definition}
+我们称上面定义的保持增广的链映射$\left\{Sd_{k}\right\}$为重分链映射，它在同调群之间诱导的同态$Sd_{k*}:H_{k}(K)\rightarrow H_{k}(\text{Sd}K)$称为重分同态。
+\end{definition}
+注意我们的最终目的是证明$H_{k}(K)$和$H_{k}(\text{Sd}K)$是相等的，现在我们已经有了一个方向的同态，因此建立另一个方向的同态是必要的，根据我们刚才的经验，首先仍要限制到基本组上来讨论，由于直接对每一个$H_{k}(\text{Sd}K)$中的单形规定其像是相当繁琐的一件事情，我们需要另找聪明的办法，注意到单形由顶点决定，所以倘若我们能够规定一个顶点之间的对应，而且这个对应还具有性质，将单形映为单形，则我们就可以建立基本组之间的一个同态，再将其线性扩充，就达到了我们的目的。下面我们就来做这件事情。
+\begin{definition}
+我们定义复形$K,\;L$之间的单纯映射$f:K\rightarrow L$是将$|K|$映入$|L|$的映射,它满足下列两个条件：
+\begin{itemize}
+    \item 把顶点映成顶点
+    \item 把单形映成单形
+    \item 限制在单形上对于重心坐标是线性的
+\end{itemize}
+\end{definition}
+\begin{remark}
+注意第二个条件并不要求将$k$维单形映到$k$维单形，即不同顶点的像是允许重合的。由$f$对于重心坐标的线性可以知道，单纯映射完全由它在顶点上的值决定，反过来，如果我们给定一个复形的顶点之间的对应，只要它满足第二条即可得到一个单纯映射。
+\end{remark}
+显然单纯映射的三个条件在单纯映射的复合下仍然是保持的，所以我们得到了下列命题
+\begin{proposition}
+单纯映射的复合还是单纯映射
+\end{proposition}
+\begin{proposition}\label{chap1_pro_1545}
+设$f:K\rightarrow L$是单纯映射，则$f$诱导了链群之间保持增广的链映射$f_{k}:C_{k}(K)\rightarrow C_{k}(L)$,特别地，恒同映射导出恒同链映射。
+\end{proposition}
+\begin{proof}
+由于$C_{k}(K)$是由其基本组自由生成的自由群，所以我们只要关心它的基本组的像即可线性扩充得到$C_{k}(K)$上的映射。对于基本组$\sigma^{k}_{i}=+(a_{0}a_{1}\cdots a_{k})$,我们定义
+\begin{equation*}
+    f_{k}(\sigma^{k}_{i})=\left\{\begin{array}{cc}
+         +(f(a_{0})f(a_{1})\cdots f(a_{k})),\quad if\;f(a_{i})\neq f(a_{j}),i\neq j  \\
+         0,\quad otherwise
+    \end{array}\right.
+\end{equation*}
+根据单纯映射的定义,$f(a_{i})$是$L$中的顶点，因此上述定义是有意义的。
+下面我们需要证明$\left\{f_{k}\right\}$是链映射，也就是要证明$\partial^{L}_{k}f_{k}=f_{k-1}\partial^{K}_{k},k\geq 1$。直接分别计算等式的两边
+\begin{equation*}
+    \partial^{L}_{k}f_{k}(+(a_{0}a_{1}\cdots a_{k}))=\partial^{L}_{k}(f(a_{0})f(a_{1})\cdots f(a_{k}))=\sum\limits_{l=0}^{k}(-1)^{l}\left(f(a_{0})\cdots \hat{f}(a_{l})\cdots f(a_{k})\right)
+\end{equation*}
+\begin{equation*}
+    f_{k-1}\partial^{K}(+(a_{0}a_{1}\cdots a_{k}))=f_{k-1}\left(\sum\limits_{l=0}^{k}(-1)^{l}\left(a_{0}\cdots \hat{a}_{l}\cdots a_{k}\right)\right)=\sum\limits_{l=0}^{k}(-1)^{l}\left(f(a_{0})\cdots \hat{f}(a_{l})\cdots f(a_{k})\right)
+\end{equation*}
+注意到如果我们考虑进有向单形置换顶点会改变其取向这一事实，那么$f_{k}$定义的两种情况就可以统一处理，所以我们得到了$\partial^{L}_{k}f_{k}=f_{k-1}\partial^{K}_{k},k\geq 1$。至于$f_{0}$保持增广,只要对一个顶点$a_{0}$证明即可，而这是显然的。
+\end{proof}
+\begin{corollary}
+设$f:K\rightarrow L$是单纯映射，则$f$诱导了同调群之间的同态$f_{k*}:H_{k}(K)\rightarrow H_{k}(L)$。特别地，恒同映射诱导了同调群之间的同构
+\end{corollary}
+\begin{proof}
+由上述命题和命题(\ref{pro1489})即得
+\end{proof}
+根据$f_{k}$的定义，$g_{k}\circ f_{k}(a_{0}\cdots a_{k})=g_{k}(f(a_{0})\cdots f(a_{k}))=(g\circ f(a_{0})\cdots g\circ f(a_{k}))=(g\circ f)_{k}(a_{0}\cdots a_{k})$,于是我们有结论
+\begin{proposition}
+设$f:K\rightarrow L$,$\;g:L\rightarrow M$都是单纯映射，则它们诱导的链群之间的链映射满足$g_{k}\circ f_{k}=(g\circ f)_{k}$
+\end{proposition}
+\begin{corollary}\label{lemma1558}
+设$f:K\rightarrow L$,$\;g:L\rightarrow M$都是单纯映射，则它们诱导的同调群之间的同态满足$g_{k*}\circ f_{k*}=(g\circ f)_{k*}$
+\end{corollary}
+\begin{proof}
+根据我们在命题(\ref{pro1489})中的定义，$f_{k*}([z_{k}])=[f_{k}(z_{k})]$,从而$g_{k*}\circ f_{k*}([z_{k}])=g_{k*}([f_{k}(z_{k})])=[g_{k}\circ f_{k}(z_{k})]=[(g\circ f)_{k}(z_{k})]=(g\circ f)_{k*}([z_{k}])$
+\end{proof}
+至此，我们知道，链群间的链映射可以诱导同调群的同态，而复形之间的单纯映射可以诱导链群之间的链映射，从而也可以得到同调群的同态，因此，为了得到$Sd_{k*}$的逆，我们可以从定义单纯映射$\pi_{0}:\text{Sd}K\rightarrow K$开始。\\
+由于单纯映射要求我们将顶点对应到顶点，因此要想定义$\pi_{0}$，就需要决定$\text{Sd}K$中的顶点$A^{*}$在$K$中的像，也就是说要将$\text{Sd}K$中的顶点改造成$K$中的顶点。实现这一想法最简单的可能是将$\text{Sd}K$中的顶点$A^{*}$对应到它在$K$中的承载单形$A$的顶点，问题是这样规定的映射究竟是不是一个单纯映射，幸运的是我们有下列命题：
+\begin{proposition}
+对$\text{Sd}K$中的顶点$A^{*}$，定义$\pi_{0}:\text{Sd}K\rightarrow K$，其满足$\pi_{0}(A^{*})$为单形$A$的某个顶点，对每个$\text{Sd}K$做这样的规定，并将其线性扩充到$\text{Sd}K$上，这样得到的$\pi_{0}$是单纯映射
+\end{proposition}
+\begin{proof}
+显然$\pi_{0}$将顶点映成顶点，对于$\text{Sd}K$中的一个单形$(A_{0}^{*}\cdots A_{k}^{*})$，由于$A_{k}$是$A_{0}$的面，从而$\pi_{0}(A^{*}_{k})$仍然是$A_{0}$中的顶点，因此它们决定$K$中的一个单形，这样$\pi_{0}$将单形映成单形。又由于$\pi_{0}$的定义，我们知道限制到单形上它是线性的。
+\end{proof}
+\begin{definition}
+单纯映射$\pi_{0}$诱导的链映射$\pi=\left\{\pi_{k}:C_{k}(\text{Sd}K)\rightarrow C_{k}(K)\right\}$称为标准链映射。
+\end{definition}
+显然由于我们选取承载单形的顶点有一定的任意性，所以我们得到的$\pi_{0}$不是唯一的，从而标准链映射也不是唯一的，然而，下面我们会看到，标准链映射在同调群上诱导的群同态是相同的。\\
+为了证明这一点，考虑两个标准链映射$\pi_{0},\;\pi_{0}'$,它们分别诱导了$\pi_{0*},\;\pi_{0*}'$，我们要证明它们相同，就是要证明$\pi_{0*}(z_{k})=\pi_{0*}'(z_{k}),\;z_{k}\in Z_{k}(K)$，也就是说存在$c_{k+1}\in C_{k+1}(K)$，使得$\partial c_{k+1}=\pi_{0}(z_{k})-\pi_{0}'(z_{k})$,由于$c_{k+1}$与$z_{k}$有关，所以要达到我们的目的，只需要证明存在一个同态$D_{k}:Z_{k}(\text{Sd}K)\rightarrow C_{k+1}(K)$，满足对于任意闭链$z_{k}$都有$\partial D_{k}(z_{k})=\pi_{0}(z_{k})-\pi_{0}'(z_{k})$,当然，$D_{k}(z_{k})$的选取与$K$的整体结构有关，所以这也体现出了同调性质是整体性质这一特点。\\
+根据我们的经验，直接在闭链上定义同态是不容易的，这主要是因为我们不清楚它的生成元是什么，相比之下，链群有足够清楚的生成元，所以我们仍然考虑在$C_{k}(K)$上定义$D_{k}$，不过，由于我们只期望$\partial D_{k}(z_{k})=\pi_{0}(z_{k})-\pi_{0}'(z_{k})$对闭链成立，对于更为一般的链群，这一要求可能需要一定的放松。我们来考虑一个足够简单的例子，对于单形$c$，我们考虑$D(c)=ac$，映成它的锥形，由于锥形中链群中所有元素都是零调的，所以对于单位映射$1$和零映射$0$，自然有$1(c)\sim 0$，根据我们前面证明的结论，$\partial(D(c))=\partial(ac)=c-a(\partial c)=1(c)-0(c)-a(\partial c)$,果然和我们所预期的式子不同，但是注意到多出来的一项$a(\partial c)$在限制到闭链群之后不产生影响，所以我们所期望的仍然是成立的，我们将上述观察总结为下列定义
+\begin{definition}
+设$f=\left\{f_{k}\right\}$和$g=\left\{g_{k}\right\}$是两个复形$K,L$之间的链映射，如果存在一组同态$D=\left\{D_{k}:C_{k}(K)\rightarrow C_{k+1}(L)\right\}$，使得$\partial_{k+1}D_{k}+D_{k-1}\partial_{k}=f_{k}-g_{k}$成立，则我们称$f$和$g$是链同伦的，记作$f\simeq g$，同时称$D$是连接$f$和$g$的一个链伦移，记作$D:f\simeq g$
+\end{definition}
+
+\begin{proposition}
+链映射之间的链同伦关系是一个等价关系
+\end{proposition}
+\begin{proof}
+由定义显然
+\end{proof}
+\begin{proposition}\label{pro1588}
+假如链映射$f$和$g$是链同伦的，则它们在同调群之间诱导相同的同态，即若$D:f\simeq g$，则$f_{k*}=g_{k*}:H_{k}(K)\rightarrow H_{k}(L)$
+\end{proposition}
+\begin{proof}
+设$[z^{k}]\in H_{k}(K)$，按链同伦的假定，我们有
+\begin{equation*}
+    \partial_{k+1}D_{k}z^{k}+D_{k-1}\partial_{k}z^{k}=f_{k}(z^{k})-g_{k}(z^{k})
+\end{equation*}
+由于$z^{k}$是闭链，这意味着$f_{k}(z^{k})\sim g_{k}(z^{k})$,即$f_{k*}([z^{k}])=[f_{k}(z^{k})]=[g_{k}(z^{k})]=g_{k*}([z^{k}])$，由$[z^{k}]$的任意性，我们有$f_{k*}=g_{k*}$
+\end{proof}
+根据这个命题，为了证明$\pi_{0}=\pi_{0}'$，只要证明$\pi\simeq \pi'$，下面我们就来做这件事情。\\
+首先我们来考虑一个简单的版本，即$K$是锥形，此时有$\partial(D(c))=c-D(\partial c)$成立，分别用$\pi(g)$和$\pi'(g)$代替c，并做差，我们就得到$\partial(D\circ (\pi-\pi'))g=\pi(g)-\pi'(g)-D(\partial\circ(\pi-\pi'))(g)$,利用$\pi,\;\pi'$是链映射，交换$\partial$于它们的位置，就得到了链同伦$D_{k}=D\circ (\pi-\pi')$,对于一般的情况，这启发我们利用锥形的性质
+\begin{proposition}\label{pro1600}
+由不同的单纯映射诱导的链映射$\pi$和$\pi'$是链同伦的。
+\end{proposition}
+\begin{proof}
+对于$\text{Sd}$中的单形$(A_{0}^{*}\cdots A_{k}^{*})$，根据我们在前面的结论，单纯映射$\pi$和$\pi'$都将其映为$A_{0}$的一个面，而$A_{0}$是锥形，所以$\pi(\sigma^{k})$和$\pi'(\sigma^{k})$都是锥形的链群$C_{k}(A_{0})$中的元素，现在我们来归纳地构造链伦移$D=\left\{D_{k}\right\}$。\\
+首先定义$D_{0}:C_{0}(\text{Sd}K)\rightarrow C_{1}(K)$,对于$C_{0}(\text{Sd}K)$中的任何一个基$\sigma^{0}=\pm A^{*}$，显然$\pi_{0},\;\pi_{0}'$都是保持增广的，即$\epsilon\pi_{0}=\epsilon=\epsilon\pi_{0'}$，从而$\epsilon(\pi_{0}(\sigma^{0})-\pi_{0}'(\sigma^{0}))=0$,因为$A_{0}$是点状复形，所以$\Ima \partial_{1}=\Ker\epsilon$，于是存在$c_{1}\in C_{1}(A_{0})$,满足$\partial_{1}c_{1}=\pi_{0}(\sigma^{0})-\pi_{0}'(\sigma^{0})$,我们将$c_{1}$看作$K$的一维链，记它为$D_{0}(\sigma^{0})$,这样我们就定义好了$D_{0}:C_{0}(\text{Sd}K)\rightarrow C_{1}(K)$,使得$\partial_{1}D_{0}=\pi_{0}-\pi_{0}'$成立（不妨定义$D_{-1}=0$）。\\
+接下来我们假设当$n<k$时已经定义好了$D_{n}:C_{n}(\text{Sd}K)\rightarrow C_{n+1}(K)$,使得$\partial_{n+1}D_{n}=\pi_{n}-\pi_{n}'-D_{n-1}\partial_{n}$成立，我们现在的目标是定义$D_{k}:C_{k}(\text{Sd}K)\rightarrow C_{k+1}(K)$，使得$\partial_{k+1}D_{k}=\pi_{k}-\pi_{k}'-D_{k-1}\partial_{k}$成立。为了达到这一目的，我们仍然利用点状复形的性质$\Ker\partial_{k}=\Ima\partial_{k+1}$。由归纳假设，我们有$\partial_{k}D_{k-1}=\pi_{k-1}-\pi_{k-1}'-D_{k-2}\partial_{k-1}$,我们进行如下计算
+\begin{equation*}
+\begin{aligned}
+    &\partial_{k}(\pi_{k}(\sigma^{k})-\pi_{k}'(\sigma^{k})-D_{k-1}(\partial_{k}\sigma^{k}))\\
+    =&\pi_{k-1}\partial_{k}(\sigma^{k})-\pi_{k-1}'\partial_{k}(\sigma^{k})-\left(\pi_{k-1}(\partial_{k}\sigma_{k})-\pi_{k-1}'(\partial_{k}\sigma_{k})-D_{k-2}\partial_{k-1}(\partial_{k}\sigma^{k})\right)\\
+    =&0
+    \end{aligned}
+\end{equation*}
+从而根据$\Ker\partial_{k}=\Ima\partial_{k+1}$，存在$c^{k+1}\in C_{k+1}(K)=\pi_{k}(\sigma^{k})-\pi_{k}'(\sigma^{k})-D_{k-1}(\partial_{k}\sigma^{k})$,我们将$c^{k+1}$视作$K$的$k+1$维链，并将其记作$D_{k}(\sigma^{k})$，这样我们就完成了归纳定义，从而命题得证。
+\end{proof}
+注意到在上面的证明中，锥形并不是关键，点状复形的性质才是关键的，因此我们事实上可以将上述证明推广到更一般的情况。
+为此需要引入几个新的定义。
+\begin{definition}
+对于复形$K,L$，我们称函数$C:K\rightarrow L$是一个承载子，如果它满足下列两个条件：
+\begin{itemize}
+    \item 对于$K$中的每个单形$A^{r}$，$C(A^{r})$为$L$的一个非空子复形
+    \item 当$B^{s}$为$A^{r}$的面时，$C(B^{s})$为$C(A^{r})$的子复形
+\end{itemize}
+如果对于$K$中任意单形$A^{r}$均有$C(A^{r})$为点状复形，我们就称$C$为点状承载子。
+\end{definition}
+\begin{definition}
+设复形$K,L$之间的承载子为$C$，对于链映射$f=\left\{f_{k}:C_{k}(K)\rightarrow C_{k}(L)\right\}$,我们称$C$承载了链映射$f$，如果对于每个有向单形$\sigma^{k}=+A^{k}$，都有$f_{k}(\sigma^{k})$为$C_{k}(C(A^{k}))$的元，即$f_{k}(\sigma^{k})$是复形$C(A^{k})$中的链。类似地，对于链伦移$D:f\simeq g$，如果有性质$D_{k}(\sigma^{k})$为$C_{k+1}(C(A^{k}))$的元，则我们称$C$承载$D$
+\end{definition}
+\begin{proposition}[点状承载子定理]
+设$K$和$L$为复形，链映射$f$和$g$在$0$维同调群导出同一同态，又$f,g$由同一个点状承载子$C$承载，那么$f\simeq g$，而且连接$f,g$的链伦移$D$也由$C$承载
+\end{proposition}
+\begin{proof}
+我们归纳地定义$D_{k}$。对于$D_{0}:C_{0}(K)\rightarrow C_{1}(L)$，我们任取$K$的一个顶点$a$，由假设可知，$f,g$均由点状承载子$C$承载，即$f(a),g(a)$都是$C(a)$的链，而且由于$f,g$在$0$维同调群导出同一同态，从而$f_{0}(a)\sim g_{0}(a)$,即存在$c_{1}\in C_{1}(L)$使得$\partial c_{1}=f_{0}(a)- g_{0}(a)$,由于$\epsilon\circ \partial_{1}=0$，所以$f_{0}(a)- g_{0}(a)\in \Ker \epsilon(C(a)\rightarrow \mathbb{Z})$，由于$C(a)$是点状的，$\Ker\epsilon=\Ima\partial_{1}$，所以我们不妨设$c_{1}$为$C(a)$的链(将$\epsilon$限制到$C(a)$上，利用点状复形的定义，由于$f_{0}(a),g_{0}(a)$都是$C(a)$上的链，所以这样的限制是有效的)，于是如果我们设$D_{0}(+a)=c_{1}$，则它满足$\partial D_{0}=f_{0}-g_{0}$而且$D_{0}(a)\in C_{1}(C(a))\subset C_{1}(L)$,这就说明$D_{0}$由$C$承载。\\
+接下来我们假设当$n<k$时已经定义好了$D_{n}:C_{n}(K)\rightarrow C_{n+1}(L)$,使得$\partial_{n+1}D_{n}=f_{n}-g_{n}-D_{n-1}\partial_{n}$成立，我们现在的目标是定义$D_{k}:C_{k}(K)\rightarrow C_{k+1}(L)$，使得$\partial_{k+1}D_{k}=f_{k}-g_{k}-D_{k-1}\partial_{k}$成立。为了达到这一目的，我们仍然利用点状复形的性质$\Ker\partial_{k}=\Ima\partial_{k+1}$。由归纳假设，我们有$\partial_{k}D_{k-1}=\pi_{k-1}-\pi_{k-1}'-D_{k-2}\partial_{k-1}$,我们进行如下计算
+\begin{equation*}
+\begin{aligned}
+    &\partial_{k}(f_{k}(\sigma^{k})-g_{k}(\sigma^{k})-D_{k-1}(\partial_{k}\sigma^{k}))\\
+    =&f_{k-1}\partial_{k}(\sigma^{k})-g_{k-1}\partial_{k}(\sigma^{k})-\left(f_{k-1}(\partial_{k}\sigma_{k})-g_{k-1}(\partial_{k}\sigma_{k})-D_{k-2}\partial_{k-1}(\partial_{k}\sigma^{k})\right)\\
+    =&0
+    \end{aligned}
+\end{equation*}
+根据$f,g$被$C$承载的假设，$f_{k}(\sigma^{k}),g_{k}(\sigma^{k})\in C_{k}(C(\sigma^{k}))$,又根据归纳假设，$D_{k-1}\partial_{k}(\sigma^{k})$也是$C(\sigma^{k})$的链，从而根据$\Ker\partial_{k}=\Ima\partial_{k+1}$，存在$c^{k+1}\in C_{k+1}(C(\sigma^{k}))=f_{k}(\sigma^{k})-g_{k}(\sigma^{k})-D_{k-1}(\partial_{k}\sigma^{k})$,我们将$c^{k+1}$视作$L$的$k+1$维链，并将其记作$D_{k}(\sigma^{k})$，这样我们就完成了归纳定义，且$D_{k}$也由$C$承载，从而命题得证。
+\end{proof}
+这一命题的证明与命题($\ref{pro1600}$)几乎完全一样，事实上，如果注意到两个保持增广的链映射在$0$维同调群导出相同的同态（已经在命题($\ref{pro1600}$)中证明，以及将$\text{Sd}K$中的元素$(A_{0}^{*}\cdots A_{k}^{*})$映到$A_{0}$的函数$C$是一个点状承载子，则命题($\ref{pro1600}$)就是我们刚证明的命题的推论。\\
+根据命题($\ref{pro1588}$)和命题($\ref{pro1600}$),我们就有下列推论
+\begin{corollary}
+标准链映射在同调群上导出相等的同态，称为标准同态，记作$\pi_{k*}:H_{k}(\text{Sd}K)\rightarrow H_{k}(K)$
+\end{corollary}
+事实上，重分同态$Sd_{k*}$和标准同态$\pi_{k*}$是互为逆映射的，我们来证明这一点。
+\begin{lemma}
+标准链映射$\pi_{k}:C_{k}(\text{Sd}K)\rightarrow C_{k}(K)$为重分链映射$Sd_{k}:C_{k}(K)\rightarrow C_{k}(\text{Sd}K)$的左逆，即
+\begin{equation*}
+    \pi_{k}\circ Sd_{k}=1_{C_{k}(K)}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+对维数用归纳法。当$n=0$时，根据$Sd_{0}$和$\pi_{0}$的定义指其显然。假设$n<k$时命题成立，当$n=k$时，考虑$C_{k}(K)$基本组中的元素$\sigma^{k}=+A^{k}$，则$Sd_{k}(\sigma^{k})=A^{0*}Sd(\partial \sigma^{k})$,我们设其中包含有向单形$(A_{0}^{*}\cdots A_{k}^{*})$,它经过$\pi$作用后，或者是$\pm \sigma^{k}$或者0，这样我们可以将$\pi_{k}Sd_{k}$的效果记为$\pi_{k}Sd_{k}\sigma^{k}=l\sigma^{k},l\in\mathbb{Z}$，将$\partial$作用上去，得到$\partial \pi_{k}Sd_{k}\sigma^{k}=\partial(l\sigma^{k})=l\partial\sigma^{k}$,由于$\pi_{k},Sd_{k}$都是链映射，所以上式左边为$\partial \pi_{k}Sd_{k}\sigma^{k}=\pi_{k-1}Sd_{k-1}\partial\sigma^{k}=\partial\sigma^{k}$，其中最后一步利用了归纳假设$\pi_{k-1}Sd_{k-1}=1$,于是$\partial\sigma^{k}=l\sigma^{k}$，这样我们得到了事实上$l=1$,于是我们有$\pi_{k}Sd_{k}\sigma^{k}=\sigma^{k}$，从而我们证明了$\pi_{k}Sd_{k}=1$，这样我们就完成了归纳法。
+\end{proof}
+根据推论(\ref{lemma1558})，我们有
+\begin{corollary}\label{cor1660}
+$\pi_{k*}Sd_{k*}=1_{k*}:H_{k}(K)\rightarrow H_{k}(K)$
+\end{corollary}
+\begin{lemma}
+链映射$Sd\circ \pi:C_{k}(\text{Sd}K)\rightarrow C_{k}(\text{Sd}K)$与恒同映射$1_{C_{k}(\text{Sd}K)}$都是保持增广的，而且它们有公共的点状承载子。
+\end{lemma}
+\begin{corollary}\label{cor1666}
+链映射$Sd\circ \pi:C_{k}(\text{Sd}K)\rightarrow C_{k}(\text{Sd}K)$与恒同映射$1_{C_{k}(\text{Sd}K)}$是链同伦，即$Sd_{k*} \pi_{k*}=1_{k*}$
+\end{corollary}
+\begin{proof}
+由于保持增广可推得它们在0维同调群诱导相同的同态，由点状承载子定理即得
+\end{proof}
+根据推论(\ref{cor1660}和推论(\ref{cor1666})，我们得到了这一节的主要结果
+\begin{corollary}[同调群的重分不变性]
+重分同态$Sd_{*}:H_{k}(K)\rightarrow H_{k}(\text{Sd}K)$以标准同态$\pi_{*}:H_{k}(\text{Sd}K)\rightarrow H_{k}(K)$为它的逆，特别地$Sd_{*}$为同构。
+\end{corollary}
+\begin{corollary}
+对于复形$K$而言，对于上同调群我们有
+\begin{equation*}
+    H^{k}(K)\cong H^{k}(\text{Sd}K)
+\end{equation*}
+\end{corollary}
+\begin{proof}
+这由上同调群完全由同调群决定立即可得
+\end{proof}
+根据上同调和同调的对偶关系，我们可以得到类似的定义，例如如果$\left\{f_{k}:C_{k}(K)\rightarrow C_{k}(L)\right\}$为链映射，则$\left\{Hom(f_{k}):C^{k}(L)\rightarrow C^{k}(K)\right\}$构成上链映射，即$\delta^{k}_{K}Hom(f_{k})=Hom(f_{k+1})\delta^{k}_{L}$，这可以由$f_{k}\partial_{k+1}^{K}=\partial^{L}_{k+1}f_{k+1}$两边作用$Hom$得到（根据推论(\ref{pro1049})）。类似地，如果我们定义$D^{k}=Hom(D_{k-1})$，则我们也可以从同调群的链同伦直接得到上链同伦$\delta^{k-1}_{K}D^{k}+D^{k+1}\delta^{k}_{L}=f^{k}-g^{k}$,其中$f^{k}=Hom(f_{k}),\;g^{k}=Hom(g_{k})$，于是我们可以得到上同调群之间的同态$f^{k}_{*}=g^{k}_{*}$,因此，除了利用同调群和上同调群之间的对应关系，我们也可以直接证明$Hom(Sd_{k})$在上同调群上导出同构得证。\\
+至此我们对重心重分和原复形之间的同调关心的讨论就告一段落了，当然这个结果完全是在我们预期之内的，因为$K$和$\text{Sd}K$只是同一个多面体的不同的单纯剖分，按照我们即将证明的同调群的拓扑不变形，它们理应是相等的。

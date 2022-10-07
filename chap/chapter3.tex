@@ -1,0 +1,539 @@
+\chapter{相对同调群及其不变性}
+\section{相对同调群}
+相对同调群的主要思想是在原来的空间$X$中，忽略掉来自其一个子空间$A$中的链的贡献，具体的，我们有如下定义
+\begin{definition}
+设$K$是复形，我们取$X=|K|$,设$L$是$K$的子复形，取$A=|L|$，我们称这样的一组复形$(K,L)$为一组复形对，并定义复形$K$相对于子复形$L$的链群为$C_{k}(K,L)=C_{k}(K)/C_{k}(L)$,如果用$x_{k}$表示$C_{k}(K)$中的元素，那么我们用$\tilde{x}_{k}$表示$C_{k}(K/L)$中的元素。
+\end{definition}
+对于$C_{k}(K)$中的元素$x_{k}=\sum\alpha_{i}\sigma_{i}^{k}$,我们可以将其分成两部分，即$x_{k}=\sum\limits_{\sigma^{k}_{i}\in L}\alpha_{i}\sigma_{i}^{k}+\sum\limits_{\sigma^{k}_{i}\notin L}\alpha_{i}\sigma_{i}^{k}$,那么在模掉$C_{k}(L)$中的元素后，我们有$\tilde{x}_{k}=\sum\limits_{\sigma^{k}_{i}\notin L}\alpha_{i}\sigma_{i}^{k}\in C_{k}(K/L)$。
+有了链群，我们自然要建立链群上的边缘映射，注意到$\partial_{k}:C_{k}(K)\rightarrow C_{k-1}(K)$限制在$C_{k}(L)$上给出$\partial_{k}\left|_{C_{k}(L)}\right.:C_{k}(L)\rightarrow C_{k-1}(L)$,从而$\partial_{k}(C_{k}(L))$是$C_{k-1}(L)$的子群，所以$\partial_{k}$导出映射
+\begin{equation}
+    \begin{aligned}
+    \tilde{\partial}_{k}:C_{k}(K,L)&\rightarrow C_{k-1}(K,L)\\
+    \tilde{x}_{k}&\rightarrow \widetilde{\partial_{k}x_{k}}
+    \end{aligned}
+\end{equation}
+设$x_{k},x'_{k}$都是$\tilde{x}_{k}$中的代表元，那么它们之间相差$C_{k}(K)$中的一个元素$c_{k}$，根据我们之前的讨论，$\partial_{k}c_{k}\in C_{k-1}(L)$，从而$\widetilde{\partial_{k}x_{k}}=\widetilde{\partial_{k}x'_{k}}$,于是$\tilde{\partial}_{k}$是良定的。
+\begin{definition}
+我们称刚才定义的$\tilde{\partial}_{k}:C_{k}(K,L)\rightarrow C_{k-1}(K,L)$为$K$相对于$L$的边缘同态,在不引起歧义的情况下，我们也称之为相对边缘同态
+\end{definition}
+\begin{proposition}\label{chap3_peo_19}
+相对边缘同态$\tilde{\partial}_{k}$与边缘同态$\partial_{k}$使得下列图交换
+{\center
+\begin{tikzcd}
+C_{k}(K) \arrow[rr, "\pi_{k}"] \arrow[dd, "\partial_{k}"] &  & C_{k}(K,L) \arrow[dd, "\tilde{\partial}_{k}"] \\
+                                                               &  &                                       \\
+C_{k-1}(K) \arrow[rr, "\pi_{k-1}"]                          &  & C_{k-1}(K,L)                             
+\end{tikzcd}\\}
+其中$\pi_{k}:C_{k}(K)\rightarrow C_{k}(K,L)$是商映射
+\end{proposition}
+\begin{proof}
+设$x_{k}=\sum\alpha_{i}\sigma^{k}_{i}=\sum\limits_{\sigma^{k}_{i}\in L}\alpha_{i}\sigma_{i}^{k}+\sum\limits_{\sigma^{k}_{i}\notin L}\alpha_{i}\sigma_{i}^{k}\in C_{k}(K)$,则$\tilde{\partial}_{k}\circ\pi_{k}(x_{k})=\tilde{\partial}_{k}(\tilde{x}_{k})=\sum\alpha_{i}\widetilde{\partial_{k}\sigma^{k}_{i}}$,而$\pi_{k-1}\circ \partial_{k}(x_{k})=\pi_{k-1}(\sum\alpha_{i}\partial_{k}\sigma_{i}^{k})=\sum\alpha_{i}\widetilde{\partial_{k}\sigma^{k}_{i}}$,这样我们就证明了命题。
+\end{proof}
+\begin{proposition}\label{chap3_pro_32}
+$\tilde{\partial}_{k}\circ\tilde{\partial}_{k+1}=0 $
+\end{proposition}
+\begin{proof}
+设$\tilde{x}_{k+1}\in C_{k+1}(K,L)$按定义，$\tilde{\partial}_{k}\circ\tilde{\partial}_{k+1}\tilde{x}_{k+1}=\tilde{\partial}_{k}\widetilde{\partial_{k+1}x_{k+1}}=\overline{\partial_{k}\circ\partial_{k+1}x_{k+1}}=0$
+\end{proof}
+\begin{definition}
+我们称二元对$(C_{k}(K,L),\tilde{\partial}_{k})$为复形对$(K,L)$的相对链复形，有时也简称为$(K,L)$的链复形。
+\end{definition}
+\begin{definition}
+我们定义复形$K$相对于复形$L$的第$k$个闭链群为$Z_{k}(K,L)=\Ker \tilde{\partial}_{k}$,复形$K$相对于复形$L$的第$k$个边缘链群为$B_{k}(K,L)=\Ima \tilde{\partial}_{k+1}$，复形$K$相对于复形$L$的第$k$个同调群为$H_{k}(K,L)=\frac{Z_{k}(K,L)}{B_{k}(K,L)}$,有时也分别简称他们为复形对$(K,L)$的第$k$个闭链群、边缘链群和同调群。
+\end{definition}
+\begin{remark}
+当$L=\varnothing$时，$H_{k}(K,L)=H_{k}(K)$,在这种意义下，我们之前定义的同调群也可以称为绝对同调群。
+\end{remark}
+考虑一个相对同调群计算的例子也许是有利的
+\begin{example}
+设$L=a$为复形$K$的一个顶点，计算$H_{k}(K,a)$
+\end{example}
+设$K_{i}(1\leq i\leq q)$是$K$的全部组合分支，不妨设$a$为$K_{1}$的顶点，那么根据之前证明的，$$C_{k}(K,a)=C_{k}(K)/C_{k}(a)=\bigoplus_{l=1}^{q}C_{k}(K_{l})/C_{k}(a)=C_{k}(K_{1},a)\oplus\left(\bigoplus_{l=2}^{q}C_{k}(K_{l})\right)$$从而我们有$$H_{k}(K,a)=H_{k}(K_{1},a)\oplus\left(\bigoplus_{l=2}^{q}H_{k}(K_{l})\right)(k\geq 0)$$于是我们只需要考虑$H_{k}(K_{1},a)$,此时$K_{1}$是连通的，我们设它的全部顶点为$a_{0}=a,a_{1},\cdots,a_{m}$。因为pt是零维的，于是根据定义有$C_{k}(a)=0,(k\geq 1)$,于是自然有$$C_{k}(K_{1},a)=C_{k}(K),(k\geq 1)$$$$\tilde{\partial}_{k}=\partial_{k},(k\geq 2)$$于是我们得到了$$H_{k}(K_{1},a)=H_{k}(K_{1}),(k\geq 2)$$
+现在还有两个同调群没有解决，分别是
+\begin{equation*}
+    \begin{aligned}
+    H_{1}(K_{1},a)&=\Ker \tilde{\partial}_{1}/\Ima\tilde{\partial}_{2}=\Ker \tilde{\partial}_{1}/\Ima\partial_{2}\\
+    H_{0}(K_{0},a)&=\Ker \tilde{\partial}_{0}/\Ima\tilde{\partial}_{1}=C_{0}(K_{1},a)/\Ima\tilde{\partial}_{1}\\
+    \end{aligned}
+\end{equation*}
+这最终归结为研究
+$$\tilde{\partial}_{1}:C_{1}(K,a)(=C_{1}(K_{1}))\rightarrow C_{0}(K_{1},a)$$
+\begin{enumerate}
+    \item 根据之前的假设，$K_{1}$的全部顶点是$a_{0}=a,a_{1},\cdots,a_{q}$,那么$C_{0}(K_{1},a)=C_{0}(K_{1})/C_{0}(a)$中的元素都可以写成$x_{0}=\sum_{i\neq 0}\alpha_{i}a_{i}$,因为$K_{1}$是连通的，所以存在
+    $x_{1}\in C_{1}(K_{1})$使得$\partial_{1}x_{i}^{1}=a_{i}-a$，于是自然有$\tilde{\partial}_{1}(\sum_{i\neq 0}x_{i}^{1})=\sum_{i\neq 0}\alpha_{i}a_{i}$,
+    这表明$\tilde{\partial}_{1}$是一个满同态,从而$$H_{0}(K_{0},a)=\Ker \tilde{\partial}_{0}/\Ima\tilde{\partial}_{1}=C_{0}(K_{1},a)/\Ima\tilde{\partial}_{1}=0$$
+    \item 我们设$z^{1}\in C_{1}(K_{1},a)=C_{1}(K_{1})$,其满足$\tilde{\partial_{1}}z^{1}=0$,根据相对边缘同态的定义，我们知道这等于是说$\partial_{1}z^{1}\in C_{0}(a)$,因此我们可以设$\partial_{1}z^{1}=ka$,在两边同时作用增广同态，利用$\partial_{1}z^{1}\epsilon=0$我们可以得到$k\epsilon(a)=k=0$,这样我们就证明了$\Ker \tilde{\partial}_{1}\subset \Ker\partial_{1}$,而另一个方向是显然成立的，因此我们证明了$\Ker \tilde{\partial}_{1}=\Ker\partial_{1}$，
+    从而我们有$H_{1}(K_{1},a)=\Ker\tilde{\partial}_{1}/\Ima \partial_{2}=\Ker{\partial_{1}}/\Ima \partial_{2}=H_{1}(K_{1})$
+\end{enumerate}
+总结一下我们有
+\begin{proposition}
+设$a$是连通复形$K_{1}$的顶点，那么我们有
+\begin{equation}
+    \begin{aligned}
+    H_{k}(K_{1},a)&=H_{k}(K_{1}),\quad k\leq 1\\
+    H_{0}(K_{1},a)&=0,\quad k=0
+    \end{aligned}
+\end{equation}
+\end{proposition}
+结合命题\eqref{chap1_pro_1431},我们可以有下列更广泛的结果
+\begin{proposition}\label{chap3_79}
+设$a$是复形$K$的顶点，那么我们有
+\begin{equation}
+    \begin{aligned}
+    H_{k}(K,a)&=\tilde{H_{k}}(K),\quad k\geq 0\\
+    \end{aligned}
+\end{equation}
+\end{proposition}
+\begin{proof}
+对于连通复形，我们知道$\tilde{H}_{0}(K)=0$,所以由上一个命题可知结论成立。如果$K$不是连通的，它的同调群可以写成有限个连通复形的同调群的直和，从而应用连通的情况的结论可知命题成立。
+\end{proof}
+\begin{proposition}
+设复形$K$是它的子复形$K_{1}$和$K_{2}$的并，即$K=K_{1}\bigcup K_{2}$,那么对于所有的$k$，含入映射$i:K_{2}\rightarrow K$导出的同态$$H_{k}(K,K_{1}\bigcap K_{2})\rightarrow H_{k}(K,K{1})$$都是同构
+\end{proposition}
+\begin{proof}
+设$\pi_{k}:C_{k}(K)\rightarrow C_{k}(K,K_{1})$为商同态，我们定义$f_{k}:\pi_{k}\circ i_{k}:C_{k}(K_{2})\rightarrow C_{k}(K,K_{1})$,按定义，$C_{k}(K,K_{1})$由不在$K_{1}$中的单形生成，但是根据假设，$K=K_{1}\bigcup K_{2}$,所以这些不在$K_{1}$中的单形都在$K_{2}$当中，所以$f_{k}$是一个满同态。显然我们有$C_{k}(K_{1}\bigcap K_{2})\subset \Ker f_{k}$,另一方面，设$z^{k}\in C_{k}(K_{2})$,且$f_{k}(z^{k})=0$,那么$z^{k}\in C_{k}(K_{1})$,这表明$z^{k}\in C_{k}(K_{1})\bigcap C_{k}(K_{2})=C_{k}(K_{1}\bigcap K_{2})$,$\Ker f_{k}=C_{k}(K_{1}\bigcap K_{2})$,从而根据群的第一同构定理，我们有
+$C_{k}(K_{2},K_{1}\bigcap K_{2})\cong C_{k}(K,K_{1})$,从而这两组链群在同构的意义下是完全一样的，从而含入映射在同调群之间诱导的同态是既单又满的，这表明它诱导的映射为同构。
+\end{proof}
+\begin{remark}
+我们令$O\subset |K|/|K_{2}|$,由于$|K_{2}|$是$|K|$的闭子集，所以$O$是一个开集，注意到$|K_{2}|=|K|/(|K|/|K_{2}|)=|K|/O\;|K_{1}\bigcap K_{2}|=|K_{1}|/(|K|/|K_{2}|)=|K_{1}|/O$,所以$(K_{2},K_{1}\bigcap K_{2})$可以看作是在$(K,K_{1})$中切除了一个开集$O$，因此这一结论也被称之为切除定理。
+\end{remark}
+
+给定了两个复形$K$和它的子复形$L$之后，我们可以得到三种同调群,$H_{K},H_{k}(L),H_{k}(K,L)$,讨论它们之间的关系是很自然的。
+
+注意到$C_{k}(L)$是$C_{k}(K)$的一个直和项，而他们的商群就是$C_{k}(K,L)=C_{k}(K)/C_{k}(L)$,于是有短正合列
+$$0\rightarrow C_{k}(L)\xrightarrow{i_{k}}C_{k}(K)\xrightarrow{\pi_{k}}C_{k}(K,L)\rightarrow 0$$
+其中$i_{k}$是嵌入映射，$\pi_{k}$是商映射。$C_{k}(K)$处的正合性由定义可见。我们将这一结果写成一个命题
+\begin{proposition}\label{chap3_pro_106}
+设$(K,L)$为复形对，那么$0\rightarrow C_{k}(L)\xrightarrow{i_{k}}C_{k}(K)\xrightarrow{\pi_{k}}C_{k}(K,L)\rightarrow 0$是短正合列。
+\end{proposition}
+
+对于嵌入映射$i_{k}$，因为$C_{k}(L)$的边缘仍然在$C_{k}(K)$中，我们有$i_{k-1}\circ \partial^{L}_{k}=\partial^{K}_{k}\circ i_{k}$,所以$\left\{i_{k}:C_{k}(L)\rightarrow C_{k}(K)\right\}$
+为复形$L$的链群到复形$K$的链群的链映射，所以根据命题\eqref{pro1489}，它导出了同调群之间的同态
+$$i_{k*}:H_{k}(L)\rightarrow H_{k}(K)$$
+
+我们在这节刚开始时，证明了对于商映射而言，有$\tilde{\partial}_{k}\circ\pi_{k}=\pi_{k-1}\circ \partial_{k}$,这表明
+\begin{equation}
+    \begin{aligned}
+    \pi_{k}(Z_{k}(K))&\subset \Ker \tilde{\partial}_{k}\\
+    \pi_{k}(B_{k}(K))&\subset \Ima \tilde{\partial}_{k+1}\\
+    \end{aligned}
+\end{equation}
+这样我们得到
+   \begin{proposition}
+   同态$\left\{j_{k}:C_{k}(K)\rightarrow C_{k}(K,L)\right\}$导出了同调群之间的同态$$\pi_{k*}:H_{k}(K)\rightarrow H_{k}(K,L)$$
+   \end{proposition} 
+   \begin{proof}
+   模仿\eqref{pro1489}的证明即可。
+   \end{proof}
+   \begin{remark}
+   注意尽管$i_{k}:C_{k}(L)\rightarrow C_{k}(K)$是单同态，$\pi_{k}:C_{k}(K)\rightarrow C_{k}(K,L)$是满同态，但是它们诱导出来的同调群之间的同态却不会保持这样的性质，即$i_{k*}:H_{k}(L)\rightarrow H_{k}(K)$不一定是单的，$\pi_{k*}:H_{k}(K)\rightarrow H_{k}(K,L)$也不一定是满的，具体的例子可以看下面的例。
+   \end{remark}
+  \begin{example}\label{example128}
+  设$K$是$n$维实心球$E^{n}$，$L$为它的边界$S^{n-1}$。
+  
+  不妨设$K=A^{n},L=\overline{A}^{n}$,于是除$C_{n}(K)=\mathbb{Z},\;C_{n}(L)=0$外，均有$C_{k}(K)=C_{k}(L),(k<n)$,因此我们有
+  \begin{equation}
+      C_{k}(K,L)=\left\{\begin{array}{cc}
+           Z,\quad k=n  \\
+           0,\quad k<n 
+      \end{array}\right.
+  \end{equation}
+  这样我们就得到了
+  \begin{equation}
+      H_{k}(K,L)=\left\{\begin{array}{cc}
+           Z,\quad k=n  \\
+           0,\quad k<n 
+      \end{array}\right.
+  \end{equation}
+  \end{example}
+  我们考虑一个特殊情况，$n=2$，此时$K=E^{2},L=S^{1}$,我们之前计算过$H_{1}(E^{2})=0$,从而$i_{k*}:H_{1}(S^{1})\rightarrow H_{1}(E^{2})$不是单同态，但是是满的。此外，对于$H_{1}(S^{1})$中的生成元$[\sigma]$,$\sigma$是$S^{1}$中的闭链，如果我们把它看成$E^{2}$中的闭链，那么根据$i_{1*}=0$，可以知道它是$E^{2}$中的边缘链，不妨设$\partial c=\sigma$,模掉$S^{1}$后，$c$是$E^{2}$中相对于$S^{1}$的2维闭链，因此它决定了$H_{2}(E^{2},S^{1})$中的一个元素$[c]$，后面我们会证明，这对于一般的情况也成立，即对于$i_{k*}:H_{k}(L)\rightarrow H_{k}(K)$，从$\Ker i_{k*}$中的元可以得到$H_{k+1}(K,L)$中的一个元。
+  \begin{example}
+  设$K$为柱面而$L$为底边，容易证明（第一章以后会补），此时$H_{2}(K)=0$，因此我们可以得到$H_{2}(K,L)=0$。对于$K$的每个1维链，我们可以加上一些2维链的边缘，使其具有以下形式$$\alpha_{1}(a_{1}a_{2})+\alpha_{2}(a_{2}a_{3})+\alpha_{3}(a_{3}a_{1})+\alpha_{4}(a_{1}a_{4})+\alpha_{5}(a_{2}a_{5}+\alpha_{6}(a_{3}a_{6}))$$,为了它是$\tilde{\partial}_{1}$的核，我们作用上$\tilde{\partial_{1}}$，可以得到系数必须满足$$\alpha_{4}=\alpha_{5}=\alpha_{6}=0$$这表明所有这样的链都是子复形$L$的链，因此$H_{1}(K,L)=0$。最后，由于$H_{0}(K)=H_{0}(L)=\mathbb{Z}$，所以我们有$H_{0}(K,L)=0$。
+  此时$i_{k*}:H_{1}(L)\rightarrow H_{1}(K)$是同构，这一点可以从$H_{k}(K)$与$H_{k}(L)$有相同的生成元看出
+  \end{example}
+  \begin{example}
+  设$K$是Mobius带，$L$是它的边界。由于Mobius和圆柱面是同伦的，所以我们有$H_{2}(K,L)=H_{0}(K,L)=0$,下面讨论1维的相对同调群。根据第一章的讨论(还没写),我们可以将$K$中的1维链写成下列形式$$\alpha_{1}(a_{1}a_{4})+\alpha_{2}(a_{1}a_{2})+\alpha_{3}(a_{2}a_{3})+\alpha_{4}(a_{3}a_{4})+\alpha_{5}(a_{4}a_{5}+\alpha_{6}(a_{5}a_{6}))+\alpha_{7}(a_{6}a_{1})$$
+  它在$C_{1}(K,L)$中具有形式$\alpha_{1}(a_{1}a_{4})\in \Ker\tilde{\partial}_{1}$,直接计算可以知道
+  \begin{equation}
+      \partial_{2}\left(\sum\limits_{i=1}^{6}\sigma_{i}^{2}\right)=(a_{1}a_{2})+(a_{2}a_{3})+(a_{3}a_{4})-(a_{4}a_{5})-(a_{5}a_{6})-2(a_{1}a_{4})
+  \end{equation}
+  于是$2(a_{1}a_{4})\in \Ima \tilde{\partial}_{2}$,事实上，为了消掉二维链产生的非$(a_{1}a_{4})$的边，我们不得不得到上式括号中的组合，因此我们得到$(a_{1}a_{4})\notin \Ima\tilde{\partial}_{2}$，这样我们得到了$$H_{1}(K,L)=\mathbb{Z}/2$$\\
+  此时我们考虑$i_{k*}H_{k}(L)\rightarrow H_{k}(K)$,注意到$H_{k}(L)=H_{k}(K)=\mathbb{Z}$,但是前者的生成元为$$(a_{1}a_{2})+(a_{2}a_{3})+(a_{3}a_{4})+(a_{4}a_{5})+(a_{5}a_{6})+(a_{6}a_{1})$$后者的生成元为$$(a_{1}a_{4})+(a_{4}a_{5})+(a_{5}a_{6})+(a_{6}a_{1})$$也可以写成$$(a_{1}a_{2})+(a_{2}a_{3})+(a_{3}a_{4})-(a_{4}a_{1})$$当我们将$H_{k}(L)$的生成元通过$i_{k*}$看作$H_{k}(K)$中的生成元时，我们有
+  \begin{equation}
+      \begin{aligned}
+        &(a_{1}a_{2})+(a_{2}a_{3})+(a_{3}a_{4})+(a_{4}a_{5})+(a_{5}a_{6})+(a_{6}a_{1})\\
+        =&(a_{1}a_{2})+(a_{2}a_{3})+(a_{3}a_{4})-(a_{1}a_{4})+(a_{1}a_{4})+(a_{4}a_{5})+(a_{5}a_{6})+(a_{6}a_{1})\\
+        =&2[(a_{1}a_{2})+(a_{2}a_{3})+(a_{3}a_{4})-(a_{1}a_{4})]
+      \end{aligned}
+  \end{equation}
+      这样我们得到$i_{k*}$是单射但是不是满的。
+ \end{example}
+  \begin{example}
+  设$K$为Mobius带和$E^{2}$的一点并，$L$是$K$的1维骨架。\\
+  按照之前的分析方法，结合Mobius带与$E^{n}$的相对同调群的例子，我们可以知道$H_{2}(K,L)=\mathbb{Z},\;H_{1}(K,L)=\mathbb{Z}/2$.此时$i_{k*}:H_{k}(L)\rightarrow H_{k}(K)$既不是单的也不是满的。注意到$H_{1}(L)$是Mobius带边缘和圆盘的边缘的直和，因此$H_{1}(L)=\mathbb{Z}\oplus\mathbb{Z}$,因为Mobius带与圆盘的一点并与Mobius带本身是同伦的，利用同调群的同伦不变性，所以我们有$H_{1}(K)=H_{1}(Mobius)=\mathbb{Z}$,从这里可以看出$i_{k*}$肯定不是单的，事实上$i_{k*}$将圆盘部分的生成元映成0,因此不是单的，此外，它还将Mobius带部分的生成元映成它的2倍，所以也不是满的。
+  \end{example}
+  根据上面四个例子，我们发现$i_{k*}$本身作为映射几乎没有什么性质；类似地，利用上面给出的四个例子，我们也可以讨论$\pi_{k*}:H_{k}(K)\rightarrow H_{k}(K,L)$的性质，与$i_{k*}$的情况相似，我们也得不到$\pi_{k*}$本身作为映射的良好的性质。因此我们需要将这两个映射结合起来考虑，即考虑序列
+  \begin{equation}
+      H_{k}(L)\xrightarrow{i_{k*}}H_{k}(K)\xrightarrow{\pi_{k*}}H_{k}(K,L)
+  \end{equation}
+  事实上我们有下列命题
+  \begin{proposition}\label{chap3_pro_180}
+  设$(K,L)$是复形对，那么$H_{k}(L)\xrightarrow{i_{k*}}H_{k}(K)\xrightarrow{\pi_{k*}}H_{k}(K,L)$是正合列
+  \end{proposition}
+  \begin{proof}
+  设$[x]\in \Ima i_{k*}$,则存在$H_{k}(L)$中的闭链$[c]$满足$i_{k*}([c])=[i_{k}(c)]=[x]$，此时$\pi_{k*}([x])=\pi_{k*}([i_{k}(c)])=[\pi_{k}(i_{k}(c))]=0$,最后一个等号是因为$c$是$C_{k}(L)$中的元素,所以我们得到了$\Ima i_{k*}\subset \Ker \pi_{k*}$.\\
+  另一方面，我们设$[x]\in \Ker\pi_{k*}$,那么$\pi_{k*}([x])=[\pi_{k}(x)]=0$,这表明$\pi_{k}(x)\in B_{k}(K,L)$,即存在$c\in C_{k+1}(K),z\in C_{k}(L)$使得$x=\partial c+z$,因此当我们把$z$看作$K$的链时，我们有$x,z$同调，即$i_{k*}([z])=[i_{k}(z)]=[x]$,此时我们还没有证明$[z]$是$H_{k}(L)$中的元素，这只要证明$z$是$L$中闭链，而这是容易的，因为$\partial z=\partial x-\partial(\partial c)=0$,其中利用了$[x]\in\Ker\pi_{k*}\subset H_{k}(K)$，从而$x$是闭链。于是我们得到了$\Ker \pi_{k*}\subset \Ima i_{k*}$。综上，$\Ker \pi_{k*}=\Ima i_{k*} $从而根据定义，命题中的序列在$H_{k}(K)$处正合。
+  \end{proof}
+  在例子\eqref{example128}中我们曾经提到过，可以从$\Ker i_{k*}$中的元得到$H_{k+1}(K,L)$中的元，现在我们来阐述它的一般情况。设$[x]\in \Ker i_{k*}\subset H_{k}(L)$，因为$0=i_{k*}([x])=[i_{k}(x)]=[x]\in H_{k}(K)$,这表明将$x$看作$K$中的链时，它是边缘链，所以对$c\in C_{k+1}(K)$有$x=\partial c$,我们商掉$H_{k+1}(L)$得到$\tilde{c}\in C_{k+1}(K,L)$,而且$\tilde{\partial}_{k+1}(\tilde{c})=\widetilde{\partial c}=0$,这是由于$\partial c=x\in C_{k}(L)$,即$\tilde{c}$为相对闭链，从而$[\tilde{c}]\in H_{k}(K,L)$\\
+  \begin{remark}
+  我们常把上面这一过程形象的称为上台阶，根据上面的描述，我们在确定$c$时只能精确到相差一个$C_{k+1}(K)$中的边缘链$\gamma_{k+1}$,但是$[\tilde{\gamma_{k+1}}]$不一定等于0，所以上台阶的结果不是由$[x]$唯一确定的。
+  \end{remark}
+  当然，我们也可以将上述过程反过来，定义下台阶。设$[\tilde{z}]\in H_{k+1}(K,L)$,取它的一个代表$\tilde{z}\in C_{k}(K,L)$,其满足$0=\tilde{\partial}_{k+1}\tilde{z}=\tilde{\partial}_{k+1}\circ \pi_{k+1}(z)=\pi_{k}\circ \partial_{k+1}z$,其中我们利用了$\pi_{k}$是链映射。利用\eqref{chap3_pro_106}我们知道$\Ker \pi_{k}=\Ima i_{k}$,于是存在$y\in C_{k}(L)$使得$\partial_{k+1}z=i_{k}(y)$，两边作用$\partial_{k}$并利用$i_{k}$也是链映射可知$0=\partial_{k}\circ\partial_{k+1}z=\partial_{k}\circ i_{k}(y)=i_{k-1}\circ\partial_{k}(y)$,又因为$i_{k-1}$是单的，所以$\partial_{k}(y)=0$,这表明$y$是$C_{k}(L)$中的闭链，从而$[y]\in H_{k}(L)$。顺带一提，$y$看作$K$中的链是边缘链，但看作$L$中的链则不一定，所以$y$是闭链的结论要依赖于$i_{k}$的链映射的性质。我们将$[y]$记作$\Delta_{k+1}([\tilde{z}])$，其原因我们会下面解释
+  
+  与上台阶相比，下台阶有更好的性质，前面我们提到上台阶的结果不是唯一确定的，但是下台阶的结果却与代表元的选择无关。这个过程中我们做了三次选择，最后一次选择$y$时，不对最终结果产生影响。只需要证明前两次选择都会得到$y$的同伦类即可。先看第一次，如果我们选择$\tilde{t}$是$[\tilde{z}]$的另一个代表元，那么$[\tilde{t}-\tilde{z}]=0$,于是$\tilde{t}-\tilde{z}\in \Ker \pi_{k+1*}$,根据\eqref{chap3_pro_180}，我们有$\Ker\pi_{k+1*}=\Ima i_{k+1*}$,即存在$u\in H_{k+1}(L)$满足$i_{k+1*}(u)=\tilde{t}-\tilde{z}$,此时我们再来看第二次选择，即我们选取了$z$为$\tilde{z}$的代表元，如果我们选择$z'$满足$\pi_{k+1}z'=\pi_{k+1}z=\tilde{z}$，那么$z-z'\in \Ker \pi_{k+1}=\Ima i_{k+1}$，即存在$c_{k+1}\in C_{k+1}(L)$使得$z-z'=i_{k+1}(c_{k+1})$，由此可见，无论我们在$\tilde{z}$和$\tilde{t}$中分别选取代表元，然后再选取代表元的代表元，还是在$\tilde{z}$或$\tilde{t}$中选择两个代表元，它们之间的差别都为$C_{k+1}(L)$中的一个链。不妨设最终得到的两个代表元$z,z'$满足$z-z'=i_{k+1}c\in C_{k+1}(K),\partial_{k+1}z=i_{k}(y),\partial_{k+1}z'=i_{k}(y')$，那么$i_{k}(y-y')=\partial_{k+1}z'-\partial_{k+1}z=\partial_{k+1}(i_{k+1}c)=i_{k}(\partial^{L}_{k+1}c)$,根据$i_{k}$是单的，我们有$y-y'=\partial^{L}_{k+1}c$,这表明$y$和$y'$是同调的，即$[y]=[y']\in H_{k}(L)$
+ 
+ 有了这个唯一性以后，我们可以良好定义下列同态
+ \begin{equation*}
+     \begin{aligned}
+      \Delta_{k+1}:H_{k+1}(K,L)&\rightarrow H_{k}(L)\\
+      [\tilde{z}]&\rightarrow [y]
+     \end{aligned}
+ \end{equation*}
+ 这样我们就解释了之前将$[y]$记作$\Delta_{k+1}([\tilde{z}])$的合理性。
+ \begin{definition}
+ 我们称上面定义的同态$\Delta_{k+1}:H_{k+1}(K,L)\rightarrow H_{k}(L)$为复形对$(K,L)$的边缘同态。
+ \end{definition}
+ \begin{proposition}\label{chap3_pro206}
+ 对于复形对$(K,L)$,序列
+ $$\cdots \xrightarrow{\pi_{k+1*}} H_{k+1}(K,L)\xrightarrow{\Delta_{k+1}}H_{k}(L)\xrightarrow{i_{k*}}H_{k}(K)\xrightarrow{\pi_{k*}}H_{k}(K,L)\xrightarrow{\Delta_{k}}\cdots$$是正合的。
+ \end{proposition}
+ \begin{proof}
+ 我们分别证明在$H_{k}(K),H_{k+1}(K,L)$和$H_{k}(L)$处的正合性。
+\begin{enumerate}
+    \item 根据\eqref{chap3_pro_180}，在$H_{k}(K)$处的正合性是清楚的
+    \item 在$H_{k}(L)$处正合，即证明$\Ima \Delta_{k+1}=\Ker i_{k*}$。\\
+    对于$[\tilde{x}^{k+1}]\in H_{k+1}(K,L)$,我们有$\Delta_{k+1}([\tilde{x}^{k+1}])=[y]$,其中$y\in C_{K}(L)$且满足$\partial_{k+1}x^{k+1}=i_{k}y$,这样$i_{k*}([y])=[i_{k}y]=[\partial x^{k+1}]=0\in H_{k}(K)$,这样我们就证明了$\Ima \Delta_{k+1}\subset \Ker i_{k*}$。\\
+    对于另一个方向，我们设$[y^{k}]\in\Ker i_{k*}$,于是$i_{k*}([y^{k}])=[i_{k}y^{k}]=0\in H_{k}(K)$,这说明存在$x^{k+1}\in C_{k+1}(K)$使得$\partial^{k+1}x^{k+1}=i_{k}y^{k}$
+    ,利用商映射我们得到$\pi_{k+1}(x^{k+1})\in C_{k+1}(K,L)$,而且$\tilde{\partial}_{k+1}\circ\pi_{k+1}(x^{k+1})=\pi_{k}\circ\partial_{k+1}(x^{k+1})=\pi_{k}(i_{k}y^{k})=0\in C_{k}(K,L)$其中我们利用了命题\eqref{chap3_peo_19}以及$y^{k}$本质上是$C_{k}(L)$中的元素的事实。这表明$\pi_{k+1}(x^{k+1})\in H_{k+1}(K,L)$,又因为$y^{k}$满足$\partial^{k+1}x^{k+1}=i_{k}y^{k}$，所以根据$\Delta_{k+1}$的定义，我们有$\Delta_{k+1}(\pi_{k+1}x^{k+1})=[y^{k}]$,这就证明了$\Ker i_{k*}\subset \Ima \Delta_{k+1}$。\\
+    综上，我们就证明了在$H_{k}(L)$处的正合性。
+    \item 在$H_{k+1}(K,L)$处的正合性，即$\Ima \pi_{k+1*}=\Ker\Delta_{k+1}$。\\
+    对于$[x^{k+1}]\in H_{k+1}(K)$,我们有$\Delta_{k+1}\circ\pi_{k+1*}([x^{k+1}])=\Delta_{k+1}([\pi_{k+1}(x^{k+1})])$,根据$\Delta_{k+1}$的定义，最右边的结果应该是$[y]$其中$y$满足$i_{k}(y)=\partial x^{k+1}=0$,这是因为$[x^{k+1}]\in H_{k+1}(K)$，所以$x^{k+1}$是$C_{k+1}(K)$中的闭链。于是$\Delta_{k+1}\circ \pi_{k+1*}([x^{k+1}])=0\in H_{k}(L)$,这样我们就证明了$\Ima \pi_{k+1*}\subset\Ker \Delta_{k+1}$。\\
+    对于另一个方向，我们设$[\tilde{x}^{k+1}]\in\Ker \Delta_{k+1}$,于是$\Delta_{k+1}([\tilde{x}^{k+1}])=0$，这表明存在$y^{k}\in C_{k}(L)$满足$i_{k}y^{k}=\partial x^{k+1}$而且$[y^{k}]=0$,这说明$y^{k}$是$C_{k}(L)$中的边缘链，从而存在$y^{k+1}\in C_{k+1}(L)$使得$y^{k}=\partial_{k+1}y^{k+1}$。尽管$x^{k+1}$不一定是闭链，但是从形式上我们有$\pi_{k+1*}([x^{k+1}])=[\pi_{k+1}(x^{k+1})]=[\tilde{x}^{k+1}]$，所以我们应当设法构造一条保持此关系的闭链。我们考虑$x^{k+1}-i_{k+1}(y^{k+1})\in C_{k+1}(K)$,对其作用边缘算符有$\partial_{k+1}^{K}(x^{k+1}-i_{k+1}(y^{k+1}))=\partial_{k+1}^{K}x^{k+1}-\partial_{k+1}^{K}\circ i_{k+1}(y^{k+1})=i_{k}y^{k}-i_{k}\circ\partial^{L}_{k}(y^{k+1})=i_{k}y^{k}-i_{k}y^{k}=0$，因此我们得到了一个闭链，而且注意到$\pi_{k+1*}([i_{k+1}y^{k+1}])=[\pi_{k+1}(i_{k+1}y^{k+1})]=0$,这是因为$y^{k+1}$是$C_{k+1}(L)$中的元素，从而我们有$\pi_{k+1*}([x^{k+1}-i_{k+1}(y^{k+1})])=[\tilde{x}^{k+1}]$，这就证明了$\Ker \Delta_{k+1}\subset\Ima \pi_{k+1*}$
+    ,于是我们得到了在$H_{k}(K,L)$处的正合性。
+\end{enumerate}
+这样，经过相当繁琐的论证，我们证明了命题。
+ \end{proof}
+ \begin{definition}
+ 我们称在上述命题中出现的正合列为复形对$(K,L)$的正合同调序列。
+ \end{definition}
+ 
+  
+
+
+\begin{proposition}
+对于复形对$(K,L)$,序列
+ $$\cdots \xrightarrow{\pi_{k+1*}} H_{k+1}(K,L)\xrightarrow{\Delta_{k+1}}\tilde{H}_{k}(L)\xrightarrow{i_{k*}}\tilde{H}_{k}(K)\xrightarrow{\pi_{k*}}H_{k}(K,L)\xrightarrow{\Delta_{k}}\cdots$$是正合的。
+\end{proposition}
+\begin{remark}
+这相当于是把正合同调序列中出现的同调群用约化同调群代替，而保持相对同调群不变。我们称这个正合列为正合约化同调序列。
+\end{remark}
+\begin{proof}
+因为$\tilde{H}_{k}(K)=H_{k}(K)$对于$k\geq 1$成立，所以我们只需要证明下面这个序列是正合的:
+\begin{equation*}
+    H_{1}(K)\xrightarrow{\pi_{1*}}H_{1}(K,L)\xrightarrow{\Delta_{1}}\tilde{H}_{0}(L)\xrightarrow{i_{0*}}\tilde{H}_{0}(K)\xrightarrow{\pi_{0*}}H_{0}(K,L)\rightarrow 0
+\end{equation*}
+
+下面我们首先证明$\Delta_{0}=0$,这样可以方便我们将整个问题统一处理。
+为了统一记号与避免记号滥用，如不特殊说明，我们在这个证明中暂时将复形$K$的约化同调群中出现的增广同态记作$\partial^{K}_{0}=\epsilon^{K}$，由增广同态的性质我们有$\partial_{0}\circ\partial_{1}=\epsilon^{K}\circ\partial_{1}=0$,将$\mathbb{Z}$记作$C_{-1}(K)$，并记$C_{-1}(K,L)=0$，在这样的记号下我们有下列的交换图。
+{
+\center
+\begin{tikzcd}
+0 \arrow[r] & C_{1}(L) \arrow[r] \arrow[r, "i_{1}"] \arrow[d, "\partial_{1}^{L}"]    & C_{1}(K) \arrow[r, "\pi_{1}"] \arrow[d, "\partial_{1}^{K}"]              & {C_{1}(K,L)} \arrow[r] \arrow[d, "\tilde{\partial}_{1}"] & 0 \\
+0 \arrow[r] & C_{0}(L) \arrow[r, "i_{0}"] \arrow[d, "\partial^{L}_{0}=\epsilon^{L}"] & C_{0}(K) \arrow[r, "\pi_{0}"] \arrow[d, "\partial^{K}_{0}=\epsilon^{K}"] & {C_{0}(K,L)} \arrow[r] \arrow[d, "\tilde{\partial}_{0}"] & 0 \\
+0 \arrow[r] & \mathbb{Z} \arrow[r] \arrow[d, "\partial^{L}_{-1}"]                    & \mathbb{Z} \arrow[r] \arrow[d, "\partial^{K}_{-1}"]                      & 0 \arrow[r] \arrow[d]                                    & 0 \\
+0 \arrow[r] & 0 \arrow[r]                                                            & 0 \arrow[r]                                                              & 0 \arrow[r]                                              & 0
+\end{tikzcd}\\
+}
+首先我们必须说明用约化同调群代替同调群后，相关的映射仍然是良定的，具体而言，我们要说明$\Delta_{1},\;i_{0*},\;\pi_{0*}$是良好定义的。检查上面我们定义$\Delta_{k+1}$的过程，其中用到了$i_{k},\pi_{k}$为链映射的性质和两次边缘同态等于0的性质，我们用$\epsilon$代替原来的$\partial_{0}$后，并不影响这些性质的成立，因此$\Delta_{1}$是良定的。$i_{0*}$是良定的是显然的，不过我们关心的是$i_{0}:\tilde{C}_{0}(L)\rightarrow \tilde{C}_{0}(K)$是否是单射，这也是显然的。由于$\tilde{H}_{0}(K)$是$H_{0}(K)$的一个直和因子，所以$\pi_{0*}$也是良好定义的。不过我们关心的是$\pi_{0*}$是不是满的。当$L$不是空集时，
+可以配凑$L$中的复形使得其为满射，具体而言，设$[x]\in \tilde{H}_{0}(K)$,那么$\partial_{0}x=\epsilon^{K}x=0$,这表明链$x$中各顶点的系数和是0，对于任意$[\tilde{y}]\in H_{0}(K,L)$,考虑它的一个代表元$\tilde{y}$,再考虑一个它的代表元$y$,将它看作$C_{0}(K)$中的元素，当然它的各顶点系数和不一定为0，但是我们可以添加$L$中的顶点$a_{l}$使得$\partial_{0}(y+\gamma a_{l})=0$,其中$\gamma=-\epsilon(y)$,这样$$\pi_{0*}([y+\gamma a_{l}])=[\pi_{0}(y+\gamma a_{l})]=[\pi_{0}y]=[\tilde{y}]$$
+这样我们就证明了$\pi_{0*}$是满射，顺便我们证明了我们所考虑的序列在$H_{0}(K,L)$处是正合的。
+
+根据上面的交换图，我们可以知道命题\eqref{chap3_peo_19}对于$k=0$也是成立的,自然命题$\eqref{chap3_pro_32}$对于$k=0$也是成立的。此外还有嵌入映射满足$i_{-1}\circ \partial_{0}^{L}=\partial^{K}_{0}\circ i_{0}$。交换图的第三行还告诉我们$$0\rightarrow C_{-1}(L)\xrightarrow{i_{-1}}C_{-1}(K)\xrightarrow{\pi_{-1}}C_{-1}(K,L)\rightarrow 0$$是短正合列。
+此时我们检查得到命题\eqref{chap3_pro206}所需要的全部引理和步骤，可以发现其成立只依赖于上面提到的链映射性质和边缘同态的性质，而这都是被增广同态所保持的，因此这一命题成立。
+\end{proof}
+\begin{remark}
+命题\eqref{chap1_pro_1431}告诉我们，0阶约化同调群比同调群要小，这是因为普通的0阶同调群$\partial_{0}$是零映射，所以零维链都是闭链，当我们用增广同态$\epsilon^{K}$代替$\partial_{0}$时，闭链群被缩小了，这一命题可以看作是对上一命题的加强，在做了映射的替换后，上面的证明过程提示我们，关键是映射所满足的性质，而不是映射的具体形式。
+\end{remark}
+\begin{remark}
+一个小疑惑，在该命题中，当$L=\varnothing$时，正合序列的最后一环是$\tilde{H}_{0}(K)\rightarrow H_{0}(K)\rightarrow 0$,如果这是短正合列，说明$\tilde{H}_{0}(K)\rightarrow H_{0}(K)=\tilde{H}_{0}(K)\oplus \mathbb{Z}$存在满射，由于同调群是有限生成的，满射似乎不总是成立，所以$L\neq\varnothing$的要求似乎是必要的。
+\end{remark}
+下面我们利用正合同调序列来讨论一下$a$为复形$K$的一个顶点时，$H_{k}(K),H_{k}(a),H_{k}(K,a)$的关系，首先我们有正合同调序列
+$$\cdots\rightarrow H_{k+1}(K,a)\xrightarrow{\Delta_{k+1}}H_{k}(a)\xrightarrow{i_{k*}}H_{k}(K)\xrightarrow{\pi_{k*}}H_{k}(K,a)$$
+考虑常值映射$c$满足
+\begin{equation*}
+    \begin{aligned}
+    c:K&\rightarrow a\\
+    x^{k}&\rightarrow a
+    \end{aligned}
+\end{equation*}
+显然它适合$c\circ i_{k}=1_{a}$,根据命题\eqref{pro_2_143}和\eqref{pro_2_133}，我们有$1_{a*}=1=c_{*}\circ i_{k*}$，这使我们回忆起分裂引理$\eqref{fenlie}$的形式，那里我们就短正合列进行了讨论，事实上这一讨论不局限于短正合列，对于长正合列我们也有类似的结果
+\begin{proposition}\label{fenlie2}
+对于长正合序列$$\cdots A_{k+1}\xrightarrow{\alpha_{k+1}}B_{k}\xrightarrow{\beta_{k}}C_{k}\xrightarrow{\gamma_{k}}A_{k}\xrightarrow{\alpha_{k}}\cdots$$如果有同态$\delta_{k}:C_{k}\rightarrow B_{k}$使得$\delta_{k}\beta_{k}=1_{B_{k}}$对于任意$k$都成立，那么我们有$$C_{k}=\Ima\beta_{k}\oplus\Ker\delta_{k}\cong B_{k}\oplus A_{k}$$
+\end{proposition}
+\begin{proof}
+根据分离引理的证明，直到我们得到$G_{2}\cong \Ima\alpha_{1}\oplus\Ker\beta_{1}$时，都没有使用任何短正合列的性质，所以在这里我们可以完全类似地得到$C_{k}\cong \Ima\beta_{k}\oplus\Ker\delta_{k}$
+
+由$\delta_{k}\beta_{k}=1$我们可以知道$\beta_{k}$是单射而$\delta_{k}$是满射，所以$B_{k}\cong\Ima\beta_{k}$。由正合性$\Ima\alpha_{k}=\Ker\beta_{k-1}=0$,因此$\Ker\alpha_{k}=A_{k}$,但是由$C_{k}$的直和分解，$\Ker\delta_{k}=C_{k}/\Ima\beta_{k}=C_{k}/\Ker\gamma_{k}=\Ima\gamma_{k}=\Ker\alpha_{k}=A_{k}$,所以我们就证明了$C_{k}=B_{k}\cong A_{k}$
+\end{proof}
+于是立得
+\begin{corollary}\label{cor_289_chap3}
+若$a$是复形$K$的顶点，那么$$H_{k}(K)=H_{k}(a)\oplus H_{k}(K,a)=\left\{\begin{array}{cc}
+     H_{k}(K,a),\quad k>0  \\
+     H_{k}(K,a)\oplus \mathbb{Z},\quad k=0 
+\end{array}\right.$$而且由上一命题的证明过程我们有$H_{k}(K,a)=\Ker c_{*}=\Ker(H_{k}(K)\rightarrow H_{k}(a))=\text{Coker}(H_{k}(a)\rightarrow H_{k}(K))$
+\end{corollary}
+\begin{proof}
+采用命题\eqref{fenlie2}中的记号，注意到$\Ker\delta_{k}=C_{k}/\Ima\beta_{k}\cong\text{Coker}\beta_{k}$即得最后一个陈述
+\end{proof}
+在命题\eqref{chap3_79}中我们曾证明$H_{k}(K,a)=\tilde{H}_{k}(K)$,因此我们有以下结论
+\begin{corollary}
+设$P$为单点空间，那么$\tilde{H}_{k}(K)=\Ker(H_{k}\rightarrow H_{k}(P))=\text{Coker}(H_{k}(P)\rightarrow H_{k}(K))$
+\end{corollary}
+\begin{proof}
+注意到$\left\{a\right\}$和$P$是同胚的即可，这样我们就有$\Ker(H_{k}(K)\rightarrow H_{k}(a))=\Ker(H_{k}(K)\rightarrow H_{k}(P))$及$\text{Coker}(H_{k}(K)\rightarrow H_{k}(a))=\text{Coker}(H_{k}(K)\rightarrow H_{k}(P))$
+\end{proof}
+现在我们可以利用我们目前得到的结果做一些有意思的事情。
+\begin{definition}
+称空间$X$的一个子空间$A$为$X$的收缩，如果存在映射$r:X\rightarrow A$使得$r\circ i=i_{A}:A\rightarrow A$，其中$i:A\rightarrow X$是嵌入映射。此时我们称$r$为收缩映射，如果还有$i\circ r\simeq 1_{X}$，则称$A$为$X$的形变收缩。
+\end{definition}
+由定义结合同调群的同伦不变性我们立刻得到
+\begin{corollary}
+设多面体$|L|$是多面体$|K|$的一个形变收缩，那么有同调群的同构$H_{k}(K)\cong H_{k}(L)$
+\end{corollary}
+\begin{proposition}
+如果多面体$|K|$的一个子多面体$|L|$为$|K|$的收缩，那么对于所有的$k$，$H_{k}(L)$是$H_{k}(K)$的一个直和项。
+\end{proposition}
+\begin{proof}
+由于$r\circ i=1$，利用命题\eqref{fenlie2}和推论\eqref{cor_289_chap3}我们知道$$H_{k}(K)=H_{k}(L)\oplus H_{k}(K,L)$$所以命题成立
+\end{proof}
+\begin{corollary}\label{chap3_319_cor}
+设$E^{n}$为$n$维欧氏空间里的实心球，$S^{n-1}$为它的边界，那么$S^{n-1}$不是$E^{n}$的收缩
+\end{corollary}
+\begin{proof}
+反证法。若不然，则存在$r:E^{n}\rightarrow S^{n-1}$为实心球到球面的收缩，那么我们由上一命题立即得到$H_{k}(S^{n-1})$是$H_{k}(E^{n})$的直和项，取$k=n-1$，由于$H_{n-1}(S^{n-1})=\mathbb{Z}$($S^{n-1}$的单纯剖分是$n-1$维复形，且其自身为边界，所以其$n-1$阶同调群为$\mathbb{Z}$)且$H_{n-1}(E^{n})=0$(由同伦不变性，$E^{n}$与pt有相同的同调群),这显然矛盾，于是我们就证明了命题。
+\end{proof}
+\begin{theorem}[Brouwer不动点定理]
+设$\phi:E^{n}\rightarrow E^{n}$为$n$维实心球到自身的一个映射，那么必有$x\in E^{n}$使得$\phi(x)=x$成立
+\end{theorem}
+\begin{proof}
+反证法。假设对于任意$x\in E^{n}$都有$\phi(x)\neq x$，那么我们可以从$\phi(x)$出发，以构造连接$x$和$\phi(x)$的射线，记射线与$S^{n-1}$的交点为$g(x)$，这样我们构造了$g:E^{n}\rightarrow S^{n-1}$,直观来看$g$是连续的，这一点也不难证明，在此略去。这一构造的$g$满足条件$g\circ i=1:S^{n-1}\rightarrow S^{n-1}$,这表明$g$是收缩映射，与$S^{n-1}$不是$E^{n}$的收缩矛盾。
+\end{proof}
+
+上面的证明依赖于推论\eqref{chap3_319_cor}，事实上这两个命题是等价的，即有下列定理
+\begin{proposition}
+如果每个映射$\phi:E^{n}\rightarrow E^{n}$都有不动点，那么$S^{n-1}$不是$E^{n}$的收缩
+\end{proposition}
+\begin{proof}
+用反证法，如果$S^{n-1}$为$E^{n}$的收缩，那么存在$r:E^{n}\rightarrow S^{n-1}$使得$r\circ i=1$,利用收缩映射我们定义
+\begin{equation*}
+    \begin{aligned}
+    g:E^{n}&\rightarrow E^{n}\\
+    x&\rightarrow-r(x)
+    \end{aligned}
+\end{equation*}
+由于$r$的值域实质上为$S^{n-1}$，所以如果$g$的不动点如果存在则只能在边界，不妨设为$x_{0}$，然而$g(x_{0})=-r(x_{0})=-r\circ i(x_{0})=-x_{0}$在边界不可能发生。
+\end{proof}
+\section{相对同调群的不变性}
+这一节我们所采取的策略跟绝对的情形基本上是平行的，均寻求如何从空间之间的映射过渡到同调群之间的同态。首先是一些定义
+\begin{definition}
+对于两个复形对$(K,K_{0})$,$(L,L_{0})$,映射$\phi:K\rightarrow L$如果满足$\phi\left|_{K_{0}}\right.:K_{0}\rightarrow L_{0}$,那么我们称$\phi$是将$(K,K_{0})$映入$(L,L_{0})$的映射，记作$\phi:(K,K_{0})\rightarrow (L,L_{0})$
+\end{definition}
+同样的，对于空间对$(X,A)$我们也可以类似定义从$(X,A)$映入$(Y,B)$的映射，记作$\phi:(X,A)\rightarrow (Y,B)$
+\begin{definition}
+对于空间对$(X,A)$和$(Y,B)$,称映射$\phi_{0}:(X,A)\rightarrow (Y,B)$和$\phi_{1}:(X,A)\rightarrow (Y,B)$是同伦的，如果存在映射$H:(X\times I,A\times I)\rightarrow (Y,B)$使得$H(x,0)=\phi_{0},\;H(x,1)=\phi_{1}$,此时我们记$\phi_{0}\simeq \phi_{1}$，称$H$为连接$\phi_{0}.\phi_{1}$的相对伦移。
+\end{definition}
+\begin{remark}
+如果两个映射作为空间对$(X,A),(Y,B)$之间的映射是同伦的，那么根据定义，它们作为空间$X,Y$之间的映射或是作为$A,B$之间的映射也是同伦的
+\end{remark}
+\begin{definition}
+称空间对$(X,A),(Y,B)$是同伦等价的，如果存在$\phi:(X,A)\rightarrow (Y,B)$和$\psi:(Y,B)\rightarrow (X,A)$满足$\phi\circ\psi\simeq 1_{(Y,B)}$且$\psi\circ\phi\simeq 1_{(X,A)}$，此时我们也称$\psi$和$\phi$是同伦等价。
+\end{definition}
+\begin{proposition}\label{chap3_pro_361}
+如果复形对之间的映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$作为$K$到$L$的映射具满足星形条件，那么$\phi\left|_{K_{0}}\right.:K_{0}\rightarrow L_{0}$也满足星形条件
+\end{proposition}
+\begin{proof}
+对于$K_{0}$的一个顶点$a_{0}$,首先我们来说明$St_{K_{0}}a_{0}=St_{K}a_{0}\bigcap |K_{0}|$。设$x\in St_{K_{0}}a_{0}$,那么$a_{0}$是$x$在$K_{0}$中的承载单形的顶点，又因为$x$在$K_{0}$中的承载单形与在$K$中的承载单形相同，所以$a_{0}$也是$x$在$K$中的承载单形的顶点，即$x\in St_{K}a_{0}$。当然$x\in K_{0}$，于是我们证明了$St_{K_{0}}a_{0}\subset St_{K}a_{0}\bigcap |K_{0}|$。对于另一个方向，只要注意到$K$中的单形与$K_{0}$相交的非空的结果仍然是单形（复形的定义），那么结论也是明显的。
+
+按假设，$\phi:K\rightarrow L$适合星形条件，即  存在$L$的顶点$b$满足$\phi(St_{K}a)\subset St_{L}b$,又因为$\phi(a_{0})\in L_{0}$，所以它在$L_{0}$中的承载单形$W$($W\subset L_{0}$)也是在$L$中的承载单形，按定义，由于$\phi_{a_{0}}\in St_{L}(b)$，所以$b$是$\phi_{a_{0}}$在$L$中的承载单形的顶点，即$b$是$W$的顶点，又因为$W\subset L_{0}$，我们证明了$b$也是$L_{0}$中的顶点，于是我们可以合法地说$St_{L_{0}}b=St_{L}b\bigcap |L_{0}|$,于是我们有
+$$\phi(St_{K_{0}}a_{0})=\phi(St_{K}a_{0}\bigcap |K_{0}|)\subset \phi_{St_{K}a_{0}}\bigcap \phi(|K_{0}|)\subset St_{L}b\bigcap |L_{0}|=St_{L_{0}}b$$
+即$\phi\left|_{K_{0}}\right.$适合星形条件。
+\end{proof}
+从上面的证明过程中可以知道，对于给定的顶点$a_{0}\in K_{0}$，顶点$b$完全由$a_{0}$决定，而与将$a_{0}$看作$K_{0}$或是$K$中的顶点无关。
+\begin{corollary}\label{chap3_cor_372}
+若复形对之间的映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$使得$\phi:K\rightarrow L$满足星形条件，那么它的单纯逼近$f:K\rightarrow L$在$K_{0}$上的限制$f\left|_{K_{0}}\right.:K_{0}\rightarrow L_{0}$也是$\phi\left|_{K_{0}}\right.:K_{0}\rightarrow L_{0}$的单纯逼近
+\end{corollary}
+\begin{proof}
+我们仍然follow\eqref{pro_2_64}中的证明。根据刚才的讨论知道，对于$K_{0}$中的顶点$a_{0}$所对应的$b$也在$L_{0}$中，所以\eqref{pro_2_64}中的证法可以移植过来。
+\end{proof}
+\begin{definition}
+设$f=\left\{f_{k}\right\}$和$g=\left\{g_{k}\right\}$是两个相对链群$C_{k}(K,K_{0}),C_{k}(L,L_{0})$之间的链映射，如果存在一组同态$D=\left\{D_{k}:C_{k}(K,K_{0})\rightarrow C_{k+1}(L,L_{0})\right\}$，使得$\tilde{\partial}_{k+1}D_{k}+D_{k-1}\tilde{\partial}_{k}=f_{k}-g_{k}$成立，则我们称$f$和$g$是相对链同伦的，记作$f\simeq g$，同时称$D$是连接$f$和$g$的一个相对链伦移，记作$D:f\simeq g$
+\end{definition}
+\begin{proposition}\label{chap3_pro_381}
+如果复形对间的映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$使得$\phi:K\rightarrow L$具有星形性质，那么$\phi$通过单纯逼近$f:K\rightarrow L$导出相对链复形之间的一个链映射$f_{k\#}:C_{k}(K,K_{0})\rightarrow C_{k}(L,L_{0})$
+\end{proposition}
+\begin{proof}
+由于$f$适合$f\left|_{K_{0}}\right.:K_{0}\rightarrow L_{0}$是$K_{0}$上的单纯逼近，所以我们有$f_{k}(C_{k}(K_{0}))\subset C_{k}(L_{0})$，从而映射
+\begin{equation*}
+    \begin{aligned}
+    f_{k\#}:C_{k}(K,K_{0})&\rightarrow C_{k}(L,L_{0})\\
+            \tilde{x}&\rightarrow \widetilde{f(x)}
+    \end{aligned}
+\end{equation*}
+是良好定义的.命题\eqref{chap1_pro_1545}指出$f$诱导了$C_{k}(K),C_{k}(L)$之间的链映射，于是对于任意$\tilde{x}_{k}\in C_{k}(K,K_{0})$,有$\tilde{\partial}_{k}^{(L,L_{0})}\circ f_{k\#}(\tilde{x}_{k})=\tilde{\partial}_{k}^{(L,L_{0})}\left(\overline{f_{k}(x)}\right)=\overline{\partial^{L}_{k}(f_{k}(x))}=\overline{f_{k-1}(\partial^{K}_{k}x)}=f_{k-1\#}\left(\widetilde{\partial_{k}x}\right)=f_{k-1\#}\circ \tilde{\partial}^{(K,K_{0})}_{k}(\tilde{x})$,这样我们就证明了$\tilde{\partial}_{k}^{(L,L_{0})}\circ f_{k\#}=f_{k-1\#}\circ \tilde{\partial}^{(K,K_{0})}_{k}$,即$f_{k\#}$为相对链复形$C_{k}(K,K_{0})$和$C_{k}(L,L_{0})$之间的链映射
+\end{proof}
+\begin{proposition}
+设复形对间的映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$使得$\phi:K\rightarrow L$具有星形性质，那么$\phi$的不同的单纯逼近所诱导的链映射是相对链同伦的，因此在相对同调群间诱导了相同的同态$f_{k*}:H_{k}(K,K_{0})\rightarrow H_{k}(L,L_{0})$
+\end{proposition}
+\begin{proof}
+在命题\eqref{pro_2_80}中，我们已经归纳证明了$\phi$的不同的单纯逼近 $f,g$诱导的链映射$f_{k},g_{k}$是链同伦的，即存在$D_{k}:C_{k}(K)\rightarrow C_{k+1}(L)$满足$\partial_{k+1}^{L}D_{k}+D_{k-1}\partial_{k}^{K}=f_{k}-g_{k}$，事实上，检查在命题\eqref{pro_2_80}中的证明，我们还可以得到$D_{k}(C_{k}(K_{0}))\subset C_{k+1}(L_{0})$,有了这个性质我们可以将$D_{k}$的定义移植到商群上去。定义$\tilde{D}_{k}=\pi_{k+1}\circ D_{k}:C_{k}(K,K_{0})\rightarrow C_{k+1}(L,L_{0})$为$\tilde{D}_{k}(\tilde{x}^{k})=\pi_{k+1}\circ D_{k}(x^{k})=\widetilde{D_{k}(x^{k})}$,其中$\pi_{k+1}:C_{k+1}(L)\rightarrow C_{k+1}(L,L_{0})$是商映射。根据$\tilde{D}_{k}(\tilde{x})-\tilde{D}_{k}(\tilde{y})=\tilde{D}_{k}(\tilde{x}-\tilde{y})=\tilde{D}_{k}(\tilde{x-y})=\widetilde{D(x-y)}=0$可知这是良好定义的。于是我们有
+\begin{equation*}
+    \begin{aligned}
+    \left(\tilde{\partial}^{L}_{k+1}\tilde{D}_{k}+\tilde{D}_{k-1}\tilde{\partial}_{k}^{K}\right)(\tilde{x})&=\tilde{\partial}^{L}_{k+1}\widetilde{D_{k}(x)}+\tilde{D}_{k-1}(\widetilde{\partial_{k}^{K}x})\\
+    &=\overline{\partial^{L}_{k+1}D_{k}(x)}+\overline{D_{k-1}\partial^{K}_{k}(x)}\\
+    &=\overline{\partial^{L}_{k+1}D_{k}(x)+D_{k-1}\partial^{K}_{k}(x)}\\
+    &=\overline{f_{k}(x)-g_{k}(x)}\\
+    &=\widetilde{f_{k}(x)}-\widetilde{g_{k}(x)}\\
+    &=f_{k\#}(\tilde{x})-g_{k\#}(\tilde{x})
+    \end{aligned}
+\end{equation*}
+其中最后一个等号我们用到了$f_{k\#}$的定义。这样我们证明了$\tilde{\partial}^{L}_{k+1}\tilde{D}_{k}+\tilde{D}_{k-1}\tilde{\partial}_{k}^{K}=f_{k\#}-g_{k\#}$，即$\phi$的不同的单纯逼近所诱导的相对链复形之间的链映射是相对链同伦的。利用与命题\eqref{pro1588}相同的证法，我们可以得到相对链同伦的链映射诱导出相同的相对同调群之间的同态。至此我们就完成了这一命题的证明。
+\end{proof}
+对于一般的复形间的映射$\phi$而言,它不一定是满足星形性质的，但是根据我们在绝对的情形下的证明可以知道，经过足够多次的重心重分后，$\phi:(Sd^{n}K,Sd^{n}K_{0})\rightarrow (L,L_{0})$可以使映射$\phi:Sd^{n}K\rightarrow L$具有星形性质，根据命题\eqref{chap3_pro_381},可以知道此时我们可以得到相对同调群之间的唯一同态$f_{k*}:H_{k}(Sd^{n}K,Sd^{n}K_{0})\rightarrow H_{k}(L,L_{0})$
+
+我们在绝对的情况下定义的重心重分和标准同态可以毫无困难的移植到相对的情况。根据重心重分同态的定义，$Sd^{K_{0}}_{k}:C_{k}(K_{0})\rightarrow C_{k}(SdK_{0})$是$Sd^{K}_{k}:C_{k}(K)\rightarrow C_{k}(SdK)$在$C_{k}(K_{0})$上的限制，又因为$Sd^{K}(C_{k}(K_{0}))\subset C_{k}(SdK_{0})$,所以它导出相对链复形之间的映射$Sd_{k}:C_{k}(K,K_{0})\rightarrow C_{k}(SdK,SdK_{0})$,定义为$Sd(\tilde{x})=\widetilde{Sd^{K}(x)}$，利用相对边缘同态的定义以及命题\eqref{chap1_pro_1526}可以知道我们刚才定义的$Sd_{k}$是相对链复形之间的链映射，从而它在相对同调群上导出同态$Sd_{\#}:H_{k}(K,K_{0})\rightarrow H_{k}(SdK,SdK_{0})$,这个同态有很好的性质,对于复形对$(K,K_{0})$和$(Sd_{k},SdK_{0})$的正合同调序列，我们可以用$Sd_{k}^{K},Sd_{k}^{K_{0}}$以及$Sd_{\#}$将它们联系起来，具体而言，有下列结论
+\begin{proposition}\label{chap3_pro_414}
+对于复形对$(K,K_{0})$和$(Sd_{k},SdK_{0})$的正合同调序列，有交换图
+{\center
+\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(K_{0}) \arrow[d, "Sd_{k}^{K_{0}}"] \arrow[r] & H_{k}(K) \arrow[r] \arrow[d, "Sd_{k}^{K}"] & {H_{k}(K,K_{0})} \arrow[r] \arrow[d, "Sd_{\#}"] & H_{k-1}(K_{0}) \arrow[r] \arrow[d, "Sd_{k-1}^{K_{0}}"] & \cdots \\
+\cdots \arrow[r] & H_{k}(SdK_{0}) \arrow[r]                           & H_{k}(SdK) \arrow[r]                       & {H_{k}(SdK,SdK_{0})} \arrow[r]                  & H_{k-1}(SdK_{0}) \arrow[r]                             & \cdots
+\end{tikzcd}\\
+}
+\end{proposition}
+\begin{proof}
+证明分三个部分，分别证明从左到右的三个方块交换
+\begin{enumerate}
+    \item 这个是显然的，将对$K_{0}$中的复形取重心显然与将$K_{0}$看作$K$的子复形与否无关。
+    \item 设$[x]\in H_{k}(K)$，那么$Sd_{\#}\circ \pi_{k*}([x])=Sd_{\#}([\tilde{x}])=[Sd(\tilde{x})]=[\widetilde{Sd^{K}(x)}]$,另一方面，$\pi_{k*}\circ Sd_{k}^{K}([x])=\pi_{k*}\left([Sd_{k}^{K}(x)]\right)=[\widetilde{Sd_{k}^{K}(x)}]$,于是$Sd_{\#}\circ \pi_{k*}=\pi_{k*}\circ Sd_{k}^{K}$
+    \item 设$[\tilde{x}]\in H_{k}(K,K_{0})$,则$Sd_{k-1}^{K_{0}}\circ \Delta_{k}([\tilde{x}])=Sd_{k-1}^{K_{0}}\left([\partial x\left|_{K_{0}}\right.]\right)=Sd_{k-1}^{K}\left([\partial x]\right)\left|_{SdK_{0}}\right.=[Sd_{k-1}^{K}(\partial x)\left|_{SdK_{0}}\right.]=[\partial(Sd_{k}^{K} (x)\left|_{SdK_{0}})\right.]$,另一方面，$\Delta_{k}\circ Sd_{\#}([\tilde{x}])=\Delta_{k}(\widetilde{[Sd^{K}(x)]})=\left[\partial(Sd_{k}^{K}(x)\left|_{SdK_{0}}\right.)\right]$，其中我们用下标来表示将该元素看作下标所示集合中的元素。
+\end{enumerate}
+\end{proof}
+类似的，对于标准同态，$\pi_{k}:C_{k}(SdK)\rightarrow C_{k}(K)$是恒同映射的单纯逼近，所以导出相对链复形之间的链映射$\pi_{k}:C_{k}(SdK,SdK_{0})\rightarrow C_{k}(K,K_{0})$,进而在同调群之间导出$\pi_{k\#}:H_{k}(SdK,SdK_{0})\rightarrow H_{k}(K,K_{0})$,而且我们也有类似的命题
+\begin{proposition}
+对于复形对$(K,K_{0})$和$(Sd_{k},SdK_{0})$的正合同调序列，有交换图
+{
+\center
+\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(SdK_{0}) \arrow[d, "\pi_{k*}^{K_{0}}"] \arrow[r] & H_{k}(SdK) \arrow[r] \arrow[d, "\pi_{k*}^{K}"] & {H_{k}(SdK,SdK_{0})} \arrow[r] \arrow[d, "\pi_{\#}"] & H_{k-1}(SdK_{0}) \arrow[r] \arrow[d, "\pi_{k-1*}^{K_{0}}"] & \cdots \\
+\cdots \arrow[r] & H_{k}(K_{0}) \arrow[r]                                 & H_{k}(K) \arrow[r]                             & {H_{k}(K,K_{0})} \arrow[r]                           & H_{k-1}(K_{0}) \arrow[r]                                   & \cdots
+\end{tikzcd}\\
+}
+\end{proposition}
+\begin{remark}
+与重分同态的情况相比，因为$\pi_{\#}$的方向相反，所以为了视觉上的统一我们交换了上下两行
+\end{remark}
+\begin{proposition}\label{chap3_pro_445}
+设$f_{k}:C_{k}(K,K_{0})\rightarrow C_{k}(L,L_{0})$和$g_{k}:C_{k}(L,L_{0})\rightarrow C_{k}(T,T_{0})$分别是复形对之间的链映射，那么它们在相对同调群上导出的同态满足$g_{\#}\circ f_{\#}=(g\circ f)_{\#}$
+\end{proposition}
+\begin{proof}
+对于$[\tilde{x}]\in H_{k}(L,L_{0})$,$g_{\#}\circ f_{\#}([\tilde{x}])=g_{\#}([f_{k}(\tilde{x})])=[g_{k}(f_{k}(\tilde{x}))]$,而$(g_{k}\circ f_{k})_{\#}([\tilde{x}])=[g_{k}\circ f_{k}(\tilde{x})]=[g_{k}(f_{k}(\tilde{x}))]$
+\end{proof}
+\begin{remark}
+这里似乎符号滥用了，应该是$*$而不是$\#$，有空再改吧
+\end{remark}
+按照定义，我们有
+\begin{proposition}\label{chap3_pro_455}
+恒同映射$1:(K,K_{0})\rightarrow (K,K_{0})$导出相对同调群之间的同构$1_{\#}=1:H_{k}(K,K_{0})\rightarrow H_{k}(K,K_{0})$
+\end{proposition}
+\begin{proposition}
+映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$在$(K,K_{0})$和$(L,L_{0})$之间导出一组同态，使得下图交换
+{
+\center\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(K_{0}) \arrow[d, "\phi_{k*}^{K_{0}}"] \arrow[r] & H_{k}(K) \arrow[r] \arrow[d, "\phi_{k*}^{K}"] & {H_{k}(K,K_{0})} \arrow[r] \arrow[d, "\phi_{k*}"] & H_{k-1}(K_{0}) \arrow[r] \arrow[d, "\phi_{k-1*}^{K_{0}}"] & \cdots \\
+\cdots \arrow[r] & H_{k}(L_{0}) \arrow[r]                                & H_{k}(L) \arrow[r]                            & {H_{k}(L,L_{0})} \arrow[r]                        & H_{k-1}(L_{0}) \arrow[r]                                  & \cdots
+\end{tikzcd}\\
+}
+\end{proposition}
+\begin{proof}
+根据命题\eqref{chap3_pro_445}和命题\eqref{chap3_pro_455},结合绝对的情况时的证明，对于映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$，当$m$足够大时，记$f:(Sd^{m}K,Sd^{m}K_{0})\rightarrow (L,L_{0})$是$\phi$的单纯逼近，我们记$\phi_{k*}=f_{k*}\circ Sd^{m}_{*}:H_{k}(K,K_{0})\rightarrow H_{k}(Sd^{m}K,Sd^{m}K_{0})\rightarrow H_{k}(L,L_{0})$,这样我们就由$\phi:(K,K_{0})\rightarrow (L,L_{0})$诱导出了相对同调群之间的同态。利用$\phi_{k*}=f_{k*}\circ Sd^{m}_{*}$我们有
+{\center
+\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(K_{0}) \arrow[d, "{Sd_{k}^{K_{0},m}}"] \arrow[r] & H_{k}(K) \arrow[r] \arrow[d, "{Sd_{k}^{K,m}}"] & {H_{k}(K,K_{0})} \arrow[r] \arrow[d, "Sd_{\#}^{m}"] & H_{k-1}(K_{0}) \arrow[r] \arrow[d, "{Sd_{k-1}^{K_{0},m}}"] & \cdots \\
+\cdots \arrow[r] & H_{k}(SdK_{0}) \arrow[r] \arrow[d, "f_{k}^{K_{0}}"]    & H_{k}(SdK) \arrow[r] \arrow[d, "f_{k}^{K}"]    & {H_{k}(SdK,SdK_{0})} \arrow[r] \arrow[d, "f_{k*}"]  & H_{k-1}(SdK_{0}) \arrow[r] \arrow[d, "f_{k-1}^{K_{0}}"]    & \cdots \\
+\cdots \arrow[r] & H_{k}(L_{0}) \arrow[r]                                 & H_{k}(L) \arrow[r]                             & {H_{k}(L,L_{0})} \arrow[r]                          & H_{k-1}(L_{0}) \arrow[r]                                   & \cdots
+\end{tikzcd}
+\\}
+根据命题\eqref{chap3_pro_414},第一行和第二行是交换的，第二行和第三行之间所有的竖箭头都是由单纯映射$f:(Sd^{m}K,Sd^{m}K_{0})\rightarrow (L,L_{0})$导出的，在链群层面上可以直接验证各方块都是交换的，根据我们对于在同调群上诱导的各映射的定义，过渡到同调群后这个交换性仍然是保持的。这样我们就得到第一行和第三行也是交换的(利用1，2行和2，3行提供的交换图进行两次交换)。
+\end{proof}
+\begin{remark}
+跟绝对时的情况一样，$\phi_{k*}$由$\phi$决定，而与$m$以及$f$的取法无关。
+\end{remark}
+下面我们来证明相对同调群是同伦不变量，为此需要准备几个引理。
+\begin{proposition}
+在群和群同态构成的下列交换图中
+{\center\begin{tikzcd}
+A_{1} \arrow[r, "\alpha_{1}"] \arrow[d, "\phi_{1}"] & A_{2} \arrow[d, "\phi_{2}"] \arrow[r, "\alpha_{2}"] & A_{3} \arrow[r, "\alpha_{3}"] \arrow[d, "\phi_{3}"] & A_{4} \arrow[r, "\alpha_{4}"] \arrow[d, "\phi_{4}"] & A_{5} \arrow[d, "\phi_{5}"] \\
+B_{1} \arrow[r, "\beta_{1}"]                        & B_{2} \arrow[r, "\beta_{2}"]                        & B_{3} \arrow[r, "\beta_{3}"]                        & B_{4} \arrow[r, "\beta_{4}"]                        & B_{5}                      
+\end{tikzcd}\\}
+如果行正合，那么
+\begin{enumerate}
+    \item 当$\phi_{4}$为单同态，$\phi_{1}$为满同态时，$\Ker \phi_{3}=\alpha_{2}(\Ker \phi_{2})$
+    \item 当$\phi_{2}$为满同态，$\phi_{5}$为单同态时，$\Ima \phi_{3}=\beta_{3}^{-1}(\Ima \phi_{4})$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item 设$x\in\Ker\phi_{2}$,根据交换性，$\phi_{3}(\alpha_{2}(x))=\beta_{2}(\phi_{2}(x))=0$,所以$\alpha_{2}(\Ker\phi_{2})\subset \Ker\phi_{3}$;下面证明反向的包含关系。设$a_{3}\in \Ker\phi_{3}$,那么利用交换图我们有$\phi_{4}(\alpha_{3}(a_{3}))=\beta_{3}(\phi_{3}(a_{3}))=0$,因为$\phi_{4}$是单的，所以有$\alpha_{3}(a_{3})=0$,根据在$A_{3}$处的正合性，可知存在$a_{2}\in A_{2}$使得$a_{3}=\alpha_{2}(a_{2})$,再次利用交换图的性质，$\beta_{2}(\phi_{2}(a{2}))=\phi_{3}(\alpha_{2}(a_{2}))=\phi_{3}(a_{3})=0$,于是根据$B_{2}$处的正合性，知存在$b_{1}\in B_{1}$使得$\phi_{2}(a_{2})=\beta_{1}(b_{1})$,因为$\phi_{1}$是满的，所以存在$a_{1}\in A_{1}$使得$b_{1}=\phi_{1}(a_{1})$，从而$\beta_{1}(b_{1})=\beta_{1}(\phi_{1}(a_{1}))=\phi_{2}(\alpha_{1}(a_{1}))$，最后一个等号利用了交换性，根据我们之前得到的$\phi_{2}(a_{2})=\beta_{1}(b_{1})$，我们得到了$\phi_{2}(a_{2})=\phi_{2}(\alpha_{1}(a_{1}))$,于是$a_{2}-\alpha_{1}(a_{1})\in \Ker\phi_{2}$,但是$\alpha_{2}(a_{2}-\alpha_{1}(a_{1}))=\alpha_{2}(a_{2})=a_{3}$，其中第一个等号利用了$A_{2}$处的正合性。这表明$a_{3}\in \alpha_{2}(\Ker \phi_{2})$,即$\Ker\phi_{3}\subset \alpha_{2}(\Ker \phi_{2})$,这样我们就证明了第一个命题。
+    \item 设$x\in\Ima\phi_{3}$,即存在$y\in A_{3}$使得$\beta_{3}(x)=\beta_{3}(\phi_{3}(y))=\phi_{4}(\alpha_{3}(y))\in \Ima\phi_{4}$，这就证明了$\Ima\phi_{3}\subset \beta_{3}^{-1}(\Ima \phi_{4})$;下面我们证明另一个方向。设$b_{3}\in\beta_{3}^{-1}(\Ima\phi_{4})$,那么存在$a_{4}\in A_{4}$使得$\beta_{3}(b_{3})=\phi_{4}(a_{4})$，于是$\phi_{5}(\alpha_{4}(a_{4}))=\beta_{4}(\phi_{4}(a_{4}))=\beta_{4}(\beta_{3}(b_{3}))=0$,这里我们利用了$B_{4}$处的正合性和交换图的性质。因为$\phi_{5}$是单的，所以$\alpha_{4}(a_{4})=0$,由$A_{4}$处的正合性，可知存在$a_{3}\in A_{3}$使得$a_{4}=\alpha_{3}(a_{3})$,于是根据最开始的式子，$\beta_{3}(b_{3})=\phi_{4}(a_{4})=\phi_{4}(\alpha_{3}(a_{3}))=\beta_{3}(\phi_{3}(a_{3}))$，这里利用了交换图的性质，于是我们有$b_{3}-\phi_{3}(a_{3})\in \Ker\beta_{3}$,但是根据$B_{2}$处的正合性，知道存在$b_{2}\in B_{2}$使得$\beta_{2}(b_{2})=b_{3}-\phi_{3}(a_{3})$,又因为$\phi_{2}$是满的，所以存在$a_{2}\in A_{2}$使得$\phi_{2}(a_{2})=b_{2}$，于是$\beta_{2}(\phi_{2}(a_{2}))=b_{3}-\phi_{3}(a_{3})$,根据交换性，$\beta_{2}(\phi_{2}(a_{2}))=\phi_{3}(\alpha_{2}(a_{2}))$，所以我们得到了$\phi_{3}(\alpha_{2}(a_{2}))=b_{3}-\phi_{3}(a_{3})$,即$b_{3}=\phi_{3}(\alpha_{2}(a_{2}))+\phi_{3}(a_{3})=\phi_{3}(\alpha_{2}(a_{2})+a_{3})\in \Ima\phi_{3}$，这就完全证明了命题
+\end{enumerate}
+\end{proof}
+\begin{remark}
+尽管上面的证明过程看起来很曲折繁复，但是仔细观察会发现，每一步转化几乎都是在所给条件下唯一的选项
+\end{remark}
+\begin{corollary}[5-lemma]
+在群和群同态构成的行正合的交换图中
+{\center\begin{tikzcd}
+A_{1} \arrow[r, "\alpha_{1}"] \arrow[d, "\phi_{1}"] & A_{2} \arrow[d, "\phi_{2}"] \arrow[r, "\alpha_{2}"] & A_{3} \arrow[r, "\alpha_{3}"] \arrow[d, "\phi_{3}"] & A_{4} \arrow[r, "\alpha_{4}"] \arrow[d, "\phi_{4}"] & A_{5} \arrow[d, "\phi_{5}"] \\
+B_{1} \arrow[r, "\beta_{1}"]                        & B_{2} \arrow[r, "\beta_{2}"]                        & B_{3} \arrow[r, "\beta_{3}"]                        & B_{4} \arrow[r, "\beta_{4}"]                        & B_{5}                      
+\end{tikzcd}\\}
+如果$\phi_{1},\phi_{2},\phi_{4},\phi_{5}$为同构，那么$\phi_{3}$也是同构
+\end{corollary}
+\begin{proof}
+根据上一命题以及四个同构条件，我们有$\Ker\phi_{3}=\alpha_{2}(\Ker\phi_{2})$以及$\Ima\phi_{3}=\beta_{3}^{-1}(\Ima\phi_{4})$,又因为$\phi_{2}$和$\phi_{4}$都是同构，所以$\alpha_{2}(\Ker\phi_{2})=0,\;\beta_{3}^{-1}(\Ima\phi_{4})=\beta_{3}^{-1}(B_{4})=B_{3}$,这表明$\phi_{3}$是既单又满的同态，从而是同构。
+\end{proof}
+\begin{theorem}[相对同调群的同伦不变性]
+对于复形对$(K,K_{0})$和$(L,L_{0})$，如果$\phi:(K,K_{0})\rightarrow (L,L_{0})$为同伦等价，那么它们的相对同调群同构，且$\phi_{k*}:H_{k}(K,K_{0})\rightarrow H_{k}(L,L_{0})$就是一个同构。
+\end{theorem}
+\begin{proof}
+我们在定义相对伦移时提到过，空间对之间的同伦等价$\phi:(K,K_{0})\rightarrow (L,L_{0})$限制到$K$或者$K_{0}$上仍然是同伦等价，所以由同调群的同伦不变性(定理\eqref{chap2_theorem_213}),我们知道$\phi_{k*}^{K_{0}}:H_{k}(K_{0})\rightarrow H_{k}(L_{0})$和$\phi_{k*}^{K}:H_{k}(K)\rightarrow H_{k}(L)$都是同构，这样在命题中应用5-lemma可知$\phi_{k*}:H_{k}(K,K_{0})\rightarrow H_{k}(L,L_{0})$为同构。这样我们就证明了相对同调群的同伦不变性
+\end{proof}
+\begin{remark}
+由于同胚是一种特殊的同伦，所以我们实际上也一并证明了相对同调群的拓扑不变性
+\end{remark}
+\section{Mayer-Vietoris序列}
+我们先从一个引理开始本节。
+\begin{lemma}
+在行正合的交换图
+{\center
+\begin{tikzcd}
+\cdots \arrow[r] & A_{n} \arrow[r, "i_{n}"] \arrow[d, "f_{n}"] & B_{n} \arrow[d, "g_{n}"] \arrow[r, "j_{n}"] & C_{n} \arrow[r, "k_{n}"] \arrow[d, "h_{n}"] & A_{n-1} \arrow[r] \arrow[d, "f_{n-1}"] & \cdots \\
+\cdots \arrow[r] & A'_{n} \arrow[r, "i'_{n}"]                  & B'_{n} \arrow[r, "j'_{n}"]                  & C'_{n} \arrow[r, "k'_{n}"]                  & A'_{n-1} \arrow[r]                     & \cdots
+\end{tikzcd}
+\\}
+中，如果同态$h_{n}:C_{n}\rightarrow C'_{n}$对于所有的$n$都为同构，那么下列序列正合：
+{\center
+\begin{tikzcd}
+\cdots \arrow[r] & A_{n} \arrow[r, "{(i_{n},f_{n})}"] & B_{n}\oplus A'_{n} \arrow[r, "g_{n}-i'_{n}"] & B'_{n} \arrow[r, "k_{n}h_{n}^{-1}j'_{n}"] & A_{n-1} \arrow[r] & \cdots
+\end{tikzcd}
+\\}
+\end{lemma}

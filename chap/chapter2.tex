@@ -1,0 +1,216 @@
+\chapter{同调群的不变性}
+本章我们将从两个方面讨论同调群的不变性，即拓扑不变性和同伦不变性。所谓拓扑不变性，指的是如果多面体$X,Y$之间存在同胚映射，则他们的同调群也是同构的。为了得到这一点，我们首先应当在不同的空间的同调群之间建立一定的联系，通过几何空间之间的映射得到同调群这一代数结构之间的同态，在第一章中我们已经做过了这种操作，回忆我们在$\text{Sd}K\rightarrow K$中建立的单纯映射$\pi_{0}$，它的定义其实是对恒同映射$1:\text{Sd}K\rightarrow K$的改造得到的，即我们将$1(A^{*})=A^{*}$改造成了其承载单形的一个顶点，并且我们之前也证明了，尽管这样得到的$\pi_{0}$是不唯一的，但是由于其承载单形是点状的，我们可以证明各$\pi$在同调群之间诱导相同的同态。从另一个角度来看，我们上述所做操作给并非单纯映射的$1:\text{Sd}K\rightarrow K$了一个单纯映射的逼近$\pi_{0}$，使得能够从中诱导出同调群之间的同态，这种技术称之为单纯逼近，在本章中它是我们证明同调群的不变性的基本工具。
+\section{同调群的拓扑不变性}
+\begin{definition}
+设$K,L$为复形，$\phi:|K|\rightarrow |L|$为多面体之间的映射，为方便，今后我们也称这种$\phi$为将复形$K$映入复形$L$的映射，并记为$\phi:K\rightarrow L$。单纯映射$f:K\rightarrow L$为$\phi:K\rightarrow L$的一个单纯逼近，如果对于$|K|$中的每一个点$x$，都有$f(x)$是$\phi(x)$在$L$中的承载单形的点，即$f(x)\in \langle\phi(x)\rangle_{L}$
+\end{definition}
+按照这一定义，根据我们之前提到的，$\pi_{0}:\text{Sd}K\rightarrow K$是$1:\text{Sd}K\rightarrow K$的一个单纯逼近。
+\begin{proposition}\label{chap2_8}
+设$f:K\rightarrow L$是单纯映射，如果对于$|K|$中的每一个点$x$,$f(x)$在$L$中的承载单形是$\langle\phi(x)\rangle$中的面，那么单纯映射$f:K\rightarrow L$是映射$\phi:K\rightarrow L$的单纯逼近。
+\end{proposition}
+\begin{proof}
+根据命题\ref{pro261}，点$y$属于单形的充要条件是$\langle y\rangle$是该单形的面，从而由假设$f(x)$是$\langle \phi(x)\rangle$中的点，从而由单纯逼近的定义可知命题成立
+\end{proof}
+\begin{proposition}\label{prochap2_14}
+若$f:K\rightarrow L$为单纯映射，那么对于$|K|$中的任意一点$x$，都有$f$将$x$的承载单形映成$f(x)$的承载单形。
+\end{proposition}
+\begin{proof}
+因为$f$是单纯映射，所以$f(\langle x\rangle)$是$L$中的单形，我们接下来只要证明它是$f(x)$的承载单形，即$f(x)$在$f(\langle x\rangle)$中各重心坐标都大于0。我们设$A^{k}=(a_{0}\cdots a_{k})$是$x$的承载单形，那么我们有$x=\sum \lambda_{i}a_{i}$，且$\lambda_{i}>0$,我们设$f(A^{k})=B^{s}$，那么由$f$为单纯映射的定义，$\left\{f(a_{i})\right\}\subset \left\{b_{s}\right\}$,我们将映射后像相同的项合并，得到$f(x)=\sum\mu_{l}b_{l}$，因为$\mu$由一项或者多项$\lambda_{i}$合并而来，且$\sum \mu_{l}=\sum\lambda_{i}=1$，所以$\mu_{l}>0$，从而$f(x)$是$B^{l}$的内点，于是$B^{l}$是$f(x)$的承载单形。
+\end{proof}
+\begin{corollary}\label{cor_20_chap2}
+如果对于$|K|$的每一个点$x$，$f$将$\langle x\rangle$映成$\langle \phi(x)\rangle$的面，则单纯映射$f:K\rightarrow L$是映射$\phi:K\rightarrow L$的单纯逼近。
+\end{corollary}
+\begin{proof}
+命题(\ref{prochap2_14})告诉我们$f(\langle x\rangle)$是$f(x)$的承载单形，由假设可知$f(\langle x\rangle)$是$\langle \phi(x)\rangle$的面，即$f(x)$的承载单形是$\langle \phi(x)\rangle$的面，则由命题(\ref{chap2_8})可知命题成立。
+\end{proof}
+上面讨论了映射和它的单纯逼近之间的关系，下面转入单纯逼近的存在性的讨论。首先回忆复形中星形的定义，$St_{K}(a)=\left\{x|x\in K,a\in\langle x\rangle\right\}$,即星形$St_{K}(a)$由$K$中所有其承载单形的顶点集包含$a$的点构成。
+\begin{proposition}\label{chap2pro_27}
+复形$K$中存在单形$A^{k}=(a_{0}\cdots a_{k})$的充要条件是$\bigcap\limits_{i}St_{K}(a_{i})\neq \varnothing$
+\end{proposition}
+\begin{proof}
+必要性。设$A^{k}=(a_{0}\cdots a_{k})$是$K$中单形，显然其重心$A^{k*}$包含在所有的$St_{K}(a_{i})$中，从而$\bigcap\limits_{i}St_{K}(a_{i})\neq \varnothing$。\\
+充分性。我们设$x\in\bigcap\limits_{i}St_{K}(a_{i})$,从而$a_{i}$是$\langle x\rangle$的顶点，于是$(a_{0}\cdots a_{k})$是$\langle x\rangle$的一个面，由于单形的面还是单形，我们就得到了充分性。
+\end{proof}
+\begin{corollary}
+设复形$K,L$的顶点间的一个对应$f$满足条件：对于任意$K$中单形$(a_{0}\cdots a_{k})$，我们有$\bigcap\limits_{i}St_{L}(f(a_{i}))\neq \varnothing$,那么$f$是单纯映射
+\end{corollary}
+\begin{proof}
+由假设我们知道$f$将顶点映到顶点，再由$\bigcap\limits_{i}St_{L}(f(a_{i}))\neq \varnothing$可知$f$将单形映到单形，于是$f$是单纯映射。
+\end{proof}
+\begin{proposition}
+若$f:K\rightarrow L$是单纯映射，那么对于$K$的所有顶点$a$我们都有包含关系$f(St_{K}(a))\subset St_{L}(f(a))$成立。
+\end{proposition}
+\begin{proof}
+我们设$x\in St_{K}(a)$，从而由星形的定义，$a$是$\langle x\rangle$的一个顶点，由于$f$是单纯映射，所以$f(\langle x\rangle)$是单形且包含$f(a)$作为顶点，由命题(\ref{prochap2_14})我们知道$f(\langle x\rangle)$是$f(x)$的承载单形，从而$f(a)\in \langle f(x)\rangle=f(\langle x\rangle)$,即$f(a)$是$f(x)$的承载单形的顶点，这就证明了$f(x)\in St_{L}(f(a))$,即$f(St_{K}(a))\subset St_{L}(f(a))$
+\end{proof}
+\begin{proposition}
+若单纯映射$f:K\rightarrow L$是映射$\phi:K \rightarrow L$的一个单纯逼近，那么对于$K$的每个顶点$a$，下列包含关系成立：$\phi(St_{K}(a))\subset St_{L}(f(a))$
+\end{proposition}
+\begin{proof}
+设$x \in St_{K}(a)$，则由上一命题的论证可知，$f(a)$是$\langle f(x)\rangle$的顶点。由单纯逼近的定义可知，$f(x)\in\langle \phi(x)\rangle$,所以$\langle f(x)\rangle$是$\langle \phi(x)\rangle$的面，于是$f(a)$也是$\langle \phi(x)\rangle$的顶点，即$\phi(x)\in St_{L}(f(a))$
+\end{proof}
+我们引入定义
+\begin{definition}
+设$\phi:K\rightarrow L$是复形间的映射，如果对于复形$K$的每个顶点$a$，都有$L$的顶点$b$使得$\phi(St_{K}(a))\subset St_{L}(b)$成立，则称映射$\phi:K\rightarrow L$具有星形性质
+\end{definition}
+于是我们可以重新将上面两个命题写成
+\begin{proposition}
+\begin{itemize}
+    \item 单纯映射具有星形性质
+    \item 如果一个映射$\phi$可以被单纯逼近，则它具有星形性质。
+\end{itemize}
+\end{proposition}
+下面我们证明反过来的命题
+\begin{proposition}\label{pro_2_64}
+若映射$\phi:K\rightarrow L$具有星形性质，那么$\phi$具有单纯逼近。
+\end{proposition}
+当然仅有星形性质并不能直接告诉我们$\phi$的单纯逼近的信息，所以我们的证明思路是先构造单纯映射$f$，再证明$f$是$\phi$的单纯逼近。
+\begin{proof}
+设$a$是$K$的一个顶点，由于$\phi$具有星形性质，从而存在$L$的顶点$b$使$\phi(St_{K}a)\subset St_{L}b$,我们令$f(a)=b$，这是一个顶点之间的对应，从而我们可以将星形性质改写为$\phi(St_{K}a)\subset St_{L}f(a_{i})$。现在我们任取一个$K$的单形$A^{k}=(a_{0}\cdots a_{k})$，我们取$x=A^{k*}\in St_{K}(a_{i})$对所有$i$成立，于是$\phi(x)\in\phi(St_{K}(a_{i}))\subset St_{L}f(a_{i})$,从而$\bigcap\limits_{i}St_{L}(f(a_{i}))\neq \varnothing$，于是由命题(\ref{chap2pro_27})可以知道$(f(a_{0})\cdots f_{a_{k}})$是单形，这样$f$就是单纯映射。\\
+现在我们取$x\in |K|$,并记其承载单形为$A=(a_{0}\cdots a_{l})$，则$x\in St_{K}(a_{i})$,从而$\phi(x)\in\phi(St_{K}(a_{i}))\subset St_{L}f(a_{i})$,这表明$f(a_{i})$是$\phi(x)$的承载单形的顶点，即$f(\langle x\rangle)$是$\phi(x)$的承载单形的面，根据推论(\ref{cor_20_chap2})命题得证。
+\end{proof}
+上面的证明告诉我们如果单纯映射$f$满足$\phi(St_{K}(a))\subset St_{L}(f(a))$，那么$f$是$\phi$的单纯逼近，这一事实的一个推论如下
+\begin{corollary}\label{cor_2_73}
+设单纯映射$f:K\rightarrow L$,$\;g:L\rightarrow M$分别为映射$\phi:K\rightarrow L$和$\psi:L\rightarrow M$的单纯逼近，那么$g\circ f:K\rightarrow M$就是映射$\psi\circ\phi:K\rightarrow M$的单纯逼近
+\end{corollary}
+\begin{proof}
+当然单纯映射的复合还是单纯映射，此外利用单纯映射的定义，$\psi\circ\phi(St_{K}(a))\subset \psi(St_{L}(f(a)))\subset St_{M}(g\circ f(a))$，这就证明了$g\circ f$就是映射$\psi\circ\phi$的单纯逼近
+\end{proof}
+\begin{corollary}\label{cor_2_79}
+设映射$f_{1},f_{2}:K\rightarrow L$适合同一组星形条件，即$f_{i}(St_{K}(a))\subset St_{L}(b)$对同一组$(a,b)$成立，那么$f_{1},f_{2}$有相同的单纯逼近
+\end{corollary}
+\begin{proof}
+由\eqref{pro_2_64}的证明过程，相同的星形条件会导致相同的$f$的定义，从而$f$即为$f_{1},f_{2}$的公共的单纯逼近
+\end{proof}
+由于我们在定义$f$时顶点的选取有一定的任意性，因此我们得到$\phi$的不同的单纯逼近，然而，幸运的是，这样得到的单纯逼近是链同伦的，所以它们不会影响在同调群上的性质。
+\begin{proposition}\label{pro_2_80}
+设$f_{1},f_{2}$是映射$\phi:K\rightarrow L$的两个单纯逼近，那么它们是链同伦的。
+\end{proposition}
+\begin{proof}
+首先我们构造单纯映射$f_{1},\;f_{2}$的公共承载子$C$。设$A^{k}$是$K$的一个单形，对于其中的内点$x$,我们有$f_{i}(A^{k})=f_{i}(\langle x\rangle)\subset \langle \phi(x)\rangle$（推论(\ref{cor_20_chap2})）,从而$f_{1}(A^{k})$和$f_{2}(A^{k})$都是同一个单形$\langle \phi(x)\rangle$的面，我们定义$C(A^{k})$为以$f_{1}(A^{k})$和$f_{2}(A^{k})$为面的维数最小的单形，并赋予其复形结构。由于$f_{1}(A^{k})$和$f_{2}(A^{k})$都是单形$\langle \phi(x)\rangle$的面，所以$C(A^{k})$是良好定义的，而且它把单形映到$L$中的非空子复形，现在设$B^{l}$是$A^{k}$的面，由于$f_{i}$是单纯映射，所以$f_{i}(B^{l})$是$f_{i}(A^{k})$的面，于是也是$C(A^{k})$的面,于是自然有$C(B^{l})$是$C(A^{k})$的子复形，这样$C$是复形$K,L$之间的承载子，又因为$f_{i}(\sigma^{k})\subset C(A^{k})$，是$C(A^{k})$中的链，从而$C$是$f_{1},\;f_{2}$的公共点状承载子。\\
+由单纯逼近的定义，它们把顶点映到顶点，因此自然是保持增广的，即$\epsilon=\epsilon f_{1}=\epsilon f_{2}$,由承载子的点状性质，它们导出相同的同态，因此根据点状承载子定理我们就证明了命题。
+\end{proof}
+尽管我们证明了具有星形性质的映射具有单纯逼近，但是并非所有的映射都具有这样的性质，例如考虑函数$f:[-1,1]\rightarrow [0,1]$，$f(x)=|x|$，如果我们给$[-1,1]$赋予复形结构$(a_{0}a_{1})$,给它的像赋予复形结构$(b_{0}b_{1}),(b_{1}b_{2})$，由于$a_{0}$的承载单形就是$(a_{0}a_{1})$，其当然没有星形性质，不过我们注意到，如果我们给$[-1,1]$一个更细致的结构，即增加顶点$f^{-1}(b_{1})$，这样$f$就具有星形性质了，从这个例子以及其它类似的例子可以看到，映射不具有星形性质的一个原因是$K$中的单形太大，以至于它的像不能被$L$中的一个单形所包含，自然的想法就是我们是否可以仅仅通过加细$K$的划分，而不改变映射对于点的作用效果，来实现构造单纯映射的目的。事实上答案是肯定的，为此我们需要一个将复形结构进行加细的方法，我们之前考虑的重心重分是个理想的选择。为了说话方便，我们仍然从定义开始。
+\begin{definition}
+我们称复形$K$的网眼为其所包含的所有单形的直径的最大值，即$max\left\{diam(A)|A\in K\right\}$
+\end{definition}
+\begin{definition}
+对于复形$K$,我们记$Sd^{(0)}K=K$，$Sd^{(m)}K=Sd(Sd^{(m-1)}K)$,$m\geq 1$。此外我们记$Sd^{(0)}_{*}=Sd_{*}:H_{k}(K)\rightarrow H_{k}(SdK)$为重分同态，并记$Sd^{(m)}_{*}:H_{k}(Sd^{(m)}K)\rightarrow H_{k}(Sd^{(m+1)}K)$为$H_{k}(Sd^{(m)}K)$到$H_{k}(Sd^{(m+1)}K)$的重分同态
+\end{definition}
+\begin{proposition}
+如果$K$为$n$维复形，且其网眼不超过$\eta$，那么我们有$Sd^{(m)}K$的网眼不超过$\left(\frac{n}{n+1}\right)^{m}\eta$
+\end{proposition}
+\begin{proof}
+根据命题\eqref{pro_1_1282}立得
+\end{proof}
+这一命题表明，在经过足够多次重心重分后，我们可以将复形$K$中的每个单形划分得足够小，正是这个良好的性质，保证了单纯逼近的存在性。
+\begin{proposition}[单纯映射存在性定理]
+设$K,L$为复形，$\phi:K\rightarrow L$是映射，那么存在正整数$m\geq 0$，使得映射$\phi:Sd^{(m)}K\rightarrow L$具有星形性质，从而其存在单纯映射。
+\end{proposition}
+\begin{proof}
+这里证明的手法与\eqref{pro774}基本相同。根据第一章的推论\eqref{cor_1_788},$\left\{St(b)|b\text{ is the vertex of } L\right\}$构成一个多面体$|L|$的开覆盖，从而$\phi^{-1}(St(b))$是紧集$|K|$的一个开覆盖，由紧致性，其Lebesgue数$\epsilon>0$,于是利用上一命题，我们知道存在整数$m\geq0$使得$Sd^{m}K$中单形的直径都小于$\frac{\epsilon}{2}$，对于$Sd^{(m)}K$中的星形$St(a_{m,i})$，其中任意两点$x,y$的承载单形存在一个公共点$a_{m,i}$,从而他们之间的的距离满足$\rho(x,y)\leq \rho(x,a_{m,i})+\rho(a_{m,i},y)< \frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$,从而他们必然落在某个$\phi^{-1}(St_{L}(b_{l}))$中，即$\phi(St(a_{m,i}))\subset St_{L}(b_{l})$，从而$\phi:St^{(m)}\rightarrow L$具有星形性质，于是存在单纯映射。
+\end{proof}
+\begin{remark}
+作为多面体之间的映射，$\phi:St^{(m)}K\rightarrow L$和$\phi:K\rightarrow L$是完全相同的，但是由于我们给了不同的剖分，从而导致一个具有星形性质而另一个并不具备。
+\end{remark}
+\begin{remark}
+从证明过程可以看出，如果对于某个$m_{0}$，$\phi:St^{(m_{0})}K\rightarrow L$具有星形性质，那么对于任意$m\geq m_{0}$，我们都有$\phi:St^{(m)}K\rightarrow L$具有星形性质
+\end{remark}
+\begin{proposition}
+对于映射$\phi:K\rightarrow L$,若存在$m,n\geq 0$，使得$\phi:Sd^{(m)}K\rightarrow L$和$\phi:Sd^{(n)}K\rightarrow L$都具有星形性质，且$f:Sd^{(m)}K\rightarrow L$和$g:Sd^{(n)}K\rightarrow L$分别为它们的单纯逼近，那么我们有下面的图交换
+{\center
+\begin{tikzcd}
+H_{k}(K) \arrow[rr, "Sd_{*}^{(0,m)}"] \arrow[dd, "Sd_{*}^{(0,n)}"] &  & H_{k}(Sd^{(m)}K) \arrow[dd, "f_{k*}"] \\
+                                                               &  &                                       \\
+H_{k}(Sd^{(n)}K) \arrow[rr, "g_{k*}"]                          &  & H_{k}(L)                             
+\end{tikzcd}\\}
+其中我们定义$Sd_{*}^{(0,m)}=Sd_{*}^{0}\circ\cdots\circ Sd_{*}^{m-1}:H_{k}(K)\rightarrow H_{k}(Sd^{(m)}K)$为$m$个重分同态的复合
+\end{proposition}
+\begin{proof}
+$m=n$时，由于单纯逼近是链同伦的，从而命题是显然的。我们不妨假设$n\geq m+1$，并记$Sd^{(m,n)}:Sd^{(m)}K\rightarrow Sd^{(n)}K$表示$n-m$个重分链映射的复合，于是我们有$Sd^{(m,n)}K\circ Sd^{(m)}K=Sd^{(n)}K$,从而他们诱导的重分同态满足$Sd_{*}^{(m,n)}K\circ Sd_{*}^{(m)}K=Sd_{*}^{(n)}K:H_{k}(K)\rightarrow H_{k}(Sd^{(n)}K)$。\\
+完全类似的，我们可以对标准同态定义类似的记号，用$\pi^{(n,m)}_{*}$表示从$H_{k}(Sd^{(n)}K)$到$H_{k}(Sd^{(m)}K)$的$(n-m)$个标准同态的复合,由于标准同态是重分同态的逆，所以$\pi^{(n,m)}_{*}=Sd_{*}^{(m,n)^{-1}}$。因为$\pi:SdK\rightarrow K$是恒同映射的单纯逼近，利用推论\eqref{cor_2_73}，$\pi^{(n,m)}:Sd^{(n)}K\rightarrow Sd^{(m)}K$也是恒同映射$1:Sd^{(n)}K\rightarrow Sd^{(m)}K$的单纯逼近，又因为$f:Sd^{(m)}K\rightarrow L$是$\phi:Sd^{(m)}K\rightarrow L$的单纯逼近，所以$f\circ \pi^{(n,m)}:Sd^{(n)}K\rightarrow L$是$\phi=\phi\circ 1:Sd^{(n)}K\rightarrow L$的单纯逼近，由命题\eqref{pro_2_80}可知它们诱导了相同的同调群之间的同态，且有$g_{*}=(f\circ \pi^{(n,m)})_{*}=f_{*}\circ \pi^{(n,m)}_{*}$，于是我们有
+$g_{*}\circ Sd^{(n)}_{*}=f\circ \pi^{(n,m)}\circ Sd^{(n)}_{*}=f\circ \pi^{(n,m)}\circ Sd^{(m,n)}_{*}\circ Sd^{(m)}_{*}=f_{*}\circ Sd^{(m)}_{*}$
+\end{proof}
+单纯映射存在定理保证了任意映射其单纯逼近的存在性，而刚刚证明的命题则保证了由反复重心重分构造的单纯逼近在同调群上诱导的同态的唯一性，因此我们可以写出以下定义
+\begin{definition}\label{def_129}
+对于映射$\phi:K\rightarrow L$，设$m\geq 0$，使得$\phi:Sd^{(m)}K\rightarrow L$有单纯逼近$f:Sd^{(m)}K\rightarrow L$，那么同态$f_{*}\circ Sd_{*}^{(m)}：H_{k}(K)\rightarrow H_{k}(L)$是与$m,\;f$均无关的，我们称它为$\phi$所诱导的同调群之间的同态，记作$\phi_{k*}$
+\end{definition}
+根据上述定义我们发现，如果两个映射$\phi,\psi:K\rightarrow L$有相同的单纯逼近$f:Sd^{(m)}K\rightarrow L$,那么他们诱导相同的同态(因为$Sd_{*}^{(m)}$部分是公共的，只要单纯映射相同，他们的复合就是相同的)，即$\phi_{*}=\psi_{*}$,为方便我们把这一观察写成一个命题
+\begin{proposition}\label{pro_2_133}
+如果$f:Sd^{(m)}K\rightarrow L$是$\phi,\psi:K\rightarrow L$的单纯逼近,那么$\phi_{*}=\psi_{*}$
+\end{proposition}
+我们考虑$1:K\rightarrow K$，它本身就是单纯映射，而且在第一章中我们证明了它诱导了同调群之间的同构$1=1_{*}:H_{k}(K)\rightarrow H_{k}(K)$,从而我们有
+\begin{proposition}\label{pro_2_143}
+    恒同映射诱导出同调群间的同构
+\end{proposition}
+\begin{proposition}\label{pro_2_146}
+    设$\phi:K\rightarrow L,\;\psi:L\rightarrow M$都是复形间映射，那么$(\psi\circ \phi)_{*}=\psi_{*}\circ \phi_{*}:H_{k}(K)\rightarrow H_{k}(M)$
+\end{proposition}
+\begin{proof}
+在第一章中我们对于单纯映射已经证明了相同的结论，因此考虑这两个映射的单纯逼近是自然的。首先我们选取足够大的$n$使得$\psi:Sd^{(n)}L\rightarrow M$具有单纯逼近$g$，根据映射诱导的同调群之间的同态的定义可知，此时我们有$\psi_{*}=g_{*}\circ Sd^{(n)}_{*}:H_{k}(L)\rightarrow H_{k}(M)$。对于$\phi:K\rightarrow Sd^{(n)}K$，我们同样可以选取$m$使得$\phi$有单纯逼近$f:Sd^{(m)}K\rightarrow Sd^{(n)}L$。记$\pi^{(n)}:Sd^{(n)}L\rightarrow L$为$n$个标准映射的复合，那么$\pi^{(n)}\circ f:Sd^{(m)}K\rightarrow L$是$1\circ \phi=\phi$的单纯逼近，利用定义\eqref{def_129}我们有$\phi_{*}=(\pi^{(n)}\circ f)_{*}\circ Sd_{*}^{(m)}=\pi^{(n)}_{*}\circ f_{*}\circ Sd_{*}^{(m)}$，其中最后一个等号利用了推论\eqref{lemma1558},于是$\psi_{*}\circ \phi_{*}=g_{*}\circ Sd^{(n)}_{*}\circ\pi^{(n)}_{*}\circ f_{*}\circ Sd_{*}^{(m)}=g_{*}\circ f_{*}\circ Sd_{*}^{(m)}$。另一方面，我们注意到$f:Sd^{(m)}K\rightarrow Sd^{(n)}L$是$\phi:Sd^{(m)}K\rightarrow Sd^{(n)}L$的单纯逼近，$g:Sd^{(n)}L\rightarrow M$是$\psi:Sd^{(n)}L\rightarrow M$的单纯逼近，于是$g\circ f$是$\psi\circ \phi:Sd^{(m)}K\rightarrow M$的单纯逼近，于是按定义$(\psi\circ\phi)_{*}=(g\circ f)_{*}\circ Sd_{*}^{(m)}=g_{*}\circ f_{*}\circ Sd_{*}^{(m)}$,这样我们就得到了$(\psi\circ\phi)_{*}=\psi_{*}\circ\phi_{*}$
+\end{proof}
+终于我们能够证明同调群的拓扑不变性
+\begin{theorem}[同调群的拓扑不变性]
+设$\phi:K\rightarrow L$为同胚映射，则$\phi_{*}:H_{k}(K)\rightarrow H_{k}(L)$是同构
+\end{theorem}
+\begin{proof}
+我们设$\psi$是$\phi$的逆，即有$\phi\circ\psi=1,\;\psi\circ\phi=1$，于是我们有$\phi_{*}\circ\psi_{*}=1_{*}=1,\;\psi_{*}\circ\phi_{*}=1_{*}=1$，于是$\phi_{*}$为同构。
+\end{proof}
+\section{同调群的同伦不变性}
+检查在上一节中我们对于同调群拓扑不变性的证明，我们发现，在命题\eqref{pro_2_133}和\eqref{pro_2_146}被证明后，我们还利用了$\phi\circ \psi=1$来得到$(\phi\circ \psi)_{*}=1_{*}$，但是这一条件还可以进一步放松，例如命题\eqref{pro_2_133}就告诉我们，如果两个映射有相同的单纯逼近，那么它们同样诱导出相同的同态。那么什么样的映射会有相同的单纯逼近呢？推论\eqref{cor_2_79}告诉我们一个充分条件就是两个映射满足相同的星形条件，即$\phi_{i}(St_{K}a)\subset St_{L}b$，可以想象，倘若我们对一个$\phi$做微小的扰动得到$\phi'$，那么映射$\phi'$理应满足相同的星形条件,从而$\phi,\phi'$将诱导出相同的同态。下面我们就将这种感觉严格化。
+\begin{definition}
+设$X,Y$为空间，映射$\phi_{0}:X\rightarrow Y$和$\phi_{1}:X\rightarrow Y$称为是同伦的，如果存在一组关于$t(0\leq t\leq 1)$也连续的映射$\phi_{t}:X\rightarrow Y$,或者等价的，存在连续映射$H:X\times I\rightarrow Y$使得$H(x,0)=\phi_{0}(x),H(x,1)=\phi_{1}(x)$,此时我们称$H$是连接$\phi_{0}$和$\phi_{1}$的伦移，此时$H(x,t)=\phi_{t}(x)$,记为$H:\phi_{0}\simeq \phi_{1}$,当我们不关心$H$时，也可以记为$\phi_{0}\simeq \phi_{1}$
+\end{definition}
+\begin{remark}
+两个映射是同伦的，相当于是说一个映射可以连续地变成另一个映射。
+\end{remark}
+\begin{proposition}
+我们记$Hom(X,Y)$是从$X$到$Y$的所有连续映射的集合，那么同伦是$Hom(X,Y)$上的一个等价关系，也就是说下面三条性质成立
+\begin{itemize}
+    \item $\phi\simeq \phi$
+    \item 若$\phi\simeq \psi$，则$\psi\simeq \phi$
+    \item 若$\phi\simeq \psi,\psi\simeq \chi$,则若$\phi\simeq \chi$
+\end{itemize}
+\end{proposition}
+\begin{proof}
+先略着，有空写
+\end{proof}
+\begin{definition}
+在同伦关系下，集合$Hom(X,Y)$被划分成的等价类被称为一个同伦类，所有同伦类构成的全体记作$[X,Y]$
+\end{definition}
+\begin{proposition}
+    映射$\phi:K\rightarrow L$跟它的单纯逼近$f:K\rightarrow L$是同伦的。
+\end{proposition}
+\begin{proof}
+由单纯映射的定义，$f(x)\in\langle\phi(x)\rangle$，从而$f(x),\;\phi(x)$处在同一个单形之中，从而可以用该单形中的线段$tf(x)+(1-t)\phi(x)$连接，我们令$H(x,t)=tf(x)+(1-t)\phi(x)$，这显然是连续的，这样我们就得到了想要的同伦。
+\end{proof}
+
+\begin{proposition}
+若复形$K,L$间的映射$\phi_{0},\phi_{1}$是由$H$连接的同伦，那么存在正整数$M$和整数$r\geq0$，使得对于$k=1,2\cdots,M$,存在映射$\phi_{\frac{k-1}{M}}$和$\phi_{\frac{k}{M}}$满足相同的星形条件，从而有公共的单纯逼近$f^{(k)}:Sd^{(r)}\rightarrow L$
+\end{proposition}
+\begin{proof}
+我们取$L$中的所有星形构成的开覆盖$\left\{St_{L}(b_{i})\right\}$，并考虑它们在$H$下的原象$\left\{H^{-1}(St_{L}(b_{i}))\right\}$，由$H$的连续性，我们知道这构成了$|K|\times I$的一个开覆盖，又因为$|K|\times I$是紧致的，它的Lebesgue数$\delta>0$,我们取$r$足够大使得$Sd^{(r)}K$中单形的最大直径小于$\frac{\delta}{3}$,同时选取$M$足够大使得$\frac{1}{M}<\frac{\delta}{3}$，那么$St_{K}(a_{i})\times\left[\frac{k-1}{M},\frac{k}{M}\right]$中两点的最大距离$d<\sqrt{\left(\frac{1}{M}\right)^{2}+\left(\text{diam}St_{K}a_{i}\right)^{2}}<\sqrt{\left(\frac{\delta}{3}\right)^{2}+\left(\frac{2\delta}{3}\right)^{2}}<\delta$,这样$St_{K}(a_{i})\times\left[\frac{k-1}{M},\frac{k}{M}\right]$的像都在某个星形$St_{L}(b_{i})$中，这对任意的$i$都成立（因为我们选取了足够小的重心重分，使得每一个星形$\times$线段都小于lebesgue数，这意味着它的像必然在某个$L$的星形之中）。特别地，$\phi_{\frac{k-1}{M}}(x)=H(x,\frac{k-1}{M})$和$\phi_{\frac{k}{M}}(x)=H(x,\frac{k}{M})$有相同的星形条件，根据推论\eqref{cor_2_79}，它们有公共的单纯逼近，这个逼近显然与$k$有关，故记为$f^{(k)}$以强调这一点。
+\end{proof}
+\begin{corollary}\label{cor_2_175}
+若复形$K,L$间的映射$\phi_{0},\phi_{1}$是由$H$连接的同伦,那么它们在同调群上诱导相同的同态，即$\phi_{0*}=\phi_{1*}:H_{k}(K)\rightarrow H_{k}(L)$
+\end{corollary}
+\begin{proof}
+利用上述命题和命题\eqref{pro_2_133}即得
+\end{proof}
+注意到我们在上一节中证明的命题\eqref{pro_2_143}和\eqref{pro_2_146}在相当广泛的情况下都是成立的，再利用我们刚证明的推论\eqref{cor_2_175}，我们可以将上一节命题中的等号放松为同伦，即如果有一组映射$\phi,\psi$，满足$\phi\circ\psi\simeq1,\psi\circ\phi\simeq1$，那么我们有$(\phi\circ\psi)_{*}=1_{*},\;(\psi\circ\phi)_{*}=1_{*}$，即$\phi_{*}\circ\psi_{*}=1,\;\psi_{*}\circ\phi_{*}=1$，其中$1$是同调群之间的同构。
+\begin{definition}\label{chap2_def_201}
+我们称空间$X$和$Y$具有相同的同伦型，或者同伦等价，记作$X\simeq Y$,如果存在映射$\phi:X\rightarrow Y$和$\psi:Y\rightarrow X$，满足$\psi\circ\phi\simeq 1_{X},\;\phi\circ\psi\simeq 1_{Y}$。此时我们称$\phi,\psi$互为同伦逆，也称它们为同伦等价映射。
+\end{definition}
+从定义我们可以直接看出，同胚的空间必然是同伦的，但反过来并不成立，例如$n$维$(n\geq 1)$实心球与单点空间pt是同伦的，记$f:E^{n}\rightarrow pt$为$f(x)=pt$,$g:pt\rightarrow E^{n}$为$g(pt)=O$,其中$O$为$E^{n}$的球心。则$f\circ g=1_{pt},g\circ f=O$，一个从$1_{E^{n}}$到$g\circ f$的可能伦移是$H(x,t)=tx$，显然这是连续的而且$H(x,0)=O=g\circ f,\;H(x,1)=x=1_{E^{n}}$。但是它们并不同胚
+\begin{proposition}
+空间之间的同伦等价是一个等价关系
+\end{proposition}
+\begin{proof}
+先略着，lengthy
+\end{proof}
+
+利用定义\eqref{chap2_def_201}，我们可以将刚才的发现总结为下列命题
+\begin{theorem}[同调群的同伦不变性]\label{chap2_theorem_213}
+如果多面体$|K|$和$|L|$同伦等价，那么它们的同调群同构，并且当$\phi$为同伦等价映射时，它导出同调群之间的同构$\phi_{*}:H_{k}(K)\rightarrow H_{k}(L)$
+\end{theorem}
+这样我们就证明了同调群是一个同伦不变量，从较为实际的角度考虑，这会为我们计算同调群带来方便，例如柱面和M\"obius带有相同的同调群，实心圆盘、锥形和单点空间有相同的同调群等；但是从另一方面，这也是一个坏消息。几何的一个重要课题就是分类不同胚的空间，然而由于同调群只能分辨出不同伦的空间，所以这个筛子还不够精细，无法完全实现我们的目的。

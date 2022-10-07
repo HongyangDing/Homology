@@ -1,0 +1,82 @@
+\documentclass[lang=cn,10pt,device=pad]{elegantbook}
+
+\title{Homology}
+%\subtitle{Elegant\LaTeX{} 经典之作}
+
+\author{Joe.Di}
+%\institute{Elegant\LaTeX{} Program}
+\date{\today}
+\version{0.1}
+%\bioinfo{自定义}{信息}
+
+\extrainfo{叶え！私たちの夢！}
+
+\setcounter{tocdepth}{3}
+
+%\logo{logo-blue.png}
+\cover{figure2.png}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+%%%%%
+\usetikzlibrary{fpu}
+\usetikzlibrary{math}
+\usetikzlibrary{cd}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings}
+ \tikzset{
+  % style to apply some styles to each segment of a path
+  on each segment/.style={
+    decorate,
+    decoration={
+      show path construction,
+      moveto code={},
+      lineto code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+      curveto code={
+        \path [#1] (\tikzinputsegmentfirst)
+        .. controls
+        (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+        ..
+        (\tikzinputsegmentlast);
+      },
+      closepath code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+    },
+  },
+  % style to add an arrow in the middle of a path
+  mid arrow/.style={postaction={decorate,decoration={
+        markings,
+        mark=at position .5 with {\arrow[#1]{stealth}}
+      }}},
+}
+\usetikzlibrary{arrows}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+%%%%%
+\newcommand{\Ker}{
+{\rm Ker}
+}
+\newcommand{\Ima}{
+{\rm Im}
+}
+% 修改标题页的橙色带
+ \definecolor{customcolor}{RGB}{192,192,192}
+ \colorlet{coverlinecolor}{customcolor}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+%\Large
+\include{chap/chapter1}
+\include{chap/chapter2}
+\include{chap/chapter3}
+\end{document}
