@@ -526,14 +526,27 @@ B_{1} \arrow[r, "\beta_{1}"]                        & B_{2} \arrow[r, "\beta_{2}
 在行正合的交换图
 {\center
 \begin{tikzcd}
-\cdots \arrow[r] & A_{n} \arrow[r, "i_{n}"] \arrow[d, "f_{n}"] & B_{n} \arrow[d, "g_{n}"] \arrow[r, "j_{n}"] & C_{n} \arrow[r, "k_{n}"] \arrow[d, "h_{n}"] & A_{n-1} \arrow[r] \arrow[d, "f_{n-1}"] & \cdots \\
-\cdots \arrow[r] & A'_{n} \arrow[r, "i'_{n}"]                  & B'_{n} \arrow[r, "j'_{n}"]                  & C'_{n} \arrow[r, "k'_{n}"]                  & A'_{n-1} \arrow[r]                     & \cdots
+\cdots \arrow[r, "i_{n+1}"]  & B_{n+1} \arrow[d, "g_{n+1}"] \arrow[r, "j_{n+1}"] & C_{n+1} \arrow[r, "k_{n+1}"] \arrow[d, "h_{n+1}"] & A_{n} \arrow[r, "i_{n}"] \arrow[d, "f_{n}"] & B_{n} \arrow[r, "j_{n}"] \arrow[d, "g_{n}"] & C_{n} \arrow[r, "k_{n}"] \arrow[d, "h_{n}"] & \cdots \\
+\cdots \arrow[r, "i'_{n+1}"] & B'_{n+1} \arrow[r, "j'_{n+1}"]                    & C'_{n+1} \arrow[r, "k'_{n+1}"]                    & A'_{n} \arrow[r, "i'_{n}"]                  & B'_{n} \arrow[r, "j'_{n}"]                  & C'_{n} \arrow[r, "k'_{n}"]                  & \cdots
 \end{tikzcd}
 \\}
 中，如果同态$h_{n}:C_{n}\rightarrow C'_{n}$对于所有的$n$都为同构，那么下列序列正合：
 {\center
 \begin{tikzcd}
-\cdots \arrow[r] & A_{n} \arrow[r, "{(i_{n},f_{n})}"] & B_{n}\oplus A'_{n} \arrow[r, "g_{n}-i'_{n}"] & B'_{n} \arrow[r, "k_{n}h_{n}^{-1}j'_{n}"] & A_{n-1} \arrow[r] & \cdots
+\cdots \arrow[r] & B'_{n+1} \arrow[rr, "k_{n+1}h_{n+1}^{-1}j'_{n+1}"] &  & A_{n} \arrow[r, "{(i_{n},f_{n})}"] & B_{n}\oplus A'_{n} \arrow[r, "g_{n}-i'_{n}"] & B'_{n} \arrow[r, "k_{n}h_{n}^{-1}j'_{n}"] & A_{n-1} \arrow[r] & \cdots
 \end{tikzcd}
 \\}
+其中$(i_{n},f_{n})(a_{n})=i_{n}(a_{n})\oplus f_{n}(a_{n}),\;(g_{n}-i'_{n})(b_{n}\oplus a'_{n})=g_{n}(b_{n})-i'_{n}(a'_{n})$
 \end{lemma}
+\begin{proof}
+按照之前类似命题的证明逻辑，我们依次验证上述序列在$A_{n},\;B_{n}\oplus A'_{n},\;B'_{n}$处是正合的。
+\begin{enumerate}
+    \item 在$A_{n}$处，也就是要证明$\Ima(k_{n+1}h_{n+1}^{-1}j'_{n+1})=\Ker((i_{n},f_{n}))$。首先证明$\Ima(k_{n+1}h_{n+1}^{-1}j'_{n+1})\subset\Ker((i_{n},f_{n}))$。设$a_{n}\in \Ima(k_{n+1}h_{n+1}^{-1}j'_{n+1})$,那么存在$b'_{n+1}\in  B'_{n+1}$满足$a_{n}=k_{n+1}h_{n+1}^{-1}j'_{n+1}(b'_{n+1})$,那么$i_{n}(a_{n})=i_{n}k_{n+1}h_{n+1}^{-1}j'_{n+1}(b'_{n+1})=0$,其中利用了$A_{n}$处的正合性；$f_{n}(a_{n})=f_{n}k_{n+1}h_{n+1}^{-1}j'_{n+1}(b'_{n+1})=k'_{n+1}h_{n+1}h_{n+1}^{-1}j'_{n+1}(b'_{n+1})=k'_{n+1}j'_{n+1}(b'_{n+1})=0$, 其中利用了$C'_{n+1}$处的正合性,这样我们有$(i_{n},f_{n})(a_{n})=0$。\\
+    对于另一方向，设$a_{n}\in \Ker((i_{n},f_{n}))$,也就是说明$i_{n}(a_{n})=0_{B_{n}},\;f_{n}(a_{n})=0_{A'_{n}}$,也就是说明$a_{n}\in\Ker i_{n}=\Ima k_{n+1}$,即存在$c_{n+1}\in C_{n+1}$满足$a_{n}=k_{n+1}(c_{n+1})$,从而$f_{n}(a_{n})=f_{n}k_{n+1}(c_{n+1})=k'_{n+1}h_{n+1}(c_{n+1})=0$,这表明$h_{n+1}(c_{n+1})\in\Ker k'_{n+1}=\Ima j'_{n+1}$,于是存在$b'_{n+1}\in B'_{n+1}$满足$h_{n+1}(c_{n+1})=j'_{n+1}(b'_{n+1})$,因为$h_{n+1}$是同构，所以$c_{n+1}=h_{n+1}^{-1}j'_{n+1}(b'_{n+1})$,于是$a_{n}=k_{n+1}(c_{n+1})=k_{n+1}h_{n+1}^{-1}j'_{n+1}(b'_{n+1})\in \Ima(k_{n+1}h_{n+1}^{-1}j'_{n+1})$
+    \item 在$B_{n}\oplus A'_{n}$处正合,也就是$\Ima((i_{n},f_{n}))=\Ker (g_{n}-i'_{n})$。考虑到$(g_{n}-i'_{n})(i_{n}(a_{n})\oplus f_{n}(a_{n}))=(g_{n}i_{n}-i'_{n}f_{n})(a_{n})=0$，所以接下来只要验证$\Ker (g_{n}-i'_{n})\subset \Ima((i_{n},f_{n}))$。设$b_{n}\oplus a'_{n}\in \Ker (g_{n}-i'_{n}) $,则有$g_{n}(b_{n})=i'_{n}(a'_{n})$,两边作用$j'_{n}$有$j'_{n}g_{n}(b_{n})=j'_{n}i'_{n}(a'_{n})=0$,从而$h_{n}j_{n}(b_{n})=j'_{n}g_{n}(b_{n})=0$,又因为$h_{n}$是同构，所以$j_{n}(b_{n})=0$,即$b_{n}\in\Ker j_{n}=\Ima i_{n}$,即存在$a_{n}\in A_{n}$满足$i_{n}(a_{n})=b_{n}$，至此我们把$b_{n}$表示成了$i_{n}$的像，如果没有什么意外的话我们已经完成了一半的任务，现在来看另一半，也就是给$a'_{n}$找到$f_{n}$作用下的原像。
+    
+    仍然利用核的条件，有$i'_{n}(a'_{n})=g_{n}(b_{n})=g_{n}i_{n}(a_{n})=i'_{n}f_{n}(a_{n})$，于是我们有$a'_{n}-f_{n}(a_{n})\in\Ker i'_{n}=\Ima k'_{n+1}$,于是有$c'_{n+1}\in C'_{n+1}$使得$a'_{n}-f_{n}(a_{n})=k'_{n+1}(c'_{n+1})=k'_{n+1}h_{n+1}h_{n+1}^{-1}(c'_{n+1})=f_{n}k_{n+1}h_{n+1}^{-1}(c'_{n+1})$,从而得到$a'_{n}=f_{n}(a_{n}+k_{n+1}h_{n+1}^{-1}c'_{n+1})$,这样我们就实现了后一半任务,然而此时我们发现$b_{n}$的原像为$a_{n}$，$a'_{n}$的原像为$a_{n}+k_{n+1}h_{n+1}^{-1}c'_{n+1}$,两者并不一样，不过好在由$A_{n}$处的正合性，我们有$i_{n}k_{n+1}h_{n+1}^{-1}c'_{n+1}=0$,这样我们发现$a_{n}+k_{n+1}h_{n+1}^{-1}c'_{n+1}$也是$b_{n}$的原像，所以有$b_{n}\oplus a'_{n}=(i_{n},f_{n})(a_{n}+k_{n+1}h_{n+1}^{-1}c'_{n+1})$,从而证明了$\Ker (g_{n}-i'_{n})\subset \Ima((i_{n},f_{n}))$
+    \item 在$B'_{n}$处正合。首先设$b_{n}'\in \Ima(g_{n}-i_{n}')$,那么存在$b_{n}\oplus a'_{n}$满足$b_{n}=(g_{n}-i'_{n})(b_{n}\oplus a'_{n})=g_{n}(b_{n})-i'_{n}(a'_{n})$，于是$k_{n}h_{n}^{-1}j'_{n}(g_{n}(b_{n})-i'_{n}(a'_{n}))=k_{n}h_{n}^{-1}j'_{n}g_{n}(b_{n})=k_{n}h_{n}^{-1}h_{n}j_{n}(b_{n})=k_{n}j_{n}(b_{n})=0$,对于另一个方向，设$b_{n}'\in \Ker k_{n}h_{n}^{-1}j'_{n}$，那么$k_{n}h_{n}^{-1}j'_{n}(b'_{n})=0$，于是$h_{n}^{-1}j'_{n}(b'_{n})\in\Ker k_{n}=\Ima j_{n}$，于是有$b_{n}\in B_{n}$满足$h_{n}^{-1}j'_{n}(b'_{n})=j_{n}(b_{n})$,因为$h_{n}$是同构，所以有$j'_{n}(b'_{n})=h_{n}j_{n}(b_{n})=j'_{n}g_{n}(b_{n})$,于是$g_{n}(b_{n})-b'_{n}\in\Ker j'_{n}=\Ima i'_{n}$，于是存在$a'_{n}\in A'_{n}$满足$i_{n}'(a_{n}')=g_{n}(b_{n})-b'_{n}$,于是我们有$(g_{n},i'_{n})(b_{n},a'_{n})=g_{n}(b_{n})-i'_{n}(a'_{n})=g_{n}(b_{n})-(g_{n}(b_{n})-b'_{n})=b'_{n}$，这就证明了$\Ker k_{n}h_{n}^{-1}j'_{n}\subset \Ima (g_{n}-i'_{n})$,这样我们就得到了在$B'_{n}$处的正合性。
+    \end{enumerate}
+    综上，我们证明了引理
+\end{proof}
