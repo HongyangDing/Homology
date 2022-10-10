@@ -87,11 +87,11 @@ $$\tilde{\partial}_{1}:C_{1}(K,a)(=C_{1}(K_{1}))\rightarrow C_{0}(K_{1},a)$$
 \begin{proof}
 对于连通复形，我们知道$\tilde{H}_{0}(K)=0$,所以由上一个命题可知结论成立。如果$K$不是连通的，它的同调群可以写成有限个连通复形的同调群的直和，从而应用连通的情况的结论可知命题成立。
 \end{proof}
-\begin{proposition}
-设复形$K$是它的子复形$K_{1}$和$K_{2}$的并，即$K=K_{1}\bigcup K_{2}$,那么对于所有的$k$，含入映射$i:K_{2}\rightarrow K$导出的同态$$H_{k}(K,K_{1}\bigcap K_{2})\rightarrow H_{k}(K,K{1})$$都是同构
+\begin{proposition}\label{chap3_pro_90}
+设复形$K$是它的子复形$K_{1}$和$K_{2}$的并，即$K=K_{1}\bigcup K_{2}$,那么对于所有的$k$，含入映射$i:K_{2}\rightarrow K$导出的同态$$H_{k}(K_{1},K_{1}\bigcap K_{2})\rightarrow H_{k}(K,K{1})$$都是同构
 \end{proposition}
 \begin{proof}
-设$\pi_{k}:C_{k}(K)\rightarrow C_{k}(K,K_{1})$为商同态，我们定义$f_{k}:\pi_{k}\circ i_{k}:C_{k}(K_{2})\rightarrow C_{k}(K,K_{1})$,按定义，$C_{k}(K,K_{1})$由不在$K_{1}$中的单形生成，但是根据假设，$K=K_{1}\bigcup K_{2}$,所以这些不在$K_{1}$中的单形都在$K_{2}$当中，所以$f_{k}$是一个满同态。显然我们有$C_{k}(K_{1}\bigcap K_{2})\subset \Ker f_{k}$,另一方面，设$z^{k}\in C_{k}(K_{2})$,且$f_{k}(z^{k})=0$,那么$z^{k}\in C_{k}(K_{1})$,这表明$z^{k}\in C_{k}(K_{1})\bigcap C_{k}(K_{2})=C_{k}(K_{1}\bigcap K_{2})$,$\Ker f_{k}=C_{k}(K_{1}\bigcap K_{2})$,从而根据群的第一同构定理，我们有
+设$\pi_{k}:C_{k}(K)\rightarrow C_{k}(K,K_{1})$为商同态，我们定义$f_{k}=\pi_{k}\circ i_{k}:C_{k}(K_{2})\rightarrow C_{k}(K,K_{1})$,按定义，$C_{k}(K,K_{1})$由不完全在$K_{1}$中的单形生成，但是根据假设，$K=K_{1}\bigcup K_{2}$,所以这些不完全在$K_{1}$中的单形都在$K_{2}$当中，所以$f_{k}$是一个满同态。显然我们有$C_{k}(K_{1}\bigcap K_{2})\subset \Ker f_{k}$,另一方面，设$z^{k}\in C_{k}(K_{2})$,且$f_{k}(z^{k})=0$,那么$z^{k}\in C_{k}(K_{1})$,这表明$z^{k}\in C_{k}(K_{1})\bigcap C_{k}(K_{2})=C_{k}(K_{1}\bigcap K_{2})$,$\;\Ker f_{k}=C_{k}(K_{1}\bigcap K_{2})$,从而根据群的第一同构定理，我们有
 $C_{k}(K_{2},K_{1}\bigcap K_{2})\cong C_{k}(K,K_{1})$,从而这两组链群在同构的意义下是完全一样的，从而含入映射在同调群之间诱导的同态是既单又满的，这表明它诱导的映射为同构。
 \end{proof}
 \begin{remark}
@@ -230,7 +230,7 @@ $$i_{k*}:H_{k}(L)\rightarrow H_{k}(K)$$
   
 
 
-\begin{proposition}
+\begin{proposition}\label{chap3_pro_233}
 对于复形对$(K,L)$,序列
  $$\cdots \xrightarrow{\pi_{k+1*}} H_{k+1}(K,L)\xrightarrow{\Delta_{k+1}}\tilde{H}_{k}(L)\xrightarrow{i_{k*}}\tilde{H}_{k}(K)\xrightarrow{\pi_{k*}}H_{k}(K,L)\xrightarrow{\Delta_{k}}\cdots$$是正合的。
 \end{proposition}
@@ -455,7 +455,7 @@ $$\phi(St_{K_{0}}a_{0})=\phi(St_{K}a_{0}\bigcap |K_{0}|)\subset \phi_{St_{K}a_{0
 \begin{proposition}\label{chap3_pro_455}
 恒同映射$1:(K,K_{0})\rightarrow (K,K_{0})$导出相对同调群之间的同构$1_{\#}=1:H_{k}(K,K_{0})\rightarrow H_{k}(K,K_{0})$
 \end{proposition}
-\begin{proposition}
+\begin{proposition}\label{chap3_pro_458}
 映射$\phi:(K,K_{0})\rightarrow (L,L_{0})$在$(K,K_{0})$和$(L,L_{0})$之间导出一组同态，使得下图交换
 {
 \center\begin{tikzcd}
@@ -522,7 +522,7 @@ B_{1} \arrow[r, "\beta_{1}"]                        & B_{2} \arrow[r, "\beta_{2}
 \end{remark}
 \section{Mayer-Vietoris序列}
 我们先从一个引理开始本节。
-\begin{lemma}
+\begin{lemma}\label{chap3_lemma_525}
 在行正合的交换图
 {\center
 \begin{tikzcd}
@@ -549,4 +549,126 @@ B_{1} \arrow[r, "\beta_{1}"]                        & B_{2} \arrow[r, "\beta_{2}
     \item 在$B'_{n}$处正合。首先设$b_{n}'\in \Ima(g_{n}-i_{n}')$,那么存在$b_{n}\oplus a'_{n}$满足$b_{n}=(g_{n}-i'_{n})(b_{n}\oplus a'_{n})=g_{n}(b_{n})-i'_{n}(a'_{n})$，于是$k_{n}h_{n}^{-1}j'_{n}(g_{n}(b_{n})-i'_{n}(a'_{n}))=k_{n}h_{n}^{-1}j'_{n}g_{n}(b_{n})=k_{n}h_{n}^{-1}h_{n}j_{n}(b_{n})=k_{n}j_{n}(b_{n})=0$,对于另一个方向，设$b_{n}'\in \Ker k_{n}h_{n}^{-1}j'_{n}$，那么$k_{n}h_{n}^{-1}j'_{n}(b'_{n})=0$，于是$h_{n}^{-1}j'_{n}(b'_{n})\in\Ker k_{n}=\Ima j_{n}$，于是有$b_{n}\in B_{n}$满足$h_{n}^{-1}j'_{n}(b'_{n})=j_{n}(b_{n})$,因为$h_{n}$是同构，所以有$j'_{n}(b'_{n})=h_{n}j_{n}(b_{n})=j'_{n}g_{n}(b_{n})$,于是$g_{n}(b_{n})-b'_{n}\in\Ker j'_{n}=\Ima i'_{n}$，于是存在$a'_{n}\in A'_{n}$满足$i_{n}'(a_{n}')=g_{n}(b_{n})-b'_{n}$,于是我们有$(g_{n},i'_{n})(b_{n},a'_{n})=g_{n}(b_{n})-i'_{n}(a'_{n})=g_{n}(b_{n})-(g_{n}(b_{n})-b'_{n})=b'_{n}$，这就证明了$\Ker k_{n}h_{n}^{-1}j'_{n}\subset \Ima (g_{n}-i'_{n})$,这样我们就得到了在$B'_{n}$处的正合性。
     \end{enumerate}
     综上，我们证明了引理
+\end{proof}
+\begin{proposition}\label{chap3_pro_553}
+若$L_{1}$和$L_{2}$都是复形$K$的子复形，那么存在着如下的正合序列
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(L_{1}\bigcap L_{2}) \arrow[r, "{(i_{1*},i_{2*})}"] & H_{k}(L_{1})\oplus H_{k}(L_{2}) \arrow[r, "k_{*}-l_{*}"] & H_{k}(L_{1}\bigcup L_{2}) \arrow[r, "\tilde{\Delta}_{k}"] & H_{k-1}(L_{1}\bigcap L_{2}) \arrow[r] & \cdots
+\end{tikzcd}\\}
+其中$i_{1},i_{2},k,l$均为嵌入映射，$\tilde{\Delta}_{k}:H_{k}(L_{1}\bigcup L_{2})\rightarrow H_{k-1}(L_{1}\bigcup L_{2})$满足$\tilde{\Delta}_{k}=\Delta_{k}\tau_{*}^{-1}\pi_{k*}$,其中$\tau_{*}$是我们在命题\eqref{chap3_pro_90}中提到的同构映射。
+\end{proposition}
+\begin{proof}
+考虑复形对$(L_{2},L_{1}\bigcap L_{2})$和$(L_{1}\bigcup L_{2},L_{1})$,则$i:L_{2}\hookrightarrow L_{1}\bigcup L_{2}$是复形对间的映射，根据命题\eqref{chap3_pro_233}我们有下列行正合的交换图
+{\center
+\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(L_{1}\bigcap L_{2}) \arrow[d, "i_{2*}"] \arrow[r, "i_{1*}"] & H_{k}(L_{1}) \arrow[r, "\pi_{1*}"] \arrow[d, "k_{*}"] & {H_{k}(L_{1},L_{1}\bigcap L_{2})} \arrow[r, "{\Delta_{k,1}}"] \arrow[d, "\tau_{*}"] & H_{k-1}(L_{1}\bigcap L_{2}) \arrow[r] \arrow[d, "{i_{2*,k-1}}"] & \cdots \\
+\cdots \arrow[r] & H_{k}(L_{2}) \arrow[r, "i_{2*}"]                                  & H_{k}(L_{1}\bigcup L_{2}) \arrow[r, "\pi_{2*}"]       & {H_{k}(L_{1}\bigcup L_{2},L_{2})} \arrow[r, "{\Delta_{k,2}}"]                       & H_{k-1}(L_{2}) \arrow[r]                                        & \cdots
+\end{tikzcd}\\}
+其中交换性可以利用嵌入映射的性质直接得到。又因为$\tau_{*}$是同构，那么根据本节开始的引理我们就得到了命题。
+\end{proof}
+\begin{definition}
+我们称上述命题中出现的正合序列为复形$K$的子复形$L_{1}$和$L_{2}$的Mayer-Vietoris序列，有时也直接称其为$L_{1}$和$L_{2}$的Mayer-Vietoris序列
+\end{definition}
+注意到我们在证明命题\eqref{chap3_pro_553}时只用到了交换性和正合性而没有关心其中出现的同调群的类型，事实上也存在着多种形式的Mayer-Vietoris序列。
+\begin{proposition}[相对形式的Mayer-Vietoris序列]
+设$L_{1},L_{2}$是复形$K$的子复形，$M$是$L_{1}\bigcap L_{2}$的子复形，那么存在如下的两个正合序列
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & {H_{k}(L_{1}\bigcap L_{2},M)} \arrow[r] & {H_{k}(L_{1},M)\oplus H_{k}(L_{2},M)} \arrow[r] & {H_{k}(L_{1}\bigcup L_{2},M)} \arrow[r] & {H_{k-1}(L_{1}\bigcap L_{2},M)} \arrow[r] & \cdots
+\end{tikzcd}
+\\}
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & {H_{k}(K,L_{1}\bigcap L_{2})} \arrow[r] & {H_{k}(K,L_{1})\oplus H_{k}(K,L_{2})} \arrow[r] & {H_{k}(K,L_{1}\bigcup L_{2})} \arrow[r] & {H_{k-1}(K,L_{1}\bigcap L_{2})} \arrow[r] & \cdots
+\end{tikzcd}
+\\}
+\end{proposition}
+\begin{proof}
+证明下面两个图是行正合的可换图然后应用引理\eqref{chap3_lemma_525}即可，注意其中要求的同构仍然由命题\eqref{chap3_pro_90}给出。
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & {H_{k}(L_{1}\bigcap L_{2},M)} \arrow[d] \arrow[r] & {H_{k}(L_{1},M)} \arrow[r] \arrow[d]    & {H_{k}(L_{1},L_{1}\bigcap L_{2})} \arrow[r] \arrow[d, "\tau_{*}"] & {H_{k-1}(L_{1}\bigcap L_{2},M)} \arrow[r] \arrow[d] & \cdots \\
+\cdots \arrow[r] & {H_{k}(L_{2},M)} \arrow[r]                        & {H_{k}(L_{1}\bigcup L_{2},M)} \arrow[r] & {H_{k}(L_{1}\bigcup L_{2},L_{2})} \arrow[r]                       & {H_{k-1}(L_{2},M)} \arrow[r]                        & \cdots
+\end{tikzcd}
+\\}
+以及
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & {H_{k}(K,L_{1}\bigcap L_{2})} \arrow[d] \arrow[r] & {H_{k}(K,L_{1})} \arrow[r] \arrow[d]    & {H_{k}(L_{1},L_{1}\bigcap L_{2})} \arrow[r] \arrow[d, "\tau_{*}"] & {H_{k-1}(K,L_{1}\bigcap L_{2})} \arrow[r] \arrow[d] & \cdots \\
+\cdots \arrow[r] & {H_{k}(K,L_{2})} \arrow[r]                        & {H_{k}(K,L_{1}\bigcup L_{2})} \arrow[r] & {H_{k}(L_{1}\bigcup L_{2},L_{2})} \arrow[r]                       & {H_{k-1}(K,L_{2})} \arrow[r]                        & \cdots
+\end{tikzcd}
+\\}
+\end{proof}
+\begin{proposition}[约化Mayer-Vietoris序列]
+对于复形$K$的子复形$L_{1},L_{2}$，如果$L_{1}\bigcap L_{2}$非空，那么有正合序列
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & \tilde{H}_{k}(L_{1}\bigcap L_{2}) \arrow[r] & \tilde{H}_{k}(L_{1})\oplus \tilde{H}_{k}(L_{2}) \arrow[r] & \tilde{H}_{k}(L_{1}\bigcup L_{2}) \arrow[r] & \tilde{H}_{k-1}(L_{1}\bigcap L_{2}) \arrow[r] & \cdots
+\end{tikzcd}
+\\}
+\end{proposition}
+\begin{proof}
+只需要证明$k=0$的情况，此时利用正合约化同调序列可以得到行正合，$\tau_{*}$仍然是同构(正合约化同调序列中，相对同调群与正合同调序列中的相对同调群是一样的)，只要证明行之间的交换性，这部分证明也是容易的。
+\end{proof}
+两个Mayer-Vietoris序列之间也存在着交换性质，如下面的命题所陈述的那样。
+\begin{proposition}
+设$L_{1}$和$L_{2}$是复形$K$的子复形，$L'_{1}$和$L'_{2}$是复形$K'$的子复形,$\phi:K\rightarrow K'$满足$\phi\left|_{L_{i}}\right.:L_{i}\rightarrow L'_{i},\;i=1,2$，那么在Mayer-Vietoris序列之间存在下列交换图
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & H_{k}(L_{1}\bigcap L_{2}) \arrow[r] \arrow[d] & H_{k}(L_{1})\oplus H_{k}(L_{2}) \arrow[r] \arrow[d] & H_{k}(L_{1}\bigcup L_{2}) \arrow[r] \arrow[d] & H_{k-1}(L_{1}\bigcap L_{2}) \arrow[r] \arrow[d] & \cdots \\
+\cdots \arrow[r] & H_{k}(L'_{1}\bigcap L'_{2}) \arrow[r]         & H_{k}(L'_{1})\oplus H_{k}(L'_{2}) \arrow[r]         & H_{k}(L'_{1}\bigcup L'_{2}) \arrow[r]         & H_{k-1}(L'_{1}\bigcap L'_{2}) \arrow[r]         & \cdots
+\end{tikzcd}
+\\}
+其中每个竖直的箭头都是由$\phi$所诱导的对应的映射
+\end{proposition}
+\begin{proof}
+直接计算验证每个方块即可，留待以后填坑。
+\end{proof}
+下面介绍一个应用。
+\begin{definition}
+定义复形上的一个运算$S$满足$S(K)=aK\bigcup bK(a\neq b)$，这里$aK$和$bK$都是复形$K$上的锥,而且满足$|aK|\bigcap |bK|=|K|$
+\end{definition}
+\begin{example}
+$S(S^{n-1})=S^{n}$
+\end{example}
+\begin{proposition}
+对于复形$K$而言有$\tilde{H}_{k}(S(K))\cong \tilde{H}_{k-1}(K)$
+\end{proposition}
+\begin{proof}
+令$L_{1}=aK,L_{2}=bK$，那么我们有$S(K)=aK\bigcup bK=L_{1}\bigcup L_{2},\;K=L_{1}\bigcap L_{2}$，所以由相对Mayer-Vietoris序列我们有下列交换图
+{\center
+\footnotesize
+\begin{tikzcd}
+\cdots \arrow[r] & \tilde{H}_{k}(K) \arrow[r] & \tilde{H}_{k}(aK)\oplus \tilde{H}_{k}(bK) \arrow[r] & \tilde{H}_{k}(S(K)) \arrow[r] & \tilde{H}_{k-1}(K) \arrow[r] & \cdots
+\end{tikzcd}
+\\}
+但是注意到对于锥形而言，$\tilde{H}_{k}(aK)=\tilde{H}_{k}(bK)=0$，于是上面的交换图(部分)变为
+{\center
+\begin{tikzcd}
+0 \arrow[r] & \tilde{H}_{k}(S(K)) \arrow[r] & \tilde{H}_{k-1}(K) \arrow[r] & 0
+\end{tikzcd}
+\\}
+所以我们实际上得到了$\tilde{H}_{k}(S(K))\cong \tilde{H}_{k-1}(K)$
+\end{proof}
+\begin{lemma}
+$n$维球面$S^{n}$满足
+\begin{equation*}
+    \tilde{H}_{k}(S^{n})=\left\{\begin{array}{c}
+         \mathbb{Z},\quad k=0  \\
+         0,\quad k\neq0
+    \end{array}\right.
+\end{equation*}
+\end{lemma}
+\begin{proof}
+只要考虑$k\leq n$的情况，其他情况是平凡的。
+反复利用$\tilde{H}_{k}(S(K))\cong \tilde{H}_{k-1}(K)$和$S(S^{n-1})=S^{n}$，我们有$$\tilde{H}_{k}(S^{n})\cong \tilde{H}_{k-1}(S^{n-1})\cong \cdots \cong \tilde{H}_{0}(S^{n-k})$$
+注意到$n=k$时，$S^{0}$由两个单点构成的联通分支，此时$\tilde{H}_{0}(S^{0})=\mathbb{Z}$,而$n>k$时，$S^{n-k}$是联通的，所以由零维同调群的结论，$\tilde{H}_{0}(S^{n-k})=0$，这样我们就完成了证明。
 \end{proof}
