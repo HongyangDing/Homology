@@ -40,6 +40,9 @@ $\mathbb{R}^{n}$中的n个向量$\textbf{v}_{i},i=1,2,\cdots,n$的一个仿射�
 \begin{proposition}
 aff$(S)=\left\{\sum\limits_{i=1}\limits^{k}\lambda_{i}x_{i}|\sum\limits_{i=1}\limits^{k}\lambda_{i}=1,x_{i}\in S,k\in \mathbb{Z}^{+}\right\}$
 \end{proposition}
+\begin{proof}
+反复利用仿射集的定义，从$\left\{v_{1},v_{2},\cdots,v_{n}\right\}$出发可以生成$S(v)$中的每一个元素。
+\end{proof}
 下面的命题给出了仿射集的另一种刻画
 \begin{proposition}
 \label{chap1_45}
@@ -52,7 +55,7 @@ aff$(S)=\left\{\sum\limits_{i=1}\limits^{k}\lambda_{i}x_{i}|\sum\limits_{i=1}\li
 设$S$是仿射集，若$0\in S$,则对于任意$x,y \in S,k\in\mathbb{R}$，我们有$kx=kx+(1-k)0\in S$，且$x+y=2(\frac{1}{2}x+\frac{1}{2}y)\in S$，从而$S$是一个向量空间，若$0\notin S$,取定$x_{0}\in S$，则$0\in S-x_{0}$,从而这是一个向量空间，于是我们有$S=x_{0}+V$\\
 倘若$S$有两种分解$S=x_{1}+V_{1}=x_{2}+V_{2}$，我们有$x_{1}-x_{2}+V_{1}=V_{2}$，由于$0\in V_{2}$。从而$x_{1}-x_{2}\in V_{1}$，我们有$V_{2}=V_{1}+x_{1}-x_{2}\subset V_{1}$,同理$V_{1}\subset V_{2}$，于是我们有$V_{1}=V_{2}$
 \end{proof}
-换言之，我们仿射集是线性子空间的平移。由$V$的唯一性，我们定义
+换言之，仿射集是线性子空间的平移。由$V$的唯一性，我们定义
 \begin{definition}
 设$S$是任意非空集，则我们定义aff$(S)$的维数为与之平行的线性子空间的维数
 \end{definition}
@@ -71,7 +74,7 @@ $x_{0},\cdots,x_{m}\in\mathbb{R}^{n}$是仿射无关的当且仅当$x_{1}-x_{0},
 \end{proposition}
 \begin{proof}
 设$x_{0},\cdots,x_{m}$是仿射无关的，我们令$\sum\lambda_{i}(x_{i}-x_{0})=0$,即得$-(\sum\lambda_{i})x_{0}+\sum\lambda_{i}x_{i}=0$，由仿射无关的定义知$\lambda_{i}=0$，即$x_{i}-x_{0}$线性无关。\\
-另一方向，设$x_{i}-x_{0}$线性无关，我们令$\sum\lambda_{i}x_{i}=0,\sum\lambda_{i}=0$,从而令$\sum\lambda_{i}x_{i}=-\sum\limits_{i\neq0}(\lambda_{i})x_{0}+\sum\limits_{i\neq0}\lambda_{i}x_{i}=\sum\limits_{i\neq0}\lambda_{i}(x_{i}-x_{0})=0$，由线性无关的假设可以知道$\lambda_{i}=0(i\neq0)$，又因为$\sum\lambda_{i}=0$，于是$\lambda_{0}=0$，从而命题成立。
+另一方向，设$x_{i}-x_{0}$线性无关，我们令$\sum\lambda_{i}x_{i}=0,\sum\lambda_{i}=0$,从而换掉$x_{0}$前的系数得到$\sum\lambda_{i}x_{i}=-\left(\sum\limits_{i\neq0}\lambda_{i}\right)x_{0}+\sum\limits_{i\neq0}\lambda_{i}x_{i}=\sum\limits_{i\neq0}\lambda_{i}(x_{i}-x_{0})=0$，由线性无关的假设可以知道$\lambda_{i}=0(i\neq0)$，又因为$\sum\lambda_{i}=0$，于是$\lambda_{0}=0$，从而命题成立。
 \end{proof}
 我们记$S={\rm aff}(\left\{x_{0},\cdots,x_{m}\right\})$,若$V$是平行于$S$的子空间，则由(\ref{chap1_45})我们知道$S-x_{0}=V$，从而span$\left\{x_{1}-x_{0},\cdots,x_{m}-x_{0}\right\}\subset V$;另一方面，令$x\in V$,我们有$x+x_{0}\in S$，即$x+x_{0}=\sum\lambda_{i}x_{i}$,$\sum\lambda_{i}=1$,于是我们有$x=\sum\lambda_{i}(x_{i}-x_{0})\in$span$\left\{x_{1}-x_{0},\cdots,x_{m}-x_{0}\right\}$。\\
 综上$V=$span$\left\{x_{1}-x_{0},\cdots,x_{m}-x_{0}\right\}$,于是我们有推论
